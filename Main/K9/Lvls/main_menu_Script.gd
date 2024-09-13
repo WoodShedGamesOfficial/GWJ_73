@@ -1,1 +1,2 @@
 extends Control
+class_name K9_Main_menu
