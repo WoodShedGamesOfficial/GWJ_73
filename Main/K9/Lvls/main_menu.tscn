@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://qjp6sy5dl83u"]
+
+[ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
+[ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gcck")
+
+[node name="Main_Menu" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(974, 284)
+texture = ExtResource("2_tc2fj")
