@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=10 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_612tq"]
+[ext_resource type="PackedScene" uid="uid://c4a0iofxtkuen" path="res://Main/K9/Assets/Player/Weapon/player_weapon.tscn" id="4_0tm40"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
 radius = 72.7805
@@ -140,3 +141,9 @@ libraries = {
 "": SubResource("AnimationLibrary_rs6k1")
 }
 speed_scale = 2.0
+
+[node name="PlayerWeapon" parent="." instance=ExtResource("4_0tm40")]
+position = Vector2(39, 0)
+rotation = 1.58381
+
+[editable path="PlayerWeapon"]

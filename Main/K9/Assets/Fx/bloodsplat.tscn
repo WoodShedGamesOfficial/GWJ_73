@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyam4fomgjqem"]
+
+[ext_resource type="Texture2D" uid="uid://b1tohpqcs0ady" path="res://Main/K9/Assets/2D/textures/bloodsplatA.png" id="1_ljisc"]
+
+[sub_resource type="GDScript" id="GDScript_4ub2b"]
+resource_name = "bpscript"
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	rotation_degrees = randi_range(5, 95)
+	scale.x = randf_range(1.00, 3.00)
+	scale.y = randf_range(1.00, 3.00)
+	
+	await get_tree().create_timer(90.0).timeout
+	pass # Replace with function body.
+"
+
+[node name="bloodsplat" type="Node2D"]
+z_index = -1
+script = SubResource("GDScript_4ub2b")
+
+[node name="BloodsplatA" type="Sprite2D" parent="."]
+modulate = Color(1, 0.216982, 0.11093, 1)
+position = Vector2(1, 0)
+texture = ExtResource("1_ljisc")

@@ -136,6 +136,8 @@ func _ready():
 
 	# Make sure to not await during _ready.
 	call_deferred("actor_setup")
+	
+	add_to_group("Enemy")
 
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
@@ -156,3 +158,23 @@ func _physics_process(delta):
 
 	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
 	move_and_slide()
+
+
+func hurt(damage, damage_type):
+	
+	if ENEMY_STATS.health > 0:
+		ENEMY_STATS.health -= damage
+	else:
+		death()
+	pass
+	
+  
+var blood_splat_p = load('res://Main/K9/Assets/Fx/bloodsplat.tscn')
+
+func death():
+	var blood_i = blood_splat_p.instantiate()
+	
+	get_tree().current_scene.add_child(blood_i)
+	blood_i.transform.origin = transform.origin
+	queue_free()
+	pass
