@@ -21,12 +21,15 @@ func _ready():
 	
 	print("enemy spawn point locations:  " + str(enemy_spawn_point_array))
 	
-	player_tower_heart_pos = $TowerHearts/PlayerHeart.transform.origin
-	enemy_tower_heart = $TowerHearts/EnemyHeart.transform.origin
+	#player_tower_heart_pos = $TowerHearts/PlayerHeart.global_transform.origin
+	#enemy_tower_heart = $TowerHearts/EnemyHeart.global_transform.origin
 	
-	var enemy_count = 15
-	for i in enemy_count:
-		spawn_enemy()
+	$Timers/SpawnTimer.connect('timeout', spawn_enemy)
+	$Timers/SpawnTimer.start()
+	
+	
+	
+	
 	pass # Replace with function body.
 	
 

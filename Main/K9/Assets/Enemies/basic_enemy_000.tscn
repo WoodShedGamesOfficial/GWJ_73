@@ -14,22 +14,28 @@ radius = 72.0
 
 [node name="BasicEnemy_000" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 31
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
+ENEMY_STATS = {
+"damage": 5,
+"health": 75.0,
+"walk_speed": 100.0
+}
 
 [node name="PlayerVisibilityArea" type="Area2D" parent="."]
-modulate = Color(1, 1, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisibilityArea"]
 shape = SubResource("CircleShape2D_8nqs1")
+debug_color = Color(1.39579e-06, 0.635834, 0.412377, 0.42)
 
 [node name="AttackRadius" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
 shape = SubResource("CircleShape2D_ubemm")
+debug_color = Color(0.972549, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hg0o2")
@@ -42,13 +48,20 @@ scale = Vector2(0.854709, 0.854709)
 texture = ExtResource("1_6w337")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 40.0
+target_desired_distance = 20.0
+path_max_distance = 7000.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 64.0
 debug_enabled = true
 
 [node name="NavTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.0
 autostart = true
 
-[connection signal="body_entered" from="AttackRadius" to="." method="attack"]
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
+[connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]

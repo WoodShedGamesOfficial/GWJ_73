@@ -19,15 +19,38 @@ func connect_buttons():
 	$ButtonContainer/Eject.connect('pressed', eject_game)
 	$ButtonContainer/Credits.connect('pressed', toggle_credits_panel)
 	$ButtonContainer/Options.connect('pressed', toggle_options_panel)
-	$ButtonContainer/Start.connect('pressed', start_level_0)
+	$ButtonContainer/Start.connect('pressed', toggle_tut)
 	
+	#start game
+	$Tutorial_confirm/Yes.connect('pressed', goto_tutorial_island)
+	$Tutorial_confirm/No.connect('pressed', goto_level_0)
 	pass
 	
 
 func settup_menu():
 	$Options_panel.visible = false
 	$CreditsPanel.visible = false
+	$Tutorial_confirm.visible = false
+	pass
 	
+
+func toggle_tut():
+	var tut_panel = $Tutorial_confirm
+	
+	tut_panel.visible =! tut_panel.visible
+	
+	pass
+	
+
+func goto_tutorial_island():
+	GlobalLibrary.level_path = load("res://Main/K9/Lvls/tutorial_island/tutorial_island.tscn")
+	get_tree().change_scene_to_file('res://Main/K9/Lvls/load_screen.tscn')
+	pass
+	
+
+func goto_level_0():
+	GlobalLibrary.level_path = load('res://Main/K9/Lvls/Lvl_0/level_0.tscn')
+	get_tree().change_scene_to_file("res://Main/K9/Lvls/load_screen.tscn")
 	pass
 	
 

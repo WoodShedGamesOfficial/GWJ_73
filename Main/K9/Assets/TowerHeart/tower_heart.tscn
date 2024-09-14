@@ -1,0 +1,317 @@
+[gd_scene load_steps=20 format=3 uid="uid://krjhmw7cd1a4"]
+
+[ext_resource type="Texture2D" uid="uid://dwx827ay683wc" path="res://Main/K9/Assets/2D/textures/ImpactFXA.png" id="1_3onqd"]
+[ext_resource type="Script" path="res://Main/K9/Assets/TowerHeart/tower_heart_script.gd" id="1_lmpey"]
+[ext_resource type="Texture2D" uid="uid://saqp4ywo6r83" path="res://Main/K9/Assets/2D/Sprites/TowerHeart/Heart.png" id="2_qnt5t"]
+[ext_resource type="Texture2D" uid="uid://bpooemth7u6a8" path="res://Main/K9/Assets/2D/Sprites/TowerHeart/Throne.png" id="3_dor7h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6htv0"]
+radius = 51.0392
+
+[sub_resource type="Animation" id="Animation_43esf"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.885, 1.005), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Throne:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Heart:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TowerheartAnimations:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_dw2wi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Throne:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Heart:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TowerheartAnimations:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BloodSquirt:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ImpactFxa:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ImpactFxa:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.541196, 0.541196)]
+}
+
+[sub_resource type="Animation" id="Animation_2qnci"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.405, 0.695), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Heart:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.976471, 0.160784, 0.588235, 1), Color(0, 0.0505279, 0.0523351, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TowerheartAnimations:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("BloodSquirt:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.433333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ImpactFxa:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ImpactFxa:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.541196, 0.541196), Vector2(1.88371, 1.88371)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_km8bo"]
+_data = {
+"Hurt": SubResource("Animation_2qnci"),
+"Idle": SubResource("Animation_43esf"),
+"RESET": SubResource("Animation_dw2wi")
+}
+
+[sub_resource type="Curve" id="Curve_45275"]
+max_value = 30.0
+
+[sub_resource type="CurveTexture" id="CurveTexture_t1j1q"]
+curve = SubResource("Curve_45275")
+
+[sub_resource type="Gradient" id="Gradient_j03lt"]
+colors = PackedColorArray(0.175291, 1.17439e-05, 0.723812, 1, 1.58831e-06, 0.811185, 0.167864, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ejm3"]
+gradient = SubResource("Gradient_j03lt")
+
+[sub_resource type="Curve" id="Curve_j8icv"]
+_data = [Vector2(0, 0.120879), 0.0, 0.0, 0, 0, Vector2(0.493151, 0.43956), 0.0, 0.0, 0, 0, Vector2(1, 0.307692), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d8wqv"]
+curve = SubResource("Curve_j8icv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0gxek"]
+particle_flag_disable_z = true
+angle_min = -9.99999
+angle_max = 90.0
+angle_curve = SubResource("CurveTexture_t1j1q")
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_d8wqv")
+color_ramp = SubResource("GradientTexture1D_3ejm3")
+
+[sub_resource type="Gradient" id="Gradient_pma40"]
+offsets = PackedFloat32Array(0.653333, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qp7wt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tvuun"]
+width = 64
+height = 64
+color_ramp = SubResource("Gradient_pma40")
+noise = SubResource("FastNoiseLite_qp7wt")
+
+[node name="TowerHeart" type="Node2D"]
+script = ExtResource("1_lmpey")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_6htv0")
+
+[node name="ImpactFxa" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(-0.999998, 32)
+rotation = 0.480383
+scale = Vector2(0.541196, 0.541196)
+skew = 0.60912
+texture = ExtResource("1_3onqd")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.41869, 0.41869)
+
+[node name="Heart" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("2_qnt5t")
+
+[node name="Throne" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("3_dor7h")
+
+[node name="TowerheartAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_km8bo")
+}
+
+[node name="BloodSquirt" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_0gxek")
+texture = SubResource("NoiseTexture2D_tvuun")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.75

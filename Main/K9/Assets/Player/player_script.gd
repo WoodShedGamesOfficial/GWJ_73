@@ -3,15 +3,17 @@ class_name K9_player_controller
 
 
 @onready var player_cam = $PlayerCam
+@onready var player_anim = $PlayerAnim
 
 
 
 @export var PLAYER_STATS = {
 	'health' : 100.00,
 	'walk_speed' : 300,
-	'jump_height' : 400
+	
 }
 
+var isSprinting : bool
 
 # function blocks ->
 
@@ -22,8 +24,14 @@ func _ready():
 	
 
 func _process(delta):
+	isSprinting = Input.is_action_pressed("Sprint")
 	
 	GlobalHiveMind.player_pos = global_position
+	
+	if velocity.x or velocity.y != 0:
+		player_anim.play("Walk")
+	else:
+		player_anim.play("Idle")
 	
 	
 	pass
@@ -46,13 +54,20 @@ func _physics_process(delta):
 	
 	if dir_x:
 		velocity.x = dir_x * PLAYER_STATS.walk_speed
+		if isSprinting:
+			velocity.x = dir_x * (PLAYER_STATS.walk_speed * 1.75)
+		#player_anim.play("Walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, PLAYER_STATS.walk_speed)
-	
+		#player_anim.play("Idle")
 	if dir_y:
 		velocity.y = dir_y * PLAYER_STATS.walk_speed
+		if isSprinting:
+			velocity.y = dir_y * (PLAYER_STATS.walk_speed * 1.75)
+		#player_anim.play("Walk")
 	else:
 		velocity.y = move_toward(velocity.y, 0, PLAYER_STATS.walk_speed)
+		#player_anim.play("Idle")
 	move_and_slide()
 	
 	pass
@@ -72,9 +87,32 @@ func _input(event):
 		player_cam.zoom.x += zoom_step
 		player_cam.zoom.y += zoom_step
 	
-	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.5, 2)
-	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.5, 2)
+	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.5, 3)
+	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.5, 3)
 	
 	
 	pass
 	
+
+func hurt(damage, damage_type):
+	
+	if PLAYER_STATS.health > 0:
+		PLAYER_STATS.health -= damage
+	else:
+		player_death()
+	
+	#match damage_type:
+		#'blunt' :
+			#print("Uga dugga  " + str(damage_type))
+		#"sharp" :
+			#print("bleeding  " + str(damage_type))
+	
+	print("took damage : " + str(damage) + "  /  " + str(damage_type) + "current health" + str(PLAYER_STATS.health))
+	pass
+	
+
+func player_death():
+	
+	print('player has died')
+	
+	pass
