@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds3lqjy5iicbd"]
+
+[ext_resource type="Texture2D" uid="uid://diqj7hg3m52r" path="res://Main/K9/Assets/2D/Sprites/PlainTriangle.png" id="1_6w337"]
+[ext_resource type="Script" path="res://Main/K9/Assets/Enemies/basic_enemy_Script.gd" id="1_a2s8a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg0o2"]
+radius = 32.0
+
+[node name="BasicEnemy_000" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_a2s8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hg0o2")
+
+[node name="PlainTriangle" type="Sprite2D" parent="."]
+modulate = Color(1, 0.188235, 0.176471, 1)
+position = Vector2(3, -1)
+rotation = 1.59723
+scale = Vector2(0.359546, 0.359546)
+texture = ExtResource("1_6w337")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 64.0
+debug_enabled = true
+
+[node name="NavTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true

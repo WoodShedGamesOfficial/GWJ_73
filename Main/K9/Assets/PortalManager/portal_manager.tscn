@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbc77r0usuhxx"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/PortalManager/portal_manager_Script.gd" id="1_rof8c"]
+[ext_resource type="PackedScene" uid="uid://ceyae8ko8aqw0" path="res://Main/K9/Assets/PortalManager/portal_000.tscn" id="2_hchwy"]
+
+[node name="PortalManager" type="Node"]
+script = ExtResource("1_rof8c")
+
+[node name="Portals" type="Node" parent="."]
+
+[node name="Portal_000" parent="Portals" instance=ExtResource("2_hchwy")]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvjqmovptc8a"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
+[ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
+[ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_612tq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
+radius = 72.7805
+
+[node name="Player_0" type="CharacterBody2D"]
+collision_mask = 14
+script = ExtResource("1_ww0cy")
+
+[node name="Feet" type="Sprite2D" parent="."]
+modulate = Color(1.44392e-07, 0.339018, 0.517899, 1)
+position = Vector2(-4, 1)
+rotation = 1.56727
+scale = Vector2(1.42313, 1.42313)
+texture = ExtResource("2_n3oth")
+flip_h = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 0.670588, 1, 1)
+rotation = 1.56727
+scale = Vector2(1.54647, 1.54647)
+texture = ExtResource("3_612tq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ldltp")
+
+[node name="PlayerCam" type="Camera2D" parent="."]
+
+[node name="ShootCast" type="RayCast2D" parent="."]
+target_position = Vector2(1000, 0)
+
+[node name="PlayerGUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

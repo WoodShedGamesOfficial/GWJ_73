@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://qjp6sy5dl83u"]
+[gd_scene load_steps=4 format=3 uid="uid://qjp6sy5dl83u"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
+[ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
 [ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
 
 [node name="MainMenu" type="Control"]
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4gcck")
+dev_room_path = ExtResource("2_di7d8")
 
 [node name="GWJLabel" type="Label" parent="."]
 layout_mode = 0
@@ -36,19 +38,19 @@ offset_top = 322.0
 offset_right = 110.0
 offset_bottom = 366.0
 
-[node name="Button" type="Button" parent="ButtonContainer"]
+[node name="Start" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "Start"
 
-[node name="Button2" type="Button" parent="ButtonContainer"]
+[node name="Options" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="Button3" type="Button" parent="ButtonContainer"]
+[node name="Credits" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "Credits"
 
-[node name="Button4" type="Button" parent="ButtonContainer"]
+[node name="Eject" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "Eject"
 
@@ -59,3 +61,54 @@ offset_top = 181.0
 offset_right = 618.0
 offset_bottom = 309.0
 texture = ExtResource("2_tc2fj")
+
+[node name="DevRoomButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1046.0
+offset_top = 599.0
+offset_right = 1129.0
+offset_bottom = 630.0
+text = "DevRoom
+"
+
+[node name="Options_panel" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 774.0
+offset_top = 98.0
+offset_right = 1074.0
+offset_bottom = 498.0
+
+[node name="Panel" type="Panel" parent="Options_panel"]
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 400.0
+
+[node name="Label" type="Label" parent="Options_panel"]
+layout_mode = 2
+offset_left = 91.0
+offset_top = 11.0
+offset_right = 391.0
+offset_bottom = 34.0
+text = "Options :"
+
+[node name="CreditsPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_left = 458.0
+offset_top = 320.0
+offset_right = 658.0
+offset_bottom = 620.0
+
+[node name="Panel" type="Panel" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 201.0
+offset_bottom = 296.0
+
+[node name="Credits" type="Label" parent="CreditsPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Credits and links:"
