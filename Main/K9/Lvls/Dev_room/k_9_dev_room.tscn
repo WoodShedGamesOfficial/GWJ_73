@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b215wnaw6ienu"]
+[gd_scene load_steps=23 format=3 uid="uid://b215wnaw6ienu"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room_Script.gd" id="1_alpff"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="2_d8sge"]
@@ -11,13 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://b4pr4nbcepcdp" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn" id="9_hltmn"]
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="13_1ky3d"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="14_2kicj"]
-[ext_resource type="PackedScene" uid="uid://krjhmw7cd1a4" path="res://Main/K9/Assets/TowerHeart/tower_heart.tscn" id="14_igbdc"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="14_tka2k"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tjw4y"]
-vertices = PackedVector2Array(-34.3594, 97, -661.25, 97, -950, 74, -950, -74, -664.758, -69.0625, -721.258, -791.648, -268.07, -758.703, -271.922, -255.969, -669.242, -254.969, -822, -438, -822, -586, -641.906, 260.789, -266, 269.758, -266, 751.32, -647.148, 805.633, -822, 586, -822, 438, -2459.93, -301.211, -2802.12, -284.492, -2807.88, -758.469, -2211.45, -787.398, -2250, -586, -3031.93, 72.1406, -3091.92, 593.117, -4237.84, 609.844, -4221.15, -476.039, -3108.56, -480.961, -3044.52, -64.6016, -2283.11, -99.2969, -2423.1, 62.8281, 772.281, -530.898, 809.703, 762.258, -9.36719, 783.742, -22.2813, -64.9375, -2250, 586, -2467.21, 736.93, -2789.74, 740.883, -2826.26, 264.219, -2437.76, 235.344, -2250, 438, -2250, -438, -2058, -438, -2058, -374, -2278.32, -111.258, -1974, -374, -1974, -438, -1974, -74, -1974, -138, -2058, -138, -2058, -74, -2122, -74, -2122, 74, -1098, 74, -1098, 138, -1014, 138, -1014, 74, -1014, 438, -1014, 374, -1098, 374, -1098, 438, -9.27344, -523.094, -2190.49, -914.109, -733.188, -934.859, -722.602, 894, -2378.17, 894)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26, 27), PackedInt32Array(22, 27, 28, 29), PackedInt32Array(30, 31, 32, 0, 33), PackedInt32Array(34, 35, 36, 37, 38, 39), PackedInt32Array(40, 41, 42, 43, 17), PackedInt32Array(3, 44, 45, 9, 8, 4), PackedInt32Array(3, 46, 47), PackedInt32Array(43, 48, 49, 50, 28), PackedInt32Array(51, 52, 53), PackedInt32Array(54, 55, 2), PackedInt32Array(11, 16, 56, 57, 2, 1), PackedInt32Array(51, 58, 59, 39, 38, 29), PackedInt32Array(33, 60, 30), PackedInt32Array(4, 33, 0), PackedInt32Array(44, 3, 47, 42), PackedInt32Array(42, 47, 48), PackedInt32Array(61, 62, 5, 10, 20), PackedInt32Array(20, 10, 21), PackedInt32Array(17, 21, 40), PackedInt32Array(43, 42, 48), PackedInt32Array(28, 50, 51, 29), PackedInt32Array(34, 15, 14, 63, 64, 35), PackedInt32Array(58, 51, 53), PackedInt32Array(58, 53, 54, 57), PackedInt32Array(57, 54, 2)])
+vertices = PackedVector2Array(-758.281, -754.227, -308.352, -721.523, -311.617, -295.867, -710.219, -294.867, -782, -398, -782, -626, -677.57, 299.953, -306, 308.82, -306, 716.609, -667.758, 768.156, -782, 626, -782, 398, -910, 114, -910, -114, -706.25, 57, -974, 398, -974, 334, -2443.64, -342.047, -2762.62, -326.469, -2767.41, -720.391, -2290, -626, -2290, -398, -3127.64, 553.648, -4197.21, 569.25, -4181.76, -436.211, -3142.86, -440.797, -3078.59, -23.0078, -3067.65, 32.6797, -2255.56, -60.5234, -2379.5, 22.1563, 733.43, -490.508, 768.563, 723.328, 29.1563, 742.719, 4.21094, 57, 16.5938, -24.6875, -2444.07, 696.641, -2752.73, 700.422, -2783.32, 301.141, -2400.79, 272.703, -2290, 398, -2290, 626, -2098, -398, -2098, -334, -2231.61, -120.281, -1934, -334, -1934, -398, -1934, -114, -1934, -178, -2098, -178, -2098, -114, -2162, -114, -2162, 114, -1138, 114, -1138, 178, -974, 178, -974, 114, -1138, 334, -1138, 398, 29.6094, -483.477, -703.82, -29.3125, -2156.48, -874.602, -769.953, -894.344, -2177.26, -749.008, -741.047, 854, -2354.86, 854)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 6, 11), PackedInt32Array(12, 11, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 22, 26), PackedInt32Array(27, 26, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(35, 36, 37, 38, 39, 40), PackedInt32Array(21, 41, 42, 43, 17), PackedInt32Array(13, 44, 45, 4, 3), PackedInt32Array(13, 46, 47), PackedInt32Array(48, 49, 50, 43), PackedInt32Array(51, 52, 53, 39, 38), PackedInt32Array(54, 55, 12), PackedInt32Array(54, 12, 16), PackedInt32Array(53, 54, 16, 56), PackedInt32Array(56, 57, 39), PackedInt32Array(34, 58, 30), PackedInt32Array(59, 34, 33, 14), PackedInt32Array(59, 14, 13, 3), PackedInt32Array(53, 56, 39), PackedInt32Array(60, 61, 0, 5, 62), PackedInt32Array(62, 5, 20, 19), PackedInt32Array(44, 13, 47, 42), PackedInt32Array(42, 47, 48), PackedInt32Array(43, 42, 48), PackedInt32Array(43, 50, 51, 28), PackedInt32Array(29, 28, 51, 38), PackedInt32Array(63, 64, 35, 40, 10, 9)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-4231, -486, -3100, -491, -3036, -75, -2290, -109, -2464, -291, -2812, -274, -2818, -768, -2220, -797, -2199, -924, -724, -945, -712, -801, -258, -768, -262, -246, -659, -245, -655, -79, -32, -75, -19, -533, 782, -541, 820, 772, -19, 794, -44, 107, -650, 107, -633, 251, -256, 260, -256, 760, -642, 815, -718, 904, -2384, 904, -2473, 747, -2799, 751, -2837, 255, -2447, 226, -2434, 73, -3023, 82, -3083, 603, -4248, 620)])
+cell_size = 128.0
+border_size = 20.0
+agent_radius = 50.0
 
 [sub_resource type="GDScript" id="GDScript_ii6ab"]
 resource_name = "TroopSpawnButtonTESTING"
@@ -79,35 +81,35 @@ max_value = 360.0
 _data = [Vector2(0, -146.374), 0.0, 0.0, 0, 0, Vector2(0.986301, 280.879), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_2vflq"]
+[sub_resource type="CurveTexture" id="CurveTexture_ekm8l"]
 curve = SubResource("Curve_bit5q")
 
 [sub_resource type="Gradient" id="Gradient_kmwab"]
 offsets = PackedFloat32Array(0, 0.711864, 0.889831, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.654232, 0.654232, 0.654232, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_w350g"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4aak8"]
 gradient = SubResource("Gradient_kmwab")
 
 [sub_resource type="Curve" id="Curve_c2b03"]
 _data = [Vector2(0, 0.076923), 0.0, 0.0, 0, 0, Vector2(0.753425, 0.098901), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ni2pw"]
+[sub_resource type="CurveTexture" id="CurveTexture_2ufvk"]
 curve = SubResource("Curve_c2b03")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_np25k"]
 particle_flag_disable_z = true
 angle_min = -0.299989
 angle_max = 1.07288e-05
-angle_curve = SubResource("CurveTexture_2vflq")
+angle_curve = SubResource("CurveTexture_ekm8l")
 direction = Vector3(0, 0, 0)
 spread = 180.0
 initial_velocity_min = 30.0
 initial_velocity_max = 30.0
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_ni2pw")
-color_ramp = SubResource("GradientTexture1D_w350g")
+scale_curve = SubResource("CurveTexture_2ufvk")
+color_ramp = SubResource("GradientTexture1D_4aak8")
 
 [node name="K9_Dev_Room" type="Node2D"]
 script = ExtResource("1_alpff")
@@ -137,24 +139,6 @@ radius = 300.0
 
 [node name="Player_0" parent="." instance=ExtResource("3_uekls")]
 position = Vector2(-3531, -152)
-PLAYER_STATS = {
-"health": 100.0,
-"jump_height": 800,
-"walk_speed": 600
-}
-
-[node name="CollisionShape2D" parent="Player_0/TroopInteractRadius" index="0"]
-debug_color = Color(0, 0.65022, 0.105736, 0.42)
-
-[node name="TowerHeart" parent="." instance=ExtResource("14_igbdc")]
-position = Vector2(-3964, -158)
-scale = Vector2(2.97604, 2.97604)
-
-[node name="TowerHeart2" parent="." instance=ExtResource("14_igbdc")]
-position = Vector2(539, 636)
-scale = Vector2(2.97604, 2.97604)
-heart_color = Color(0.47731, 0.852002, 7.70092e-07, 1)
-heart_faction = "hostile"
 
 [node name="PortalManager" parent="." instance=ExtResource("5_ftxrp")]
 
@@ -196,13 +180,11 @@ position = Vector2(-2957, -6)
 [node name="BasicFriendlyTroop2" parent="TheHiveMind/FriendlyNPCs" index="1" instance=ExtResource("9_hltmn")]
 position = Vector2(-3025, 73)
 
-[node name="PlayerHeart" parent="TheHiveMind/TowerHearts" index="0"]
-visible = false
-position = Vector2(-3965, -152)
+[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
+position = Vector2(-3997, 227)
 
-[node name="EnemyHeart" parent="TheHiveMind/TowerHearts" index="1"]
-visible = false
-position = Vector2(6968, -665)
+[node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
+position = Vector2(482, -238)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.802209, 0.813949, 0.837776, 1)

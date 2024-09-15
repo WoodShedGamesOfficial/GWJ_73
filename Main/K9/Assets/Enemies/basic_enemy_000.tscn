@@ -12,7 +12,7 @@
 radius = 406.832
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ubemm"]
-radius = 138.177
+radius = 106.005
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hg0o2"]
 radius = 72.0
@@ -122,6 +122,11 @@ collision_mask = 29
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
+ENEMY_STATS = {
+"damage": 5,
+"health": 25,
+"walk_speed": 200.0
+}
 
 [node name="PlayerVisibilityArea" type="Area2D" parent="."]
 collision_mask = 17
@@ -142,11 +147,7 @@ debug_color = Color(0.972549, 0, 0, 0.419608)
 shape = SubResource("CircleShape2D_hg0o2")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 40.0
-target_desired_distance = 20.0
-path_max_distance = 7000.0
-path_postprocessing = 1
-radius = 64.0
+target_desired_distance = 300.0
 debug_enabled = true
 
 [node name="NavTimer" type="Timer" parent="."]
@@ -154,7 +155,7 @@ wait_time = 15.0
 autostart = true
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 
 [node name="Sprites" type="Node2D" parent="."]
 rotation = -0.022804
@@ -213,4 +214,5 @@ stream = ExtResource("7_68m2c")
 [connection signal="body_exited" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_exited"]
 [connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
 [connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]
-[connection signal="body_entered" from="HitBox" to="." method="prepare_attack"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="attack"]

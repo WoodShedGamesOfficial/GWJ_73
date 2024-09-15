@@ -10,6 +10,7 @@ class_name K9_player_controller
 @export var PLAYER_STATS = {
 	'health' : 100.00,
 	'walk_speed' : 300,
+	"base_gold" : 500,
 	
 }
 
@@ -20,6 +21,8 @@ var isSprinting : bool
 func _ready():
 	GlobalHiveMind.player_pos = global_position
 	add_to_group("Player")
+	
+	GlobalHiveMind.players_gold_coins = PLAYER_STATS.base_gold
 	pass
 	
 
@@ -37,6 +40,7 @@ func _process(delta):
 		player_anim.play("Idle")
 		$Footsteps.playing = false
 	
+	$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
 	pass
 	
 
