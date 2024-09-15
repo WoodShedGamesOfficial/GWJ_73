@@ -1,0 +1,60 @@
+--Game/play:
+	2D / Top down
+	
+	wave based enemies
+	
+	attrition warfare - tied to fast travel
+	
+	
+
+--Story:
+	---Towers, Fast travel, and fun facts
+	
+	defending/ attacking enemy towers
+	
+
+
+--technical goals:
+	wave based spawning 
+	
+	education and working with others
+	
+
+
+--Timeline:
+	Day 0: concept and blockout design
+	
+	day 1 - 2: prototyping and GDD refinery
+	
+	day 3-7: polish and refinement
+	
+	day 8: publish and page 
+	
+
+--technichal goals: #MVP Minimal viable product
+	player movement : 
+	enemy armies :
+	portal travel :
+	friendly army managment : 
+	resource system : #gold bodies etc
+	fun facts : #as a collectibe resource?
+	attrition warfare mechanics : 
+	towers and tower upgrades : 
+	
+	
+
+--Tools:
+	Godot 
+	Krita
+	Blender
+	LMMS
+	Audacity
+	
+
+
+--Credits:
+	@saaeb Game Dev
+	@DaveGameDev
+	@tiago
+	@TQoE / K9
+	@SilverKnightGG
