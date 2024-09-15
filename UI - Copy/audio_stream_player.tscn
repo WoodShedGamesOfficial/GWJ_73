@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vkngouivng0y"]
+
+[ext_resource type="AudioStream" uid="uid://bkxieorhj2het" path="res://02 Space Riddle.wav" id="1_rceei"]
+[ext_resource type="Script" path="res://audio_stream_player.gd" id="2_uo1w5"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_rceei")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_uo1w5")
