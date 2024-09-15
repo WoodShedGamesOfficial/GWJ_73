@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ds3lqjy5iicbd"]
+[gd_scene load_steps=22 format=3 uid="uid://ds3lqjy5iicbd"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Enemies/basic_enemy_Script.gd" id="1_a2s8a"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_cjn3j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rl2xa3envu3y" path="res://Main/K9/Assets/Fx/blood_spray_fx.tscn" id="4_umixc"]
 [ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="5_qj5kx"]
 [ext_resource type="AudioStream" uid="uid://ctri741ilja0" path="res://Main/K9/Assets/Audio/SFX/SwordClang_A.ogg" id="6_bhdw5"]
+[ext_resource type="AudioStream" uid="uid://bi5qnteu6128r" path="res://Main/K9/Assets/Audio/SFX/Death_A.ogg" id="7_68m2c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nqs1"]
 radius = 406.832
@@ -18,6 +19,33 @@ radius = 72.0
 
 [sub_resource type="Animation" id="Animation_wpb7y"]
 resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_2sxug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Feet:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Feet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_0c53e"]
 resource_name = "Walk"
@@ -42,33 +70,6 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.00245369),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_2sxug"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Feet:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/Feet:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -117,7 +118,7 @@ size = Vector2(78, 78)
 
 [node name="BasicEnemy_000" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 31
+collision_mask = 29
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
@@ -198,12 +199,18 @@ collision_mask = 17
 [node name="DeathHowl" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_qj5kx")
 pitch_scale = 1.5
+bus = &"NPCs"
 
 [node name="SwordClang" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_bhdw5")
 pitch_scale = 0.9
+bus = &"NPCs"
+
+[node name="HurtGrunt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_68m2c")
 
 [connection signal="body_entered" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_entered"]
 [connection signal="body_exited" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_exited"]
 [connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
 [connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]
+[connection signal="body_entered" from="HitBox" to="." method="prepare_attack"]

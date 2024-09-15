@@ -10,6 +10,8 @@ func _ready():
 	connect_buttons()
 	
 	settup_menu() #hides credits and options panel
+	
+	get_tree().paused = false
 	pass
 	
 

@@ -23,9 +23,9 @@ class_name K9_basic_enemy
 var movement_target : Vector2
 
 var canAttack : bool 
-
+var isAttacking : bool
 var movement_speed: float = 200.0
-var movement_target_position: Vector2 
+#var movement_target_position: Vector2 
 
 var attackingPlayer : bool
 
@@ -46,7 +46,9 @@ func _ready():
 	add_to_group("Enemy")
 	
 	if GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
-		movement_target_position = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+		movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+	else:
+		print("there are no Player towers")
 	
 	
 	ENEMY_STATS.health = randi_range(50, (100 * enemy_level))
@@ -88,6 +90,9 @@ func _physics_process(delta):
 
 func _process(delta):
 	
+	if isAttacking and $AttackTimer.is_stopped():
+		$AttackTimer.start
+	
 	if velocity != Vector2.ZERO:
 		enemy_anims.play("Walk")
 		#sprites.look_at(navigation_agent.get_next_path_position())
@@ -99,7 +104,7 @@ func _process(delta):
 	if target != null and target.is_in_group("Player"):
 		movement_target = target.transform.origin
 		set_movement_target(movement_target)
-		look_at(movement_target_position)
+		look_at(movement_target)
 	if target == null:
 		movement_target = GlobalHiveMind.enemy_heart_pos_array.front()
 	
@@ -115,6 +120,8 @@ func hurt(damage, damage_type):
 	if ENEMY_STATS.health > 0:
 		ENEMY_STATS.health -= damage
 		$BloodFX.restart()
+		$HurtGrunt.pitch_scale = randf_range(.80, 1.5)
+		$HurtGrunt.play(0.0)
 		#var blood_i = blood_splat_p.instantiate()
 	#
 		#get_tree().current_scene.add_child(blood_i)
@@ -129,6 +136,9 @@ var blood_splat_p = load('res://Main/K9/Assets/Fx/bloodsplat.tscn')
 func death():
 	var blood_i = blood_splat_p.instantiate()
 	var chance_to_scream = randf_range(0,100)
+	
+	$CollisionShape2D.disabled = true
+	DisableMode.DISABLE_MODE_MAKE_STATIC
 	
 	get_tree().current_scene.add_child(blood_i)
 	blood_i.transform.origin = transform.origin
@@ -151,11 +161,14 @@ func cancel_attack(body):
 func prepare_attack(body):
 	if body.is_in_group("Player"):
 		canAttack = true
-		
-		if attack_timer.is_stopped():
-			attack_timer.start(0.0)
-			await attack_timer.timeout
-			attack(body)
+		isAttacking = true
+		await $AttackTimer.timeout
+		attack(body)
+		#if attack_timer.is_stopped():
+			#attack_timer.start(0.0)
+			#await attack_timer.timeout
+			#prepare_attack(body)
+			#attack(body)
 		
 	pass
 	

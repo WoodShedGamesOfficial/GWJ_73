@@ -30,9 +30,12 @@ func _process(delta):
 	
 	if velocity.x or velocity.y != 0:
 		player_anim.play("Walk")
+		$Footsteps.playing = true
+		#await $Footsteps.finished
+		#$Footsteps.pitch_scale = randf_range(.9, 1.5)
 	else:
 		player_anim.play("Idle")
-	
+		$Footsteps.playing = false
 	
 	pass
 	
@@ -80,8 +83,8 @@ func _input(event):
 		player_cam.zoom.x += zoom_step
 		player_cam.zoom.y += zoom_step
 	
-	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.5, 3)
-	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.5, 3)
+	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.20, 1.5)
+	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.20, 1.5)
 	
 	
 	pass
