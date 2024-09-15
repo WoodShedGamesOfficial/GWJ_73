@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfgc78ags3cbo"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind_controller.gd" id="1_jpxir"]
+[ext_resource type="Texture2D" uid="uid://dkyijekrupmad" path="res://Main/K9/Assets/2D/Sprites/HeartShape.png" id="2_qr238"]
+
+[node name="TheHiveMind" type="Node"]
+script = ExtResource("1_jpxir")
+
+[node name="EnemySpawnPoints" type="Node" parent="."]
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="EnemySpawnPoints"]
+
+[node name="FriendlySpawnPoints" type="Node" parent="."]
+
+[node name="FriendlySpawnPoints" type="Marker2D" parent="FriendlySpawnPoints"]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="Timers"]
+wait_time = 6.0
+
+[node name="WaveTransitionTimer" type="Timer" parent="Timers"]
+wait_time = 35.0
+one_shot = true
+
+[node name="WaveStart" type="Timer" parent="Timers"]
+wait_time = 15.0
+one_shot = true
+
+[node name="EnemyNPCs" type="Node" parent="."]
+
+[node name="FriendlyNPCs" type="Node" parent="."]
+
+[node name="CapturePoints" type="Node" parent="."]
+
+[node name="TowerHearts" type="Node" parent="."]
+
+[node name="PlayerHeart" type="Sprite2D" parent="TowerHearts"]
+modulate = Color(0.00392157, 0.54902, 1, 1)
+position = Vector2(-1, 1)
+texture = ExtResource("2_qr238")
+
+[node name="EnemyHeart" type="Sprite2D" parent="TowerHearts"]
+modulate = Color(0.701961, 0.141176, 0.0784314, 1)
+position = Vector2(167, 1)
+texture = ExtResource("2_qr238")

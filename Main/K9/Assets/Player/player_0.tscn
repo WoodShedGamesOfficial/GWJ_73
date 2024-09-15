@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvjqmovptc8a"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
+[ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
+[ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_612tq"]
+[ext_resource type="PackedScene" uid="uid://c4a0iofxtkuen" path="res://Main/K9/Assets/Player/Weapon/player_weapon.tscn" id="4_0tm40"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
+radius = 72.7805
+
+[sub_resource type="Animation" id="Animation_aa37j"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4clu4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Feet:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAnim:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_iq0at"]
+resource_name = "Walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Feet:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAnim:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rs6k1"]
+_data = {
+"Idle": SubResource("Animation_aa37j"),
+"RESET": SubResource("Animation_4clu4"),
+"Walk": SubResource("Animation_iq0at")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o561a"]
+radius = 408.54
+
+[node name="Player_0" type="CharacterBody2D"]
+collision_mask = 14
+script = ExtResource("1_ww0cy")
+
+[node name="Feet" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1.44392e-07, 0.339018, 0.517899, 1)
+position = Vector2(-4, 1)
+rotation = 1.56727
+scale = Vector2(1.42313, 1.42313)
+texture = ExtResource("2_n3oth")
+flip_h = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 0.670588, 1, 1)
+rotation = 1.56727
+scale = Vector2(1.54647, 1.54647)
+texture = ExtResource("3_612tq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ldltp")
+
+[node name="PlayerCam" type="Camera2D" parent="."]
+
+[node name="ShootCast" type="RayCast2D" parent="."]
+target_position = Vector2(1000, 0)
+
+[node name="PlayerAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rs6k1")
+}
+speed_scale = 2.0
+
+[node name="PlayerWeapon" parent="." instance=ExtResource("4_0tm40")]
+position = Vector2(39, 0)
+rotation = 1.58381
+
+[node name="TroopInteractRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TroopInteractRadius"]
+shape = SubResource("CircleShape2D_o561a")
+debug_color = Color(0, 0.65022, 0.105736, 0.42)
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+
+[editable path="PlayerWeapon"]
