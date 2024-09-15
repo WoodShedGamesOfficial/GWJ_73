@@ -28,11 +28,11 @@ func set_heart_faction():
 	
 	match heart_faction:
 		"friendly" :
-			GlobalHiveMind.friendly_tower_heart_pos = global_transform.origin
+			GlobalHiveMind.friendly_tower_heart_pos_array.append(global_transform.origin)
 			add_to_group("Player")
 
 		"hostile" :
-			GlobalHiveMind.enemy_heart_pos = transform.origin
+			GlobalHiveMind.enemy_heart_pos_array.append(global_transform.origin)
 			add_to_group("Enemy")
 			
 		

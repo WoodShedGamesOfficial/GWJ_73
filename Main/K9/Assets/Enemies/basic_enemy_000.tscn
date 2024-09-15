@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds3lqjy5iicbd"]
+[gd_scene load_steps=21 format=3 uid="uid://ds3lqjy5iicbd"]
 
-[ext_resource type="Texture2D" uid="uid://diqj7hg3m52r" path="res://Main/K9/Assets/2D/Sprites/PlainTriangle.png" id="1_6w337"]
 [ext_resource type="Script" path="res://Main/K9/Assets/Enemies/basic_enemy_Script.gd" id="1_a2s8a"]
+[ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_cjn3j"]
+[ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_dbnb0"]
+[ext_resource type="PackedScene" uid="uid://rl2xa3envu3y" path="res://Main/K9/Assets/Fx/blood_spray_fx.tscn" id="4_umixc"]
+[ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="5_qj5kx"]
+[ext_resource type="AudioStream" uid="uid://ctri741ilja0" path="res://Main/K9/Assets/Audio/SFX/SwordClang_A.ogg" id="6_bhdw5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nqs1"]
 radius = 406.832
@@ -12,19 +16,114 @@ radius = 138.177
 [sub_resource type="CircleShape2D" id="CircleShape2D_hg0o2"]
 radius = 72.0
 
+[sub_resource type="Animation" id="Animation_wpb7y"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_0c53e"]
+resource_name = "Walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Feet:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Feet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.00245369),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2sxug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Feet:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Feet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0ndp"]
+_data = {
+"Idle": SubResource("Animation_wpb7y"),
+"RESET": SubResource("Animation_2sxug"),
+"Walk": SubResource("Animation_0c53e")
+}
+
+[sub_resource type="Curve" id="Curve_di1hs"]
+_data = [Vector2(0, 0.538462), 0.0, 0.0, 0, 0, Vector2(0.753425, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 0.208791), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fr6fp"]
+curve = SubResource("Curve_di1hs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wf0pi"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 20.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_fr6fp")
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_a3fu6"]
+offsets = PackedFloat32Array(0.693333, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4wka"]
+noise_type = 2
+frequency = 0.0625
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eekym"]
+width = 64
+height = 64
+color_ramp = SubResource("Gradient_a3fu6")
+noise = SubResource("FastNoiseLite_f4wka")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vta2a"]
+size = Vector2(78, 78)
+
 [node name="BasicEnemy_000" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 31
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
-ENEMY_STATS = {
-"damage": 5,
-"health": 75.0,
-"walk_speed": 100.0
-}
 
 [node name="PlayerVisibilityArea" type="Area2D" parent="."]
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisibilityArea"]
 shape = SubResource("CircleShape2D_8nqs1")
@@ -32,6 +131,7 @@ debug_color = Color(1.39579e-06, 0.635834, 0.412377, 0.42)
 
 [node name="AttackRadius" type="Area2D" parent="."]
 collision_layer = 2
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
 shape = SubResource("CircleShape2D_ubemm")
@@ -40,19 +140,11 @@ debug_color = Color(0.972549, 0, 0, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hg0o2")
 
-[node name="PlainTriangle" type="Sprite2D" parent="."]
-modulate = Color(1, 0.188235, 0.176471, 1)
-position = Vector2(17, -2)
-rotation = 1.59723
-scale = Vector2(0.854709, 0.854709)
-texture = ExtResource("1_6w337")
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 40.0
 target_desired_distance = 20.0
 path_max_distance = 7000.0
 path_postprocessing = 1
-avoidance_enabled = true
 radius = 64.0
 debug_enabled = true
 
@@ -63,5 +155,55 @@ autostart = true
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="Sprites" type="Node2D" parent="."]
+rotation = -0.022804
+
+[node name="Feet" type="Sprite2D" parent="Sprites"]
+position = Vector2(-5, -2)
+rotation = 1.60978
+texture = ExtResource("2_cjn3j")
+
+[node name="Head" type="Sprite2D" parent="Sprites"]
+position = Vector2(-5, -2)
+rotation = 1.60978
+texture = ExtResource("3_dbnb0")
+
+[node name="EnemyAnims" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g0ndp")
+}
+
+[node name="BloodFX" parent="." instance=ExtResource("4_umixc")]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_wf0pi")
+texture = SubResource("NoiseTexture2D_eekym")
+one_shot = true
+explosiveness = 0.75
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(57, 2)
+collision_layer = 2
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_vta2a")
+debug_color = Color(0.725216, 0.476489, 0, 0.42)
+
+[node name="DetectCast" type="RayCast2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+target_position = Vector2(2000, 0)
+collision_mask = 17
+
+[node name="DeathHowl" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qj5kx")
+pitch_scale = 1.5
+
+[node name="SwordClang" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_bhdw5")
+pitch_scale = 0.9
+
+[connection signal="body_entered" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_entered"]
+[connection signal="body_exited" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_exited"]
 [connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
 [connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]

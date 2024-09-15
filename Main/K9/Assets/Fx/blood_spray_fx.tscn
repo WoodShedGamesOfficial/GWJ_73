@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://rl2xa3envu3y"]
+
+[node name="BloodFX" type="GPUParticles2D"]

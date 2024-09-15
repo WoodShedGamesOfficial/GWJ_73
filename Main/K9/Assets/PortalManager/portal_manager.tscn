@@ -9,3 +9,8 @@ script = ExtResource("1_rof8c")
 [node name="Portals" type="Node" parent="."]
 
 [node name="Portal_000" parent="Portals" instance=ExtResource("2_hchwy")]
+
+[connection signal="body_entered" from="Portals/Portal_000/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Portals/Portal_000/Area2D" to="." method="_on_area_2d_body_exited"]
+
+[editable path="Portals/Portal_000"]

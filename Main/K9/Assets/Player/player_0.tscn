@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=11 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -109,6 +109,9 @@ _data = {
 "Walk": SubResource("Animation_iq0at")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o561a"]
+radius = 408.54
+
 [node name="Player_0" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_ww0cy")
@@ -145,5 +148,13 @@ speed_scale = 2.0
 [node name="PlayerWeapon" parent="." instance=ExtResource("4_0tm40")]
 position = Vector2(39, 0)
 rotation = 1.58381
+
+[node name="TroopInteractRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TroopInteractRadius"]
+shape = SubResource("CircleShape2D_o561a")
+debug_color = Color(0, 0.65022, 0.105736, 0.42)
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
 
 [editable path="PlayerWeapon"]

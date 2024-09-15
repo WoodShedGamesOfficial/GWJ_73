@@ -6,10 +6,6 @@ extends Node
 var enemy_spawn_point_array = []
 
 
-var player_tower_heart_pos : Vector2
-var enemy_tower_heart : Vector2
-
-
 
 # --function blocks
 

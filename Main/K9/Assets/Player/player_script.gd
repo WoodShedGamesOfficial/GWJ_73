@@ -39,16 +39,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	look_at(get_global_mouse_position())
-	# Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-
-	## Handle jump.
-	#if Input.is_action_just_pressed("Jump") and is_on_floor():
-		#velocity.y =  (-1 * PLAYER_STATS.jump_height)
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var dir_x = Input.get_axis("ui_left", "ui_right")
 	var dir_y = Input.get_axis("ui_up", "ui_down")
 	
@@ -68,6 +59,8 @@ func _physics_process(delta):
 	else:
 		velocity.y = move_toward(velocity.y, 0, PLAYER_STATS.walk_speed)
 		#player_anim.play("Idle")
+	
+	
 	move_and_slide()
 	
 	pass
