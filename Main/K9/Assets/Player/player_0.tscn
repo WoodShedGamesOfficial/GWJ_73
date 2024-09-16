@@ -188,4 +188,12 @@ script = SubResource("GDScript_8yo3n")
 [node name="Pause_Menu" parent="GUI/GUI" instance=ExtResource("6_gqqi6")]
 layout_mode = 1
 
+[node name="Label" type="Label" parent="GUI"]
+offset_left = 1085.0
+offset_top = 606.0
+offset_right = 1128.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.94902, 0.545098, 0, 1)
+text = "Coins"
+
 [editable path="PlayerWeapon"]

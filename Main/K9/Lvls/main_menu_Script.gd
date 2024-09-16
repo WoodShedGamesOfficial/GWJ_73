@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 class_name K9_Main_menu
 
 @export var dev_room_path : PackedScene
@@ -12,6 +12,14 @@ func _ready():
 	settup_menu() #hides credits and options panel
 	
 	get_tree().paused = false
+	if GlobalLibrary.hasSplashed == false:
+		$SplashScreen/SplashAnim.play("Spash")
+		GlobalLibrary.hasSplashed = true
+		await $SplashScreen/SplashAnim.animation_finished
+		GlobalLibrary.hasSplashed = true
+		$SplashScreen.queue_free()
+	else:
+		$SplashScreen.queue_free()
 	pass
 	
 
@@ -26,6 +34,14 @@ func connect_buttons():
 	#start game
 	$Tutorial_confirm/Yes.connect('pressed', goto_tutorial_island)
 	$Tutorial_confirm/No.connect('pressed', goto_level_0)
+	pass
+	
+
+func _input(event):
+	if Input.is_anything_pressed() and get_tree().current_scene.get_node_or_null('SplashScreen') and $SplashScreen/SplashAnim.is_playing():
+		$SplashScreen.queue_free()
+	else:
+		return 
 	pass
 	
 
@@ -45,14 +61,15 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	GlobalLibrary.level_path = load("res://Main/K9/Lvls/tutorial_island/tutorial_island.tscn")
-	get_tree().change_scene_to_file('res://Main/K9/Lvls/load_screen.tscn')
+	var island_path = load("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
+	get_tree().change_scene_to_packed(island_path)
 	pass
 	
 
 func goto_level_0():
-	GlobalLibrary.level_path = load('res://Main/K9/Lvls/Lvl_0/level_0.tscn')
-	get_tree().change_scene_to_file("res://Main/K9/Lvls/load_screen.tscn")
+	var lvl0_p = load("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	
+	get_tree().change_scene_to_packed(lvl0_p)
 	pass
 	
 
@@ -62,7 +79,6 @@ func go_to_devRoom():
 		get_tree().change_scene_to_packed(dev_room_path)
 	else:
 		print("no dev_room path assigned")
-	
 	
 	pass
 	

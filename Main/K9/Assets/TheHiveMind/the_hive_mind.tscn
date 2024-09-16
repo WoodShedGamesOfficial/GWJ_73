@@ -1,7 +1,109 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfgc78ags3cbo"]
+[gd_scene load_steps=14 format=3 uid="uid://cfgc78ags3cbo"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind_controller.gd" id="1_jpxir"]
-[ext_resource type="Texture2D" uid="uid://dkyijekrupmad" path="res://Main/K9/Assets/2D/Sprites/HeartShape.png" id="2_qr238"]
+[ext_resource type="PackedScene" uid="uid://krjhmw7cd1a4" path="res://Main/K9/Assets/TowerHeart/tower_heart.tscn" id="2_kpdsw"]
+[ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="3_5ju07"]
+[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="4_hqobe"]
+
+[sub_resource type="GDScript" id="GDScript_p4mte"]
+resource_name = "TroopSpawnButtonTESTING"
+script/source = "extends Node2D
+
+@onready var interaction_radius = $InteractionRadius
+
+var canInteract : bool
+
+@export var troop_p = preload(\"res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn\")
+@export var price_of_troop : int = 50
+
+var spawn_points_array = []
+var players_wallet = GlobalHiveMind.players_gold_coins
+
+
+# function bloack
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	for points in $\"../../FriendlySpawnPoints\".get_children():
+		spawn_points_array.append(points.transform.origin)
+	
+	
+	GlobalHiveMind.players_gold_coins = 500
+	pass # Replace with function body.
+
+func _input(event):
+	if Input.is_action_just_pressed(\"ui_accept\") and canInteract and GlobalHiveMind.players_gold_coins >= price_of_troop:
+		spawn_friendly_troop()
+	pass
+	
+
+
+func _on_interaction_radius_body_entered(body):
+	if body.is_in_group(\"Player\"):
+		canInteract = true
+	
+	pass # Replace with function body.
+
+
+func _on_interaction_radius_body_exited(body):
+	if body.is_in_group(\"Player\"):
+		canInteract = false
+	
+	pass # Replace with function body.
+
+
+func spawn_friendly_troop():
+	var troop_i = troop_p.instantiate() ##troop instance
+	
+	var hivemind_friendlymanager = $\"../../FriendlyNPCs\"
+	
+	hivemind_friendlymanager.add_child(troop_i)
+	troop_i.global_transform.origin = spawn_points_array.pick_random()
+	$SpawnFX.restart()
+	GlobalHiveMind.players_gold_coins -= price_of_troop
+	print(\"troops position\" )
+	pass
+	
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2s8js"]
+radius = 69.0072
+
+[sub_resource type="Curve" id="Curve_wpjy1"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -146.374), 0.0, 0.0, 0, 0, Vector2(0.986301, 280.879), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2vflq"]
+curve = SubResource("Curve_wpjy1")
+
+[sub_resource type="Gradient" id="Gradient_havv6"]
+offsets = PackedFloat32Array(0, 0.711864, 0.889831, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.654232, 0.654232, 0.654232, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w350g"]
+gradient = SubResource("Gradient_havv6")
+
+[sub_resource type="Curve" id="Curve_6y0v6"]
+_data = [Vector2(0, 0.076923), 0.0, 0.0, 0, 0, Vector2(0.753425, 0.098901), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ni2pw"]
+curve = SubResource("Curve_6y0v6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kthl0"]
+particle_flag_disable_z = true
+angle_min = -0.299989
+angle_max = 1.07288e-05
+angle_curve = SubResource("CurveTexture_2vflq")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ni2pw")
+color_ramp = SubResource("GradientTexture1D_w350g")
 
 [node name="TheHiveMind" type="Node"]
 script = ExtResource("1_jpxir")
@@ -27,6 +129,9 @@ one_shot = true
 wait_time = 15.0
 one_shot = true
 
+[node name="ResourceTimer" type="Timer" parent="Timers"]
+wait_time = 20.0
+
 [node name="EnemyNPCs" type="Node" parent="."]
 
 [node name="FriendlyNPCs" type="Node" parent="."]
@@ -35,12 +140,50 @@ one_shot = true
 
 [node name="TowerHearts" type="Node" parent="."]
 
-[node name="PlayerHeart" type="Sprite2D" parent="TowerHearts"]
-modulate = Color(0.00392157, 0.54902, 1, 1)
-position = Vector2(-1, 1)
-texture = ExtResource("2_qr238")
+[node name="PlayersHeart" parent="TowerHearts" instance=ExtResource("2_kpdsw")]
+position = Vector2(-3137, -489)
+scale = Vector2(2.67108, 2.67108)
+heart_color = Color(0, 1, 0.596078, 1)
 
-[node name="EnemyHeart" type="Sprite2D" parent="TowerHearts"]
-modulate = Color(0.701961, 0.141176, 0.0784314, 1)
-position = Vector2(167, 1)
-texture = ExtResource("2_qr238")
+[node name="EnemyHeart2" parent="TowerHearts" instance=ExtResource("2_kpdsw")]
+position = Vector2(3057, -138)
+scale = Vector2(2.24127, 2.24127)
+heart_color = Color(0.924667, 0.000159217, 0.773509, 1)
+
+[node name="SpawnButtons" type="Node" parent="."]
+
+[node name="FriendlyTroopSpawnButton" type="Node2D" parent="SpawnButtons"]
+rotation = -2.27114
+script = SubResource("GDScript_p4mte")
+
+[node name="Label" type="Label" parent="SpawnButtons/FriendlyTroopSpawnButton"]
+offset_left = -71.0
+offset_top = -83.0
+offset_right = 78.0
+offset_bottom = -60.0
+text = "Spawn infantry : 50"
+
+[node name="InteractionRadius" type="Area2D" parent="SpawnButtons/FriendlyTroopSpawnButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius"]
+shape = SubResource("CircleShape2D_2s8js")
+
+[node name="Marker2D" type="Marker2D" parent="SpawnButtons/FriendlyTroopSpawnButton"]
+position = Vector2(15, 402)
+
+[node name="SpawnFX" type="GPUParticles2D" parent="SpawnButtons/FriendlyTroopSpawnButton"]
+position = Vector2(16, 401)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_kthl0")
+texture = ExtResource("3_5ju07")
+one_shot = true
+explosiveness = 0.8
+
+[node name="PlainCircle" type="Sprite2D" parent="SpawnButtons/FriendlyTroopSpawnButton"]
+modulate = Color(0.384314, 0.658824, 0.396078, 1)
+scale = Vector2(0.154175, 0.154175)
+texture = ExtResource("4_hqobe")
+
+[connection signal="body_entered" from="SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
+[connection signal="body_exited" from="SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]

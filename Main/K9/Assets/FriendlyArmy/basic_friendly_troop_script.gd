@@ -54,6 +54,7 @@ func _ready():
 	
 	add_to_group("Player")
 	add_to_group("Troop")
+	
 	pass
 	
 
@@ -69,7 +70,7 @@ func actor_setup():
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
-	sprites.look_at(movement_target)
+	#sprites.look_at(movement_target)
 	pass
 	
 
@@ -80,10 +81,10 @@ func _physics_process(delta):
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 
-	velocity = current_agent_position.direction_to(next_path_position) * TROOPSTATS.walk_speed
+	velocity = (current_agent_position.direction_to(next_path_position) * TROOPSTATS.walk_speed)
 	move_and_slide()
 	
-	sprites.look_at(movement_target_position)
+	sprites.look_at(navigation_agent.get_next_path_position())
 	pass
 	
 
@@ -101,9 +102,10 @@ func death():
 	
 	print(name + "  died")
 	
+	GlobalHiveMind.enemies_gold_coins += 50
 	GlobalHiveMind.friendly_troops_names.erase(name)
 	
 	queue_free()
-	pass
+	
 	pass
 	

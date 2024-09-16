@@ -90,6 +90,11 @@ slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_10r6t")
+TROOPSTATS = {
+"damage": 5,
+"health": 25,
+"walk_speed": 200.0
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -101,10 +106,8 @@ libraries = {
 }
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_max_distance = 4000.0
-path_postprocessing = 1
-avoidance_enabled = true
-radius = 85.0
+target_desired_distance = 200.0
+path_max_distance = 25.0
 
 [node name="BloodFX" parent="." instance=ExtResource("4_vqw4e")]
 
