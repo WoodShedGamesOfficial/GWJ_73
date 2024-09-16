@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=14 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_612tq"]
 [ext_resource type="PackedScene" uid="uid://c4a0iofxtkuen" path="res://Main/K9/Assets/Player/Weapon/player_weapon.tscn" id="4_0tm40"]
+[ext_resource type="AudioStream" uid="uid://b30ytb6dd5pg4" path="res://Main/K9/Assets/Audio/267492__snudio_records__footsteps-on-forest-ground.ogg" id="5_6mqcu"]
+[ext_resource type="PackedScene" uid="uid://sv7l5kycqjet" path="res://Main/K9/Assets/Player/pause_menu.tscn" id="6_gqqi6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
 radius = 72.7805
@@ -112,6 +114,18 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_o561a"]
 radius = 408.54
 
+[sub_resource type="GDScript" id="GDScript_8yo3n"]
+resource_name = "GUI_controller"
+script/source = "extends Control
+
+
+func _input(event):
+	if Input.is_action_just_pressed(\"ui_end\"):
+		get_tree().paused =! get_tree().paused
+		$Pause_Menu.visible =! $Pause_Menu.visible
+	pass
+"
+
 [node name="Player_0" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_ww0cy")
@@ -156,5 +170,30 @@ shape = SubResource("CircleShape2D_o561a")
 debug_color = Color(0, 0.65022, 0.105736, 0.42)
 
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6mqcu")
+bus = &"Player"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUI"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_8yo3n")
+
+[node name="Pause_Menu" parent="GUI/GUI" instance=ExtResource("6_gqqi6")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="GUI"]
+offset_left = 1085.0
+offset_top = 606.0
+offset_right = 1128.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.94902, 0.545098, 0, 1)
+text = "Coins"
 
 [editable path="PlayerWeapon"]

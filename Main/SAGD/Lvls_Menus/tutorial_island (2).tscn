@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=4 uid="uid://cha4djm5388ox"]
+
+[ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_cqyc0"]
+[ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="2_vg4lo"]
+[ext_resource type="PackedScene" uid="uid://krjhmw7cd1a4" path="res://Main/K9/Assets/TowerHeart/tower_heart.tscn" id="3_1shhw"]
+[ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="4_wnq4q"]
+[ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="5_c1wgj"]
+
+[node name="Tutorial_Island" type="Node2D"]
+
+[node name="World" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="World"]
+format = 2
+
+[node name="Floors" type="TileMapLayer" parent="World/TileMap"]
+tile_set = ExtResource("1_cqyc0")
+
+[node name="Walls" type="TileMapLayer" parent="World/TileMap"]
+tile_map_data = PackedByteArray("AAD+//7/AgAAAAAAAAD+/wEAAgAAAAAAAGABAAEAAgAAAAAAADABAP7/AgAAAAAAAFAAAP7/AgABAAAAAAD///7/AgABAAAAAAD//wEAAgABAAAAADAAAAEAAgABAAAAADACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/BAACAAIAAAAHAP3/AgAAAAEAAAAHAPz/AgAAAAEAAAAHAPv/AgAAAAAAAAAIAPv/AgABAAAAAAAJAPv/AgABAAAAAAAKAPv/AgABAAAAAAALAPv/AgACAAAAAAALAPz/AgACAAEAAAALAP3/AgACAAEAAAALAP7/AgACAAEAAAALAAEAAgABAAIAAAAKAAEAAgABAAIAAAAJAAEAAgABAAIAAAAIAAEAAgABAAIAAAAHAAEAAgABAAIAAAAGAAEAAgABAAIAAAAFAAEAAgABAAIAAAAEAAEAAgABAAIAAAADAAEAAgABAAIAAAACAAEAAgABAAIAAAALAP//BAAAAAIAAAAMAP//BAABAAIAAAANAP//BAABAAIAAAAOAP//BAABAAIAAAAMAAEAAgABAAIAAAANAAEAAgABAAIAAAAOAAEAAgABAAIAAAAPAAEAAgABAAIAAAAQAAEAAgABAAIAAAARAAEAAgABAAIAAAASAAEAAgABAAIAAAATAAEAAgABAAIAAAAUAAEAAgACAAIAAAAPAP//BAACAAIAAAAPAP7/AgAAAAEAAAAPAP3/AgAAAAEAAAAPAPz/AgAAAAEAAAAPAPv/AgAAAAAAAAAQAPv/AgABAAAAAAARAPv/AgABAAAAAAASAPv/AgABAAAAAAATAPv/AgABAAAAAAAUAPv/AgACAAAAAAAUAPz/AgACAAEAAAAUAAAAAgACAAEAAAAUAP3/BAACAAAAADAVAP3/AgABAAAAAAAWAP3/AgABAAAAAAAXAP3/AgABAAAAAAAYAP3/AgABAAAAAAAZAP3/AgABAAAAAAAUAP//BAAAAAAAAAAVAP//AgABAAIAAAAWAP//AgABAAIAAAAXAP//AgABAAIAAAAYAP//AgABAAIAAAAZAP//AgABAAIAAAAaAP//AgABAAIAAAAAAP3/AgACAAEAAAAAAPz/AgACAAAAAAD///z/AgABAAAAAAD+//z/AgABAAAAAAD9//z/AgABAAAAAAD8//z/AgABAAAAAAD7//z/AgABAAAAAAD6//z/AgABAAAAAAD5//z/AgAAAAAAAAD5//3/AgAAAAEAAAD5//7/AgAAAAEAAAD5////AgAAAAEAAAD5/wAAAgAAAAEAAAD5/wEAAgAAAAEAAAD5/wIAAgAAAAEAAAD5/wMAAgAAAAIAAAAAAAMAAgACAAIAAAAAAAIAAgACAAEAAAD//wMAAgABAAIAAAD+/wMAAgABAAIAAAD9/wMAAgABAAIAAAD8/wMAAgABAAIAAAD7/wMAAgABAAIAAAD6/wMAAgABAAIAAAAbAP//AgABAAIAAAAcAP//AgABAAIAAAAaAP3/AgABAAAAAAAbAP3/AgABAAAAAAAcAP3/AgABAAAAAAAdAP3/BAACAAIAAAAdAP//BAACAAIAAGAdAAAAAgAAAAEAAAAdAAEAAgAAAAEAAAAdAPz/AgAAAAEAAAAdAPv/AgAAAAEAAAAdAPr/AgAAAAEAAAAdAPn/AgAAAAAAAAAdAAIAAgAAAAAAAGAeAAIAAgABAAIAAAAfAAIAAgABAAIAAAAgAAIAAgABAAIAAAAhAAIAAgABAAIAAAAiAAIAAgABAAIAAAAjAAIAAgABAAIAAAAkAAIAAgABAAIAAAAlAAIAAgABAAIAAAAmAAIAAgACAAIAAAAmAAEAAgACAAEAAAAmAAAAAgACAAEAAAAmAP//AgACAAEAAAAmAP7/AgACAAEAAAAmAP3/AgACAAEAAAAmAPz/AgACAAEAAAAmAPv/AgACAAEAAAAmAPr/AgACAAEAAAAmAPn/AgACAAAAAAAlAPn/AgABAAAAAAAkAPn/AgABAAAAAAAjAPn/AgABAAAAAAAiAPn/AgABAAAAAAAhAPn/AgABAAAAAAAgAPn/AgABAAAAAAAfAPn/AgABAAAAAAAeAPn/AgABAAAAAAA=")
+tile_set = ExtResource("2_vg4lo")
+
+[node name="TowerHeart" parent="World/TileMap" instance=ExtResource("3_1shhw")]
+position = Vector2(-593, -12)
+scale = Vector2(2.67108, 2.67108)
+heart_color = Color(0, 1, 0.596078, 1)
+
+[node name="TowerHeart2" parent="World/TileMap" instance=ExtResource("3_1shhw")]
+position = Vector2(4731, -308)
+scale = Vector2(2.24127, 2.24127)
+heart_color = Color(0.924667, 0.000159217, 0.773509, 1)
+
+[node name="DefensiveGate" parent="World/TileMap" instance=ExtResource("4_wnq4q")]
+position = Vector2(-210, -9)
+rotation = 0.0192822
+gate_health = 9999
+faction = "hostile"
+
+[node name="DefensiveGate2" parent="World/TileMap" instance=ExtResource("4_wnq4q")]
+position = Vector2(3753, -193)
+rotation = 0.0192822
+faction = "hostile"
+
+[node name="Player_0" parent="World/TileMap" instance=ExtResource("5_c1wgj")]
+position = Vector2(-71, 113)
+rotation = -0.900308
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Welcome" type="Label" parent="Labels"]
+z_index = -1
+offset_left = -164.0
+offset_top = 181.0
+offset_right = 187.0
+offset_bottom = 217.0
+rotation = -1.5708
+theme_override_font_sizes/font_size = 26
+text = "Welcome to tower conquest"
+
+[node name="Movement tutorial" type="Label" parent="Labels"]
+z_index = -1
+offset_left = 76.0
+offset_top = -52.0
+offset_right = 360.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 36
+text = "     ( W  A  S  D)
+To move around"
+
+[node name="Movement tutorial2" type="Label" parent="Labels"]
+z_index = -1
+offset_left = 597.0
+offset_top = -52.0
+offset_right = 1050.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 36
+text = "   Move around the mouse
+              to rotate"
+
+[node name="Movement tutorial3" type="Label" parent="Labels"]
+z_index = -1
+offset_left = 1326.0
+offset_top = -52.0
+offset_right = 1779.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 36
+text = "   Press left mouse button
+              "

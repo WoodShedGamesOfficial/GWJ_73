@@ -12,6 +12,10 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$HealthBar.max_value = TOWERSTATS.health
+	$HealthBar.value = TOWERSTATS.health
+	
+	$HealthBar/Label.text = str(TOWERSTATS.health)
 	
 	set_heart_faction()
 	
@@ -22,6 +26,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 
 func set_heart_faction():
@@ -40,9 +45,11 @@ func set_heart_faction():
 
 func hurt(damage, damage_type):
 	
-	if TOWERSTATS.health > 0:
+	if TOWERSTATS.health >= 1:
 		TOWERSTATS.health -= damage
 		towerheart_animations.play("Hurt")
+		$HealthBar.value = TOWERSTATS.health
+		$HealthBar/Label.text = str(TOWERSTATS.health)
 		print('hurt enemy tower')
 	else:
 		death_of_the_tower()
@@ -51,6 +58,7 @@ func hurt(damage, damage_type):
 	
 
 func death_of_the_tower():
+	$HealthBar.visible = false
 	
 	match heart_faction:
 		"friendly":

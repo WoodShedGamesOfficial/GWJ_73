@@ -24,7 +24,7 @@ func _ready():
 	$Timers/SpawnTimer.start()
 	
 	
-	
+	$Timers/ResourceTimer.connect('timeout', add_enemy_resources)
 	
 	pass # Replace with function body.
 	
@@ -33,9 +33,17 @@ func spawn_enemy():
 	
 	var enemy_p = enemy_troop_array.pick_random()
 	var enemy_i = enemy_p.instantiate()
+	
 	$EnemyNPCs.add_child(enemy_i)
 	enemy_i.transform.origin = enemy_spawn_point_array.pick_random()
 	print("enemy spawned" + str(enemy_i.transform.origin))
+	
+	pass
+	
+
+func add_enemy_resources():
+	
+	GlobalHiveMind.enemies_gold_coins += 100
 	
 	pass
 	

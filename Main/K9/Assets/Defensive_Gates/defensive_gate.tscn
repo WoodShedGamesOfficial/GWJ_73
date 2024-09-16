@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://7p387hc5oya"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate_Script.gd" id="1_7ajfd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eojc"]
+size = Vector2(117, 445)
+
+[sub_resource type="Curve" id="Curve_v28id"]
+min_value = -45.0
+max_value = 90.0
+_data = [Vector2(0, -36.0989), 0.0, 0.0, 0, 0, Vector2(1, 49.9451), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kd4hm"]
+curve = SubResource("Curve_v28id")
+
+[sub_resource type="Curve" id="Curve_cnkpl"]
+_data = [Vector2(0, 0.43956), 0.0, 0.0, 0, 0, Vector2(0.493151, 0.956044), 0.0, 0.0, 0, 0, Vector2(1, 0.274725), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c0lji"]
+curve = SubResource("Curve_cnkpl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkcsc"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(80, 160, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -45.0
+angle_max = 45.0
+angle_curve = SubResource("CurveTexture_kd4hm")
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.25
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_c0lji")
+
+[sub_resource type="Gradient" id="Gradient_jagg3"]
+offsets = PackedFloat32Array(0.373333, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xiq5b"]
+noise_type = 3
+frequency = 0.0389
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i2lc5"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_jagg3")
+noise = SubResource("FastNoiseLite_xiq5b")
+
+[node name="DefensiveGate" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_7ajfd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 8.5)
+shape = SubResource("RectangleShape2D_2eojc")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.47797, 0.544349, 0.626098, 1)
+polygon = PackedVector2Array(-53, -139, 43, -140, 51, 162, -47, 164)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(-6, -52)
+scale = Vector2(0.688297, 0.688297)
+color = Color(0.846184, 0.37914, 0.0810306, 1)
+polygon = PackedVector2Array(-74, -134, -40, -69, 45, -69, 81, -134, 72, -199, 26, -233, -38, -236, -70, -207)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(2, 63)
+rotation = -3.12304
+scale = Vector2(0.737088, 0.737088)
+color = Color(0.846184, 0.37914, 0.0810306, 1)
+polygon = PackedVector2Array(-74, -134, -40, -69, 45, -69, 81, -134, 72, -199, 26, -233, -38, -236, -70, -207)
+
+[node name="DustFX" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_qkcsc")
+texture = SubResource("NoiseTexture2D_i2lc5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.85
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 192.66
+
+[node name="health" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -47.0
+offset_right = 29.0
+offset_bottom = -24.0
+text = "health"
