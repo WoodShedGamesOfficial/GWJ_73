@@ -29,17 +29,21 @@ var names = [
 
 var target_pos : Vector2
 
+@export_enum('blunt', 'sharp', 'fire', 'poison', 'ice') var damage_type = 'blunt'
 
 var movement_speed: float = 200.0
 var movement_target_position : Vector2
 
 @onready var sprites = $Sprites
+@onready var attack_timer = $AttackTimer
+
+var canAttack : bool 
 
 #@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready():
 	name = names.pick_random()
-	$Label.text = name
+	$Control/Label.text = name
 	GlobalHiveMind.friendly_troops_names.append(name)
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
@@ -69,12 +73,15 @@ func actor_setup():
 	
 
 func set_movement_target(movement_target: Vector2):
+	
 	navigation_agent.target_position = movement_target
+	
 	#sprites.look_at(movement_target)
 	pass
 	
 
 func _physics_process(delta):
+	
 	if navigation_agent.is_navigation_finished():
 		return
 
@@ -84,18 +91,67 @@ func _physics_process(delta):
 	velocity = (current_agent_position.direction_to(next_path_position) * TROOPSTATS.walk_speed)
 	move_and_slide()
 	
-	sprites.look_at(navigation_agent.get_next_path_position())
+	look_at(navigation_agent.get_next_path_position())
+	
+	for body in $AttackRadius.get_overlapping_bodies():
+		if body != null:
+			if body.is_in_group("Enemy") and $AttackTimer.is_stopped():
+				$AttackTimer.start(0.0)
+				look_at(body.transform.origin)
+				await $AttackTimer.timeout
+				attack(body)
+		
 	pass
 	
 
-func hurt(damage, damage_type) -> int:
-	if TROOPSTATS.health > 0:
+func _process(delta):
+	$Control/Label.rotation = 0
+	
+	for body in $VisiblilityRadius.get_overlapping_bodies():
+		if body != null and body.is_in_group("Enemy"):
+			if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
+				movement_target_position = body.transform.origin
+		else:
+			movement_target_position = GlobalHiveMind.enemy_heart_pos_array.front()
+	
+	pass
+	
+
+func prepare_attack(body):
+	
+	if body.is_in_group("Enemy"):
+		canAttack = true
+		#$AttackTimer.start()
+		
+		#attack(body)
+
+	pass
+	
+
+func attack(body):
+	var damage = TROOPSTATS.damage
+	
+	#print("troop attacked" + body.name)
+	
+	if canAttack and body != null:    #body.has_method("hurt") and 
+		body.hurt(damage, damage_type)
+		print(str(name) + "hurt  " + str(body.name))
+	
+	pass
+
+
+func hurt(damage, damage_type):
+	
+	print(name + "    got hurt")
+	
+	if TROOPSTATS.health >= 1:
 		TROOPSTATS.health -= damage
+		print(str(TROOPSTATS.health))
 		$BloodFX.restart()
 	else:
 		death()
 	
-	return TROOPSTATS.health
+	pass
 	
 
 func death():
@@ -105,7 +161,17 @@ func death():
 	GlobalHiveMind.enemies_gold_coins += 50
 	GlobalHiveMind.friendly_troops_names.erase(name)
 	
+	await get_tree().create_timer(1.0).timeout
 	queue_free()
 	
 	pass
 	
+
+
+
+
+func cancel_attack(body):
+	if body.is_in_group("Enemy"):
+		canAttack = false
+		attack_timer.stop()
+	pass # Replace with function body.

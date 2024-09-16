@@ -39,6 +39,7 @@ func _ready():
 
 
 func receive_teleport_body(body: Node2D):
+
 	# Prevent teleporting multiple times - called from manager
 	if bodies_in_area.has(body):
 		return
@@ -57,5 +58,6 @@ func _on_portal_area_body_entered(body:Node2D):
 
 
 func _on_portal_area_body_exited(body:Node2D):
+
 	if bodies_in_area.has(body):
 		bodies_in_area.erase(body)
