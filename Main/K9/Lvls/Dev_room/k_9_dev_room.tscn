@@ -4,15 +4,15 @@
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="2_d8sge"]
 [ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="3_i80vs"]
 [ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="3_uekls"]
-[ext_resource type="PackedScene" uid="uid://bbc77r0usuhxx" path="res://Main/K9/Assets/PortalManager/portal_manager.tscn" id="5_ftxrp"]
-[ext_resource type="PackedScene" uid="uid://ceyae8ko8aqw0" path="res://Main/K9/Assets/PortalManager/portal_000.tscn" id="6_cucph"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="6_rhd1w"]
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="7_qgotf"]
 [ext_resource type="PackedScene" uid="uid://b4pr4nbcepcdp" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn" id="9_hltmn"]
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="13_1ky3d"]
 [ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_000.tscn" id="13_xg50i"]
+[ext_resource type="PackedScene" uid="uid://cc7v8ymum2h4t" path="res://Main/Dutt/Assets/PortalManager/portal_manager.tscn" id="14_0gfm4"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="14_2kicj"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="14_tka2k"]
+[ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="15_w7gvn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tjw4y"]
 vertices = PackedVector2Array(-758.281, -754.227, -308.352, -721.523, -311.617, -295.867, -710.219, -294.867, -782, -398, -782, -626, -677.57, 299.953, -306, 308.82, -306, 716.609, -667.758, 768.156, -782, 626, -782, 398, -910, 114, -910, -114, -706.25, 57, -974, 398, -974, 334, -2443.64, -342.047, -2762.62, -326.469, -2767.41, -720.391, -2290, -626, -2290, -398, -3127.64, 553.648, -4197.21, 569.25, -4181.76, -436.211, -3142.86, -440.797, -3078.59, -23.0078, -3067.65, 32.6797, -2255.56, -60.5234, -2379.5, 22.1563, 733.43, -490.508, 768.563, 723.328, 29.1563, 742.719, 4.21094, 57, 16.5938, -24.6875, -2444.07, 696.641, -2752.73, 700.422, -2783.32, 301.141, -2400.79, 272.703, -2290, 398, -2290, 626, -2098, -398, -2098, -334, -2231.61, -120.281, -1934, -334, -1934, -398, -1934, -114, -1934, -178, -2098, -178, -2098, -114, -2162, -114, -2162, 114, -1138, 114, -1138, 178, -974, 178, -974, 114, -1138, 334, -1138, 398, 29.6094, -483.477, -703.82, -29.3125, -2156.48, -874.602, -769.953, -894.344, -2177.26, -749.008, -741.047, 854, -2354.86, 854)
@@ -141,20 +141,6 @@ radius = 300.0
 [node name="Player_0" parent="." instance=ExtResource("3_uekls")]
 position = Vector2(-3531, -152)
 
-[node name="PortalManager" parent="." instance=ExtResource("5_ftxrp")]
-
-[node name="Portal_000" parent="PortalManager/Portals" index="0"]
-position = Vector2(-2813, 747)
-
-[node name="Portal_001" parent="PortalManager/Portals" index="1" instance=ExtResource("6_cucph")]
-position = Vector2(-372, -671)
-
-[node name="Portal_002" parent="PortalManager/Portals" index="2" instance=ExtResource("6_cucph")]
-position = Vector2(-406, 720)
-
-[node name="Portal_003" parent="PortalManager/Portals" index="3" instance=ExtResource("6_cucph")]
-position = Vector2(-2801, -670)
-
 [node name="TheHiveMind" parent="." instance=ExtResource("7_qgotf")]
 isAwake = false
 
@@ -245,11 +231,23 @@ ENEMY_STATS = {
 "walk_speed": 200.0
 }
 
+[node name="Duffs" type="Node" parent="."]
+
+[node name="PortalManager" parent="Duffs" instance=ExtResource("14_0gfm4")]
+
+[node name="Portal_000" parent="Duffs/PortalManager/Portals" index="0"]
+position = Vector2(-3146, 659)
+
+[node name="Portal_001" parent="Duffs/PortalManager/Portals" index="1" instance=ExtResource("15_w7gvn")]
+position = Vector2(-60, 783)
+
+[node name="Portal_002" parent="Duffs/PortalManager/Portals" index="2" instance=ExtResource("15_w7gvn")]
+position = Vector2(-1621, -233)
+
 [connection signal="body_entered" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
 
 [editable path="Player_0"]
 [editable path="Player_0/PlayerWeapon"]
-[editable path="PortalManager"]
-[editable path="PortalManager/Portals/Portal_000"]
 [editable path="TheHiveMind"]
+[editable path="Duffs/PortalManager"]

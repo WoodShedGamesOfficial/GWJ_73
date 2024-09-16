@@ -94,7 +94,7 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_10r6t")
 TROOPSTATS = {
-"damage": 5,
+"damage": 50,
 "health": 25,
 "walk_speed": 200.0
 }
@@ -161,3 +161,4 @@ wait_time = 5.0
 one_shot = true
 
 [connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
+[connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]

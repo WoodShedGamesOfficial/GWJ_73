@@ -94,7 +94,7 @@ func _physics_process(delta):
 	sprites.look_at(navigation_agent.get_next_path_position())
 	
 	for body in $AttackRadius.get_overlapping_bodies():
-		if body.is_in_group("Player") and $AttackTimer.is_stopped():
+		if body.is_in_group("Enemy") and $AttackTimer.is_stopped() and body != null:
 			$AttackTimer.start(0.0)
 			look_at(body.transform.origin)
 			await $AttackTimer.timeout
@@ -112,7 +112,7 @@ func _process(delta):
 
 func prepare_attack(body):
 	
-	if body.is_in_group("Player"):
+	if body.is_in_group("Enemy"):
 		canAttack = true
 		#$AttackTimer.start()
 		
@@ -120,11 +120,6 @@ func prepare_attack(body):
 
 	pass
 	
-func cancel_attack(body):
-	if body.is_in_group("Player"):
-		canAttack = false
-		attack_timer.stop()
-	pass
 
 func attack(body):
 	var damage = TROOPSTATS.damage
@@ -162,3 +157,12 @@ func death():
 	
 	pass
 	
+
+
+
+
+func cancel_attack(body):
+	if body.is_in_group("Enemy"):
+		canAttack = false
+		attack_timer.stop()
+	pass # Replace with function body.
