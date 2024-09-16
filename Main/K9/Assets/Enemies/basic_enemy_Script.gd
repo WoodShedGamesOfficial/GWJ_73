@@ -58,8 +58,9 @@ func _ready():
 	ENEMY_STATS.damage = (ENEMY_STATS.damage * enemy_level / 2)
 	
 	$AttackTimer.connect('timeout', attack)
-	$AttackTimer.start()
-	
+	#$AttackTimer.start()
+	$AttackRadius.connect("body_entered", attack)
+	$AttackRadius.connect('body_entered', prepare_attack)
 	pass
 	
 
@@ -89,7 +90,7 @@ func _physics_process(delta):
 
 	if seesEnemy:
 		movement_target = current_enemy.transform.origin
-	else:
+	elif GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
 		movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
 	
 	velocity = current_agent_position.direction_to(next_path_position) * ENEMY_STATS.walk_speed
@@ -116,7 +117,7 @@ func _process(delta):
 		movement_target = target.transform.origin
 		set_movement_target(movement_target)
 		look_at(movement_target)
-	if target == null:
+	if target == null and GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
 		movement_target = GlobalHiveMind.enemy_heart_pos_array.front()
 	
 	
@@ -128,8 +129,10 @@ func hurt(damage, damage_type):
 	if ENEMY_STATS.health > 0:
 		ENEMY_STATS.health -= damage
 		$BloodFX.restart()
+		$EnemyAnims.play("Hurt")
 		$HurtGrunt.pitch_scale = randf_range(.80, 1.5)
 		$HurtGrunt.play(0.0)
+		await $EnemyAnims.animation_finished
 		#var blood_i = blood_splat_p.instantiate()
 	#
 		#get_tree().current_scene.add_child(blood_i)
@@ -150,6 +153,7 @@ func death():
 	
 	get_tree().current_scene.add_child(blood_i)
 	blood_i.transform.origin = transform.origin
+	
 	if chance_to_scream >= 95:
 		$DeathHowl.stream = preload("res://Main/K9/Assets/Audio/SFX/Whilhelm_Scream.wav")
 	
@@ -158,6 +162,7 @@ func death():
 	await get_tree().create_timer(0.75).timeout
 	GlobalHiveMind.players_gold_coins += 25
 	queue_free()
+	
 	pass
 	
 	
@@ -165,7 +170,7 @@ func prepare_attack(body):
 	
 	if body.is_in_group("Player"):
 		canAttack = true
-		$AttackTimer.start()
+		#$AttackTimer.start()
 		
 		#attack(body)
 
@@ -179,15 +184,17 @@ func cancel_attack(body):
 
 
 
-func attack(body):
+func attack():
 	var damage = ENEMY_STATS.damage
 	
-	if body.is_in_group("Player") or body.is_in_group("Troop") and body.has_method('hurt') and canAttack == true:
-		body.hurt(damage, damage_type)
-		$SwordClang.pitch_scale = randf_range(.90, 1.5)
-		$SwordClang.play(0.0)
-		print("enemy attacked:  " + str(body.name))
-	
+	for body in $HitBox.get_overlapping_bodies():
+		if body.is_in_group("Player") or body.is_in_group("Troop") and canAttack == true:
+			#await get_tree().create_timer(randf_range(1.5, 3)).timeout
+			body.hurt(damage, damage_type)
+			$SwordClang.pitch_scale = randf_range(.90, 1.5)
+			$SwordClang.play(0.0)
+			print("enemy attacked:  " + str(body.name))
+		
 	
 	pass
 	
@@ -209,8 +216,4 @@ func _on_player_visibility_area_body_exited(body):
 		movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
 		set_movement_target(movement_target)
 		
-	pass # Replace with function body.
-
-
-func _on_hit_box_body_entered(body):
 	pass # Replace with function body.

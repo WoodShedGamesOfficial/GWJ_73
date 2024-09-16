@@ -14,6 +14,7 @@ func _ready():
 	get_tree().paused = false
 	if GlobalLibrary.hasSplashed == false:
 		$SplashScreen/SplashAnim.play("Spash")
+		GlobalLibrary.hasSplashed = true
 		await $SplashScreen/SplashAnim.animation_finished
 		GlobalLibrary.hasSplashed = true
 		$SplashScreen.queue_free()
@@ -37,8 +38,10 @@ func connect_buttons():
 	
 
 func _input(event):
-	if Input.is_anything_pressed() and $SplashScreen/SplashAnim.is_playing():
+	if Input.is_anything_pressed() and get_tree().current_scene.get_node_or_null('SplashScreen') and $SplashScreen/SplashAnim.is_playing():
 		$SplashScreen.queue_free()
+	else:
+		return 
 	pass
 	
 

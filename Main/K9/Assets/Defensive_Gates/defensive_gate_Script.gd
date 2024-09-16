@@ -20,20 +20,23 @@ func _ready():
 			set_collision_layer_value(2, true)
 			
 	
+	$health.text = str(gate_health)
 	pass
 
-func hurt(damage, damage_type) -> int:
+func hurt(damage, damage_type):
 	
-	if gate_health > 0:
+	if gate_health >= 1:
 		gate_health -= damage
+		$health.text = str(gate_health)
 		$DustFX.restart()
 	else:
 		destroy_gate()
-	return gate_health
+	pass
 	
 
 func destroy_gate():
-	if get_tree().current_scene.get_node_or_null("NavigationRegion2D") != null:
-		get_tree().current_scene.get_node_or_null("NavigationRegion2D").bake_navigation_polygon()
-
+	#if get_tree().current_scene.get_node_or_null("NavigationRegion2D") != null:
+		#get_tree().current_scene.get_node_or_null("NavigationRegion2D").bake_navigation_polygon()
+	
+	queue_free()
 	pass
