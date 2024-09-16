@@ -1,9 +1,19 @@
 extends Node
+class_name K9s_Hive_Mind_Manager
+##@experimental
+
+##README   v ಠ益ಠ v 
+
+##yet another version of my cool lil AI managment baby
+
+##im still practicing better docs so bear with me
 
 
 @export var enemy_troop_array = [preload('res://Main/K9/Assets/Enemies/basic_enemy_000.tscn') ]
 
 var enemy_spawn_point_array = []
+
+@export var isAwake : bool = true
 
 
 
@@ -21,10 +31,12 @@ func _ready():
 	#enemy_tower_heart = $TowerHearts/EnemyHeart.global_transform.origin
 	
 	$Timers/SpawnTimer.connect('timeout', spawn_enemy)
-	$Timers/SpawnTimer.start()
-	
-	
 	$Timers/ResourceTimer.connect('timeout', add_enemy_resources)
+	
+	if isAwake:
+		$Timers/SpawnTimer.start()
+	
+	
 	
 	pass # Replace with function body.
 	

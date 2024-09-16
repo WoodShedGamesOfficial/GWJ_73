@@ -21,6 +21,7 @@ var isSprinting : bool
 func _ready():
 	GlobalHiveMind.player_pos = global_position
 	add_to_group("Player")
+	add_to_group("Teleportable")
 	
 	GlobalHiveMind.players_gold_coins = PLAYER_STATS.base_gold
 	pass
@@ -67,6 +68,10 @@ func _physics_process(delta):
 		velocity.y = move_toward(velocity.y, 0, PLAYER_STATS.walk_speed)
 		#player_anim.play("Idle")
 	
+	#velocity = velocity.normalized()
+	
+	#if velocity != Vector2.ZERO:
+		#print(str(velocity))
 	
 	move_and_slide()
 	
