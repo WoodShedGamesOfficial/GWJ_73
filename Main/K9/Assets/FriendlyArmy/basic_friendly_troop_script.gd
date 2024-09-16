@@ -43,7 +43,7 @@ var canAttack : bool
 
 func _ready():
 	name = names.pick_random()
-	$Label.text = name
+	$Control/Label.text = name
 	GlobalHiveMind.friendly_troops_names.append(name)
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
@@ -91,21 +91,28 @@ func _physics_process(delta):
 	velocity = (current_agent_position.direction_to(next_path_position) * TROOPSTATS.walk_speed)
 	move_and_slide()
 	
-	sprites.look_at(navigation_agent.get_next_path_position())
+	look_at(navigation_agent.get_next_path_position())
 	
 	for body in $AttackRadius.get_overlapping_bodies():
-		if body.is_in_group("Enemy") and $AttackTimer.is_stopped() and body != null:
-			$AttackTimer.start(0.0)
-			look_at(body.transform.origin)
-			await $AttackTimer.timeout
-			attack(body)
+		if body != null:
+			if body.is_in_group("Enemy") and $AttackTimer.is_stopped():
+				$AttackTimer.start(0.0)
+				look_at(body.transform.origin)
+				await $AttackTimer.timeout
+				attack(body)
 		
 	pass
 	
 
 func _process(delta):
+	$Control/Label.rotation = 0
 	
-	
+	for body in $VisiblilityRadius.get_overlapping_bodies():
+		if body != null and body.is_in_group("Enemy"):
+			if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
+				movement_target_position = body.transform.origin
+		else:
+			movement_target_position = GlobalHiveMind.enemy_heart_pos_array.front()
 	
 	pass
 	
@@ -123,6 +130,8 @@ func prepare_attack(body):
 
 func attack(body):
 	var damage = TROOPSTATS.damage
+	
+	#print("troop attacked" + body.name)
 	
 	if canAttack and body != null:    #body.has_method("hurt") and 
 		body.hurt(damage, damage_type)

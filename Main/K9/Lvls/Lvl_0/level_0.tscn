@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=4 uid="uid://bvgo1sg5f3ja1"]
+[gd_scene load_steps=10 format=4 uid="uid://bvgo1sg5f3ja1"]
 
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_2keua"]
+[ext_resource type="Script" path="res://Main/K9/Lvls/Lvl_0/level_0Script.gd" id="1_uberc"]
 [ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="2_hbjpx"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="3_djy7d"]
 [ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="4_sj08y"]
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="5_habx7"]
+[ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_000.tscn" id="6_dedqh"]
+[ext_resource type="PackedScene" uid="uid://b4pr4nbcepcdp" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn" id="7_ke0tr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_txw3b"]
 vertices = PackedVector2Array(-804, -1060, -1194.86, -1064.35, -1295.22, -1420.15, 604, -1436.9, -476, -1060, -2468, -409, -3180.01, -340.047, -3184.1, -782.797, -2468, -420, 3131.85, -819.289, 3146.06, -52.4297, 2624.64, -69.6875, 2630.75, -433.133, 2596, -815.477, 2596, -668, 2099, -417.023, 2332, -668, -2468, -817.758, -2468, -732, -2354.5, -420, -804, 804.633, -1867.69, 807.688, -1841.86, 193.844, -1572, 164, -1390.74, 265.742, 1572, -795.789, 2332, -812.789, 1572, 164, 2099, 796.281, 1244, 164, 932, 799.641, 932, 796, 932, -548, 1214.78, -787.82, 1244, -788.461, 932, 484, 668, 800.391, -540, 803.867, -540, -284, -412, -284, 668, 796, -412, -548, -540, -548, -540, -732, -476, -732, -2204, -732, -1884.94, -465.477, 604, -548, -100, -548, -100, -284, 668, -284, 668, 484, 868, -548, 868, -1439.23, 1196.74, -1442.13, -2204, -826.711, -1572, -831.359, -1407.53, 164, -1207.91, 251.672)
@@ -14,21 +17,59 @@ border_size = 20.0
 agent_radius = 100.0
 
 [node name="Lvl_0" type="Node2D"]
+script = ExtResource("1_uberc")
 
 [node name="World" type="Node" parent="."]
 
 [node name="obstacles" type="Node" parent="World"]
 
 [node name="DefensiveGate" parent="World/obstacles" instance=ExtResource("3_djy7d")]
-position = Vector2(2459, -544)
+position = Vector2(851, 648)
+rotation = 1.56768
 faction = "hostile"
 
+[node name="ToothyGate" parent="World/obstacles/DefensiveGate/Sprites" index="0"]
+scale = Vector2(2.31919, 2.31919)
+
+[node name="Frame" parent="World/obstacles/DefensiveGate/Sprites" index="1"]
+position = Vector2(-4, -82)
+scale = Vector2(2.33861, 2.33861)
+
+[node name="Eyeball" parent="World/obstacles/DefensiveGate/Sprites" index="2"]
+modulate = Color(0.936461, 0, 0.231795, 1)
+position = Vector2(-1, -112)
+scale = Vector2(1.43405, 1.43405)
+
+[node name="DefensiveGate4" parent="World/obstacles" instance=ExtResource("3_djy7d")]
+position = Vector2(2496, -572)
+rotation = 1.56768
+faction = "hostile"
+
+[node name="ToothyGate" parent="World/obstacles/DefensiveGate4/Sprites" index="0"]
+scale = Vector2(2.31919, 2.31919)
+
+[node name="Frame" parent="World/obstacles/DefensiveGate4/Sprites" index="1"]
+position = Vector2(-4, -82)
+scale = Vector2(2.33861, 2.33861)
+
+[node name="Eyeball" parent="World/obstacles/DefensiveGate4/Sprites" index="2"]
+modulate = Color(0.936461, 0, 0.231795, 1)
+position = Vector2(-1, -112)
+scale = Vector2(1.43405, 1.43405)
+
 [node name="DefensiveGate2" parent="World/obstacles" instance=ExtResource("3_djy7d")]
-position = Vector2(-2310, -588)
+position = Vector2(-2384, -594)
+rotation = -1.59072
+scale = Vector2(1.21299, 1.21299)
+
+[node name="DefensiveGate3" parent="World/obstacles" instance=ExtResource("3_djy7d")]
+position = Vector2(-216, -436)
+rotation = -0.00206874
 scale = Vector2(1.21299, 1.21299)
 
 [node name="WorldNav" type="NavigationRegion2D" parent="World"]
 navigation_polygon = SubResource("NavigationPolygon_txw3b")
+navigation_layers = 3
 
 [node name="TileMap" type="TileMap" parent="World/WorldNav"]
 format = 2
@@ -49,22 +90,22 @@ rotation = 1.32506
 [node name="TheHiveMind" parent="." instance=ExtResource("5_habx7")]
 
 [node name="EnemySpawnPoint" parent="TheHiveMind/EnemySpawnPoints" index="0"]
-position = Vector2(2142, 161)
+position = Vector2(1794, -130)
 
 [node name="EnemySpawnPoint2" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="1"]
-position = Vector2(2132, 337)
+position = Vector2(2249, -720)
 
 [node name="EnemySpawnPoint3" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="2"]
-position = Vector2(2137, 488)
+position = Vector2(1613, -726)
 
 [node name="EnemySpawnPoint4" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="3"]
-position = Vector2(1260, -1437)
+position = Vector2(1149, -781)
 
 [node name="EnemySpawnPoint5" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="4"]
-position = Vector2(1104, -1482)
+position = Vector2(1023, -1314)
 
 [node name="EnemySpawnPoint6" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="5"]
-position = Vector2(902, -1416)
+position = Vector2(896, -1083)
 
 [node name="FriendlySpawnPoints" parent="TheHiveMind/FriendlySpawnPoints" index="0"]
 position = Vector2(-1588, 278)
@@ -84,6 +125,18 @@ position = Vector2(-1206, 718)
 [node name="FriendlySpawnPoints6" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="5"]
 position = Vector2(-994, 718)
 
+[node name="BasicEnemy_000" parent="TheHiveMind/EnemyNPCs" index="0" instance=ExtResource("6_dedqh")]
+position = Vector2(1753, -639)
+
+[node name="BasicEnemy_001" parent="TheHiveMind/EnemyNPCs" index="1" instance=ExtResource("6_dedqh")]
+position = Vector2(2104, -600)
+
+[node name="BasicFriendlyTroop" parent="TheHiveMind/FriendlyNPCs" index="0" instance=ExtResource("7_ke0tr")]
+position = Vector2(-2146, -594)
+
+[node name="BasicFriendlyTroop2" parent="TheHiveMind/FriendlyNPCs" index="1" instance=ExtResource("7_ke0tr")]
+position = Vector2(-1978, -770)
+
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(3062, -138)
 heart_faction = "hostile"
@@ -92,4 +145,6 @@ heart_faction = "hostile"
 position = Vector2(-1640, -848)
 rotation = 0.0181603
 
+[editable path="World/obstacles/DefensiveGate"]
+[editable path="World/obstacles/DefensiveGate4"]
 [editable path="TheHiveMind"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc7v8ymum2h4t"]
 
 [ext_resource type="Script" path="res://Main/Dutt/Assets/PortalManager/portal_manager_Script.gd" id="1_1jqln"]
-[ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="2_84a14"]
+[ext_resource type="PackedScene" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="2_84a14"]
 
 [node name="PortalManager" type="Node"]
 script = ExtResource("1_1jqln")

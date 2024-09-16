@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://krjhmw7cd1a4"]
+[gd_scene load_steps=23 format=3 uid="uid://krjhmw7cd1a4"]
 
 [ext_resource type="Texture2D" uid="uid://dwx827ay683wc" path="res://Main/K9/Assets/2D/textures/ImpactFXA.png" id="1_3onqd"]
 [ext_resource type="Script" path="res://Main/K9/Assets/TowerHeart/tower_heart_script.gd" id="1_lmpey"]
@@ -275,6 +275,21 @@ noise = SubResource("FastNoiseLite_qp7wt")
 [sub_resource type="CircleShape2D" id="CircleShape2D_6htv0"]
 radius = 51.0392
 
+[sub_resource type="GDScript" id="GDScript_rqko1"]
+resource_name = "WinLosePanel"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="TowerHeart" type="CharacterBody2D"]
 collision_layer = 18
 script = ExtResource("1_lmpey")
@@ -337,3 +352,37 @@ offset_right = 266.32
 offset_bottom = 42.3481
 scale = Vector2(2.74205, 7.70629)
 text = "int"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WinLoseScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_rqko1")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/WinLoseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -250.0
+offset_right = 150.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
+layout_mode = 2
+
+[node name="WinLoseLabel" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "You mighta won?"

@@ -10,11 +10,14 @@ class_name K9_player_controller
 @export var PLAYER_STATS = {
 	'health' : 100.00,
 	'walk_speed' : 300,
-	"base_gold" : 500,
-	
 }
 
+@export var base_gold : int = 150
+
 var isSprinting : bool
+
+#respawning
+var respawn_location : Vector2
 
 # function blocks ->
 
@@ -23,7 +26,11 @@ func _ready():
 	add_to_group("Player")
 	add_to_group("Teleportable")
 	
-	GlobalHiveMind.players_gold_coins = PLAYER_STATS.base_gold
+	GlobalHiveMind.players_gold_coins = base_gold
+	
+	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
+	$GUI/HUD/HP_Bar.max_value = PLAYER_STATS.health
+	respawn_location = transform.origin
 	pass
 	
 
@@ -41,7 +48,8 @@ func _process(delta):
 		player_anim.play("Idle")
 		$Footsteps.playing = false
 	
-	$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
+	
+	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
 	pass
 	
 
@@ -117,7 +125,8 @@ func hurt(damage, damage_type):
 	
 
 func player_death():
-	
+	transform.origin = respawn_location
+	GlobalHiveMind.players_gold_coins -= (GlobalHiveMind.players_gold_coins / 2)
 	print('player has died')
 	
 	pass
