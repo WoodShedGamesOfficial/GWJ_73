@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b215wnaw6ienu"]
+[gd_scene load_steps=24 format=3 uid="uid://b215wnaw6ienu"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room_Script.gd" id="1_alpff"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="2_d8sge"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="7_qgotf"]
 [ext_resource type="PackedScene" uid="uid://b4pr4nbcepcdp" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn" id="9_hltmn"]
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="13_1ky3d"]
+[ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_000.tscn" id="13_xg50i"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="14_2kicj"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="14_tka2k"]
 
@@ -155,6 +156,7 @@ position = Vector2(-406, 720)
 position = Vector2(-2801, -670)
 
 [node name="TheHiveMind" parent="." instance=ExtResource("7_qgotf")]
+isAwake = false
 
 [node name="EnemySpawnPoint" parent="TheHiveMind/EnemySpawnPoints" index="0"]
 position = Vector2(251, -410)
@@ -178,13 +180,14 @@ position = Vector2(-3229, 105)
 position = Vector2(-2957, -6)
 
 [node name="BasicFriendlyTroop2" parent="TheHiveMind/FriendlyNPCs" index="1" instance=ExtResource("9_hltmn")]
-position = Vector2(-3025, 73)
+position = Vector2(-2959, 115)
 
 [node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
 position = Vector2(-3997, 227)
 
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(482, -238)
+heart_faction = "hostile"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.802209, 0.813949, 0.837776, 1)
@@ -233,6 +236,14 @@ faction = "hostile"
 
 [node name="DefensiveGate2" parent="." instance=ExtResource("6_rhd1w")]
 position = Vector2(-2094, 296)
+
+[node name="BasicEnemy_000" parent="." instance=ExtResource("13_xg50i")]
+position = Vector2(-2227, -148)
+ENEMY_STATS = {
+"damage": 25,
+"health": 25,
+"walk_speed": 200.0
+}
 
 [connection signal="body_entered" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]

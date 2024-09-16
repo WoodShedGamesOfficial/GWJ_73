@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4pr4nbcepcdp"]
+[gd_scene load_steps=13 format=3 uid="uid://b4pr4nbcepcdp"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop_script.gd" id="1_10r6t"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="1_52hbr"]
@@ -83,9 +83,12 @@ shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.462745)
 shadow_offset = Vector2(-3, 3)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbg4l"]
+radius = 106.005
+
 [node name="BasicFriendlyTroop" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 30
+collision_mask = 14
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -144,3 +147,17 @@ modulate = Color(0.384314, 1, 0.54902, 1)
 position = Vector2(-1, 1)
 rotation = 1.56772
 texture = ExtResource("2_5ow4f")
+
+[node name="AttackRadius" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
+shape = SubResource("CircleShape2D_bbg4l")
+debug_color = Color(0.972549, 0, 0, 0.419608)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]

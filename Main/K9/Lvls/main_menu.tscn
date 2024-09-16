@@ -6,6 +6,33 @@
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
 [ext_resource type="Texture2D" uid="uid://bkfax83eg2w3q" path="res://Main/Woodshed_Games/WSSplash_Logo.png" id="5_yhaeg"]
 
+[sub_resource type="Animation" id="Animation_f4347"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_c3nw7"]
 resource_name = "Spash"
 length = 5.5
@@ -34,33 +61,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_f4347"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/CanvasModulate:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tj07h"]
 _data = {
 "RESET": SubResource("Animation_f4347"),
@@ -82,13 +82,14 @@ text = "A Godot Wild Jam #73 game"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 482.0
-offset_top = 2.0
-offset_right = 692.0
-offset_bottom = 47.0
+offset_left = 489.0
+offset_top = 3.0
+offset_right = 699.0
+offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
-text = "Tower Conquest"
+text = "Tower Wars
+"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
 offset_left = 70.0
@@ -190,7 +191,7 @@ offset_bottom = 68.0
 
 [node name="Credit" type="Label" parent="CreditsPanel/VBoxContainer"]
 layout_mode = 2
-text = "@siverKnight"
+text = "@Dutt1ez"
 
 [node name="Credit2" type="Label" parent="CreditsPanel/VBoxContainer"]
 layout_mode = 2
