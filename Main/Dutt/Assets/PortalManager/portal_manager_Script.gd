@@ -9,16 +9,21 @@ func _ready():
 		portal_array.append(p)
 
 
-func teleport(body: Node2D, portal: Portal):
-	# Don't do anything if the body isn't teleportable
-	if !body.is_in_group("Teleportable"):
-		return
+func teleport(body: Node2D, from_portal: Portal, to_portal: Portal):
 
-	# This will first filter out the current portal and then pick a random portal
-	var random_portal = portal_array.filter(func(p): return p != portal).pick_random()
+	var receiving_portal : Portal
 
-	# This adds the body to the random portal to prevent teleportation loops
-	random_portal.receive_teleport_body(body)
+	# If we've provided a target portal, use that
+	if to_portal:
+		receiving_portal = to_portal
+
+	# Otherwise, pick a random portal
+	else: 
+		# This will first filter out the current portal and then pick a random neutral portal
+		receiving_portal = portal_array.filter(func(p): return p != from_portal and p.faction == "neutral").pick_random()
+	
+	# This adds the body to the receiving portal to prevent teleportation loops
+	receiving_portal.receive_teleport_body(body)
 
 	# Teleport the body
-	body.transform.origin = random_portal.transform.origin
+	body.transform.origin = receiving_portal.transform.origin
