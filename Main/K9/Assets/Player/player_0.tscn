@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=17 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c4a0iofxtkuen" path="res://Main/K9/Assets/Player/Weapon/player_weapon.tscn" id="4_0tm40"]
 [ext_resource type="AudioStream" uid="uid://b30ytb6dd5pg4" path="res://Main/K9/Assets/Audio/267492__snudio_records__footsteps-on-forest-ground.ogg" id="5_6mqcu"]
 [ext_resource type="PackedScene" uid="uid://sv7l5kycqjet" path="res://Main/K9/Assets/Player/pause_menu.tscn" id="6_gqqi6"]
+[ext_resource type="Script" path="res://Main/K9/Assets/Player/gui_script.gd" id="6_iwycx"]
+[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="8_efr0t"]
+[ext_resource type="PackedScene" uid="uid://cg1tgik1raup3" path="res://Main/K9/Assets/win_lose_screen.tscn" id="8_io5ii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
 radius = 72.7805
@@ -174,6 +177,7 @@ stream = ExtResource("5_6mqcu")
 bus = &"Player"
 
 [node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("6_iwycx")
 
 [node name="GUI" type="Control" parent="GUI"]
 layout_direction = 1
@@ -186,13 +190,56 @@ grow_vertical = 2
 script = SubResource("GDScript_8yo3n")
 
 [node name="Pause_Menu" parent="GUI/GUI" instance=ExtResource("6_gqqi6")]
+visible = false
 layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+grow_vertical = 1
 
-[node name="Label" type="Label" parent="GUI"]
-offset_left = 1085.0
-offset_top = 606.0
-offset_right = 1128.0
-offset_bottom = 629.0
+[node name="WinLoseScreen" parent="GUI" instance=ExtResource("8_io5ii")]
+
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HP_Bar" type="TextureProgressBar" parent="GUI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -18.0
+offset_right = 518.0
+offset_bottom = 494.0
+grow_vertical = 0
+scale = Vector2(0.283587, 0.283587)
+value = 75.0
+fill_mode = 3
+texture_under = ExtResource("8_efr0t")
+texture_progress = ExtResource("8_efr0t")
+tint_under = Color(0.0495185, 3.5346e-08, 0.0185641, 1)
+tint_progress = Color(0.831373, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 1049.0
+offset_top = 599.0
+offset_right = 1136.0
+offset_bottom = 639.0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/HUD/HBoxContainer"]
+modulate = Color(1, 0.517647, 0.384314, 1)
+layout_mode = 2
+texture = ExtResource("8_efr0t")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="GUI/HUD/HBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.94902, 0.545098, 0, 1)
 text = "Coins"
 

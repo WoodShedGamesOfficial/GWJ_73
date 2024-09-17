@@ -57,14 +57,15 @@ func _ready():
 	ENEMY_STATS.health = randi_range(50, (100 * enemy_level))
 	ENEMY_STATS.damage = (ENEMY_STATS.damage * enemy_level / 2)
 	
-	$AttackTimer.connect('timeout', attack)
+	#$AttackTimer.connect('timeout', attack)
 	#$AttackTimer.start()
-	$AttackRadius.connect("body_entered", attack)
+	#$AttackRadius.connect("body_entered", attack)
 	$AttackRadius.connect('body_entered', prepare_attack)
 	pass
 	
 
 func actor_setup():
+	
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame
 
@@ -82,6 +83,7 @@ func set_movement_target(movement_target: Vector2):
 	
 
 func _physics_process(delta):
+	
 	if navigation_agent.is_navigation_finished():
 		return
 
@@ -121,6 +123,14 @@ func _process(delta):
 		movement_target = GlobalHiveMind.enemy_heart_pos_array.front()
 	
 	
+	for body in $AttackRadius.get_overlapping_bodies():
+		if body.is_in_group("Player") and $AttackTimer.is_stopped():
+			$AttackTimer.start(0.0)
+			look_at(body.transform.origin)
+			await $AttackTimer.timeout
+			attack(body)
+		
+	
 	pass
 	
 
@@ -133,6 +143,7 @@ func hurt(damage, damage_type):
 		$HurtGrunt.pitch_scale = randf_range(.80, 1.5)
 		$HurtGrunt.play(0.0)
 		await $EnemyAnims.animation_finished
+		
 		#var blood_i = blood_splat_p.instantiate()
 	#
 		#get_tree().current_scene.add_child(blood_i)
@@ -184,17 +195,21 @@ func cancel_attack(body):
 
 
 
-func attack():
+func attack(body):
 	var damage = ENEMY_STATS.damage
 	
-	for body in $HitBox.get_overlapping_bodies():
-		if body.is_in_group("Player") or body.is_in_group("Troop") and canAttack == true:
-			#await get_tree().create_timer(randf_range(1.5, 3)).timeout
-			body.hurt(damage, damage_type)
-			$SwordClang.pitch_scale = randf_range(.90, 1.5)
-			$SwordClang.play(0.0)
-			print("enemy attacked:  " + str(body.name))
-		
+	if canAttack and body != null:    #body.has_method("hurt") and 
+		body.hurt(damage, damage_type)
+		print(str(name) + "hurt  " + str(body.name))
+	
+	#for body in $HitBox.get_overlapping_bodies():
+		#if body.is_in_group("Player") or body.is_in_group("Troop") and canAttack == true:
+			##await get_tree().create_timer(randf_range(1.5, 3)).timeout
+			#body.hurt(damage, damage_type)
+			#$SwordClang.pitch_scale = randf_range(.90, 1.5)
+			#$SwordClang.play(0.0)
+			#print("enemy attacked:  " + str(body.name))
+		#
 	
 	pass
 	

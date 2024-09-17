@@ -12,6 +12,8 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CanvasLayer/WinLoseScreen.visible = false
+	
 	$HealthBar.max_value = TOWERSTATS.health
 	$HealthBar.value = TOWERSTATS.health
 	
@@ -62,10 +64,14 @@ func death_of_the_tower():
 	
 	match heart_faction:
 		"friendly":
-			print('you lost')
-			await get_tree().create_timer(5.0).timeout
+			$CanvasLayer/WinLoseScreen.visible = true
+			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you got your ass kicked bro"
+			#print('you lost')
+			await get_tree().create_timer(15.0).timeout or Input.is_anything_pressed()
 			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')
 		"hostile" :
+			$CanvasLayer/WinLoseScreen.visible = true
+			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you destroyed their Tower!"
 			print('you won!')
 			await get_tree().create_timer(5.0)
 			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')

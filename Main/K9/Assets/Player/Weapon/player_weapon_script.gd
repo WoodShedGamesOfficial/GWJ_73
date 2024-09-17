@@ -24,7 +24,7 @@ func _input(event):
 
 func attack(body):
 	if body.is_in_group("Enemy") and body.has_method("hurt"):
-		var damage = WEAPON_STATS.damage
+		var damage = randi_range(WEAPON_STATS.damage, (WEAPON_STATS.damage * 2))
 		var damage_type = "blunt"
 		
 		body.hurt(damage, damage_type)

@@ -11,11 +11,12 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation_degrees = randi_range(5, 95)
+	rotation_degrees = randi_range(-45, 95)
 	scale.x = randf_range(1.00, 3.00)
 	scale.y = randf_range(1.00, 3.00)
 	
 	await get_tree().create_timer(90.0).timeout
+	
 	pass # Replace with function body.
 "
 
@@ -72,7 +73,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-683.015, 0.213028)
 mode = 1
 flags/light_only = false
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_703iu")

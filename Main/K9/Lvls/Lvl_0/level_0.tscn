@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="5_habx7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_txw3b"]
-vertices = PackedVector2Array(-804, -1060, -1194.86, -1064.35, -1295.22, -1420.15, 604, -1436.9, -476, -1060, -2468, -409, -3180.01, -340.047, -3184.1, -782.797, -2468, -420, 3131.85, -819.289, 3146.06, -52.4297, 2596, -70.6406, 2596, -420, -2468, -817.758, -2468, -732, -2354.5, -420, -804, 804.633, -1867.69, 807.688, -1841.86, 193.844, -1572, 164, -1390.74, 265.742, 1572, 164, 1572, -795.789, 2332, -812.789, 2332, -668, 2099, -402.992, 932, -548, 1214.78, -787.82, 1244, -788.461, 1244, 164, 932, 484, 2099, 796.281, 932, 799.641, 932, 796, 668, 800.391, -540, 803.867, -540, -284, -412, -284, 668, 796, -412, -548, -540, -548, -540, -732, -476, -732, -2204, -732, -1884.94, -465.477, 604, -548, -100, -548, -100, -284, 668, -284, 668, 484, 868, -548, 868, -1439.23, 1196.74, -1442.13, 2596, -668, 2596, -815.477, 2457.41, -470.188, -2204, -826.711, -1572, -831.359, -1407.53, 164, -1207.91, 251.672, 2474.71, -420)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(7, 13, 14), PackedInt32Array(8, 7, 14, 15), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42), PackedInt32Array(15, 14, 43, 44), PackedInt32Array(4, 3, 45, 46, 42), PackedInt32Array(47, 48, 49), PackedInt32Array(26, 50, 51, 52, 27), PackedInt32Array(53, 54, 9), PackedInt32Array(53, 9, 12), PackedInt32Array(24, 53, 12, 55), PackedInt32Array(43, 56, 57, 44), PackedInt32Array(44, 57, 19, 18), PackedInt32Array(19, 58, 20), PackedInt32Array(16, 20, 59), PackedInt32Array(0, 16, 59, 1), PackedInt32Array(39, 42, 46), PackedInt32Array(37, 39, 46, 47), PackedInt32Array(38, 37, 47, 49, 33), PackedInt32Array(33, 49, 30, 31), PackedInt32Array(31, 30, 29, 21), PackedInt32Array(25, 31, 21), PackedInt32Array(55, 25, 24), PackedInt32Array(55, 12, 60)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1942, 195, -1978, -356, -3279, -230, -3285, -878, -2302, -926, -1487, -932, -1307, 159, -1295, -1051, -1427, -1519, 1294, -1543, 1312, -890, 2385, -914, 3230, -920, 3248, 51, 2523, 27, 2391, -356, 2199, -320, 2199, 896, -1972, 908)])
+vertices = PackedVector2Array(-2468, -409, -3180.01, -340.047, -3184.1, -782.797, -2468, -420, 3131.85, -819.289, 3146.06, -52.4297, 2624.64, -69.6875, 2630.75, -433.133, 2596, -815.477, 2596, -668, 2099, -417.023, 2332, -668, -2468, -817.758, -2468, -732, -2354.5, -420, -804, 804.633, -1867.69, 807.688, -1841.86, 193.844, -1623.37, 260.469, 1572, -795.789, 2332, -812.789, 1572, 164, 2099, 796.281, 1244, 164, 932, 799.641, 932, 796, 932, -548, 1214.78, -787.82, 1244, -788.461, 932, 484, -2204, -732, -2204, -825.242, -1619.36, -820.758, -1884.94, -465.477, 668, 800.391, -540, 803.867, -540, -284, -412, -284, 668, 796, -412, -548, -540, -548, -540, -732, -476, -732, -1196.61, 258.492, -804, -1060, -1244, -217.992, -1244, -1060, -1308, -1060, -1308, -1124, 604, -1436.9, -476, -1060, 604, -548, -100, -548, -100, -284, 668, -284, 668, 484, 868, -548, 868, -1439.23, 1196.74, -1442.13, -1334.11, -1124, -1334.89, -1131.93, -1329, -1419.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 4, 7, 9), PackedInt32Array(9, 7, 10, 11), PackedInt32Array(2, 12, 13), PackedInt32Array(3, 2, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 11, 10), PackedInt32Array(21, 19, 10, 22), PackedInt32Array(23, 21, 22, 24, 25), PackedInt32Array(26, 27, 28, 23, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42), PackedInt32Array(14, 13, 30, 33), PackedInt32Array(33, 32, 18, 17), PackedInt32Array(15, 18, 43), PackedInt32Array(44, 15, 43, 45, 46), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(50, 49, 51, 52, 42), PackedInt32Array(53, 54, 55), PackedInt32Array(26, 56, 57, 58, 27), PackedInt32Array(29, 23, 25, 38), PackedInt32Array(55, 29, 38), PackedInt32Array(53, 55, 38, 37, 39), PackedInt32Array(52, 53, 39, 42), PackedInt32Array(59, 60, 61, 49, 48), PackedInt32Array(44, 46, 49), PackedInt32Array(50, 44, 49)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1942, 195, -1978, -356, -3279, -230, -3285, -878, -2302, -926, -1519, -920, -1523, 160, -1307, 159, -1435, -1128, -1427, -1519, 1294, -1543, 1312, -890, 2385, -914, 3230, -920, 3248, 51, 2523, 27, 2529, -330, 2199, -320, 2199, 896, -1972, 908)])
 border_size = 20.0
 agent_radius = 100.0
 
@@ -18,14 +18,6 @@ agent_radius = 100.0
 [node name="World" type="Node" parent="."]
 
 [node name="obstacles" type="Node" parent="World"]
-
-[node name="DefensiveGate" parent="World/obstacles" instance=ExtResource("3_djy7d")]
-position = Vector2(2459, -544)
-faction = "hostile"
-
-[node name="DefensiveGate2" parent="World/obstacles" instance=ExtResource("3_djy7d")]
-position = Vector2(-2310, -588)
-scale = Vector2(1.21299, 1.21299)
 
 [node name="WorldNav" type="NavigationRegion2D" parent="World"]
 navigation_polygon = SubResource("NavigationPolygon_txw3b")
@@ -45,7 +37,6 @@ tile_set = ExtResource("2_hbjpx")
 [node name="Player_0" parent="." instance=ExtResource("4_sj08y")]
 position = Vector2(-1876, -616)
 rotation = 1.32506
-scale = Vector2(1, 1)
 
 [node name="TheHiveMind" parent="." instance=ExtResource("5_habx7")]
 
@@ -85,19 +76,30 @@ position = Vector2(-1206, 718)
 [node name="FriendlySpawnPoints6" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="5"]
 position = Vector2(-994, 718)
 
-[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
-position = Vector2(-3137, -489)
-scale = Vector2(2.67108, 2.67108)
-heart_color = Color(0, 1, 0.596078, 1)
-
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(3062, -138)
-scale = Vector2(2.24127, 2.24127)
-heart_color = Color(0.924667, 0.000159217, 0.773509, 1)
 heart_faction = "hostile"
 
 [node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]
 position = Vector2(-1640, -848)
 rotation = 0.0181603
+
+[node name="DefensiveGate" parent="." instance=ExtResource("3_djy7d")]
+position = Vector2(-2364, -568)
+rotation = -1.57132
+
+[node name="DefensiveGate2" parent="." instance=ExtResource("3_djy7d")]
+position = Vector2(-236, -460)
+rotation = -0.0010922
+
+[node name="DefensiveGate3" parent="." instance=ExtResource("3_djy7d")]
+position = Vector2(832, 656)
+rotation = 1.58582
+faction = "hostile"
+
+[node name="DefensiveGate4" parent="." instance=ExtResource("3_djy7d")]
+position = Vector2(2508, -552)
+rotation = 1.58582
+faction = "hostile"
 
 [editable path="TheHiveMind"]
