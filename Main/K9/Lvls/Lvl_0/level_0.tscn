@@ -21,6 +21,7 @@ agent_radius = 100.0
 
 [node name="WorldNav" type="NavigationRegion2D" parent="World"]
 navigation_polygon = SubResource("NavigationPolygon_txw3b")
+navigation_layers = 3
 
 [node name="TileMap" type="TileMap" parent="World/WorldNav"]
 format = 2
@@ -41,19 +42,19 @@ rotation = 1.32506
 [node name="TheHiveMind" parent="." instance=ExtResource("5_habx7")]
 
 [node name="EnemySpawnPoint" parent="TheHiveMind/EnemySpawnPoints" index="0"]
-position = Vector2(2142, 161)
+position = Vector2(2213, -731)
 
 [node name="EnemySpawnPoint2" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="1"]
-position = Vector2(2132, 337)
+position = Vector2(1664, -726)
 
 [node name="EnemySpawnPoint3" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="2"]
-position = Vector2(2137, 488)
+position = Vector2(1925, -724)
 
 [node name="EnemySpawnPoint4" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="3"]
-position = Vector2(1260, -1437)
+position = Vector2(1141, -1305)
 
 [node name="EnemySpawnPoint5" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="4"]
-position = Vector2(1104, -1482)
+position = Vector2(906, -1235)
 
 [node name="EnemySpawnPoint6" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="5"]
 position = Vector2(902, -1416)

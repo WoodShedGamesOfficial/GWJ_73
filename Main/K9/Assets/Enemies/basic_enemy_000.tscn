@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ds3lqjy5iicbd"]
+[gd_scene load_steps=24 format=3 uid="uid://ds3lqjy5iicbd"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Enemies/basic_enemy_Script.gd" id="1_a2s8a"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_cjn3j"]
@@ -15,7 +15,7 @@ radius = 406.832
 radius = 106.005
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hg0o2"]
-radius = 72.0
+radius = 23.0868
 
 [sub_resource type="Animation" id="Animation_fc7xy"]
 resource_name = "Hurt"
@@ -216,9 +216,12 @@ noise = SubResource("FastNoiseLite_f4wka")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vta2a"]
 size = Vector2(78, 78)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v2nup"]
+polygon = PackedVector2Array(-8, -44, -18, -41, -25, -10, -20, 28, -11, 36, 2, 36, 17, 9, 18, -11, 6, -40)
+
 [node name="BasicEnemy_000" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 21
+collision_mask = 23
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
@@ -315,6 +318,12 @@ pitch_scale = 0.9
 bus = &"NPCs"
 
 [node name="HurtGrunt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_68m2c")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_v2nup")
+
+[node name="HURTAUDIOTEST" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_68m2c")
 
 [connection signal="body_entered" from="PlayerVisibilityArea" to="." method="_on_player_visibility_area_body_entered"]

@@ -27,4 +27,3 @@ func teleport(body: Node2D, from_portal: Portal, to_portal: Portal):
 
 	# Teleport the body
 	body.transform.origin = receiving_portal.transform.origin
-

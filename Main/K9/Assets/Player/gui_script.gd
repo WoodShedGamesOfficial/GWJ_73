@@ -10,4 +10,5 @@ func _process(delta):
 	coin_label.text = str(GlobalHiveMind.players_gold_coins)
 	$HUD/HP_Bar.value = player_0.PLAYER_STATS['health']
 	
+	$HUD/TroopsLabel.text =("Troops:  " + str(GlobalHiveMind.friendly_troops_names.size()))
 	pass

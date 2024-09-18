@@ -97,7 +97,7 @@ func _physics_process(delta):
 		if body != null:
 			if body.is_in_group("Enemy") and $AttackTimer.is_stopped():
 				$AttackTimer.start(0.0)
-				look_at(body.transform.origin)
+				#look_at(body.transform.origin)
 				await $AttackTimer.timeout
 				attack(body)
 		
@@ -109,8 +109,10 @@ func _process(delta):
 	
 	for body in $VisiblilityRadius.get_overlapping_bodies():
 		if body != null and body.is_in_group("Enemy"):
+			look_at(body.transform.origin)
 			if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
 				movement_target_position = body.transform.origin
+				look_at(body.transform.origin)
 		else:
 			movement_target_position = GlobalHiveMind.enemy_heart_pos_array.front()
 	
@@ -130,17 +132,24 @@ func prepare_attack(body):
 
 func attack(body):
 	var damage = TROOPSTATS.damage
-	
+	var attack_sfx = $SFX/AttackSFX
+
 	#print("troop attacked" + body.name)
 	
 	if canAttack and body != null:    #body.has_method("hurt") and 
 		body.hurt(damage, damage_type)
+		
+		if attack_sfx.is_playing() != true:
+			attack_sfx.pitch_scale = randf_range(1.0, 1.8)
+			attack_sfx.play(0.0)
+		
 		print(str(name) + "hurt  " + str(body.name))
-	
 	pass
 
 
 func hurt(damage, damage_type):
+	var hurt_sfx = $SFX/HurtSFX
+	
 	
 	print(name + "    got hurt")
 	
@@ -148,6 +157,7 @@ func hurt(damage, damage_type):
 		TROOPSTATS.health -= damage
 		print(str(TROOPSTATS.health))
 		$BloodFX.restart()
+		
 	else:
 		death()
 	
@@ -160,7 +170,7 @@ func death():
 	
 	GlobalHiveMind.enemies_gold_coins += 50
 	GlobalHiveMind.friendly_troops_names.erase(name)
-	
+	$SFX/DeathSFX.play(0.0)
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
 	

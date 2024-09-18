@@ -1,12 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4pr4nbcepcdp"]
+[gd_scene load_steps=18 format=3 uid="uid://b4pr4nbcepcdp"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop_script.gd" id="1_10r6t"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="1_52hbr"]
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="2_5ow4f"]
 [ext_resource type="PackedScene" uid="uid://rl2xa3envu3y" path="res://Main/K9/Assets/Fx/blood_spray_fx.tscn" id="4_vqw4e"]
+[ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="5_uvehc"]
+[ext_resource type="AudioStream" uid="uid://c4j0nka7q4f7v" path="res://Main/K9/Assets/Audio/SFX/DeathC.ogg" id="6_hvnpb"]
+[ext_resource type="AudioStream" uid="uid://dry1h6ir2l4rn" path="res://Main/K9/Assets/Audio/SFX/SwordClang_B.ogg" id="7_5pqa1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lmbc"]
-radius = 53.0848
+radius = 26.0192
 
 [sub_resource type="Animation" id="Animation_gmni1"]
 resource_name = "Idle"
@@ -89,9 +92,12 @@ shadow_offset = Vector2(-3, 3)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6diit"]
 radius = 575.147
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_41mhf"]
+polygon = PackedVector2Array(-13, -39, -23, -7, -15, 35, 1, 45, 13, 34, 28, 1, 9, -37)
+
 [node name="BasicFriendlyTroop" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 14
+collision_mask = 30
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -103,7 +109,6 @@ TROOPSTATS = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_5lmbc")
 
 [node name="FriendlyAnim" type="AnimationPlayer" parent="."]
@@ -163,6 +168,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = -19.0
 offset_top = -78.0
 offset_right = 28.0
@@ -175,6 +181,20 @@ text_direction = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisiblilityRadius"]
 shape = SubResource("CircleShape2D_6diit")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_41mhf")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_uvehc")
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_hvnpb")
+
+[node name="AttackSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_5pqa1")
 
 [connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
 [connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]

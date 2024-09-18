@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b215wnaw6ienu"]
+[gd_scene load_steps=28 format=3 uid="uid://b215wnaw6ienu"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room_Script.gd" id="1_alpff"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="2_d8sge"]
@@ -7,18 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="6_rhd1w"]
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="7_qgotf"]
 [ext_resource type="PackedScene" uid="uid://b4pr4nbcepcdp" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop.tscn" id="9_hltmn"]
+[ext_resource type="PackedScene" uid="uid://cc7v8ymum2h4t" path="res://Main/Dutt/Assets/PortalManager/portal_manager.tscn" id="12_t2ivh"]
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="13_1ky3d"]
+[ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="13_cs77b"]
 [ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_000.tscn" id="13_xg50i"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="14_2kicj"]
+[ext_resource type="PackedScene" uid="uid://c6i737ycfrrw4" path="res://Main/K9/Assets/Lighting/ambient_orange_light.tscn" id="14_hvywi"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="14_tka2k"]
+[ext_resource type="PackedScene" uid="uid://b0ijb8wnix7am" path="res://Main/K9/Assets/Lighting/torch_A.tscn" id="15_6chd0"]
+[ext_resource type="PackedScene" uid="uid://c6l5wlds2suxo" path="res://Main/K9/Assets/2D/textures/vfx/MudSplat.tscn" id="16_by8xx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tjw4y"]
-vertices = PackedVector2Array(-767.531, -744.883, -318.43, -712.227, -321.539, -305.852, -720.461, -304.852, -772, -388, -772, -636, -686.477, 309.742, -316, 318.578, -316, 707.938, -672.906, 758.797, -772, 636, -772, 388, -900, 124, -900, -124, -717.5, 47, -964, 388, -964, 324, -2439.56, -352.273, -2752.75, -336.961, -2757.29, -710.867, -2300, -636, -2300, -388, -3136.57, 543.773, -4187.05, 559.102, -4171.91, -426.258, -3151.43, -430.773, -3087.11, -12.6094, -3076.58, 22.8125, -2248.68, -50.8203, -2368.6, 11.9922, 723.727, -480.406, 758.281, 713.594, 38.7969, 732.461, 13.8594, 47, 26.3125, -14.6172, -2300, 636, -2438.29, 686.57, -2743.47, 690.313, -2772.58, 310.367, -2391.55, 282.039, -2300, 388, -2108, -388, -2108, -324, -2172, -124, -2219.94, -122.539, -1924, -324, -1924, -388, -1924, -124, -1924, -188, -2108, -188, -2108, -124, -2172, 124, -1148, 124, -1148, 188, -964, 188, -964, 124, -1148, 324, -1148, 388, 39.3438, -473.57, -713.578, -19.3672, -779.133, -884.211, -2168.71, -739.422, -2147.98, -864.719, -745.656, 844, -2349.04, 844)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 6, 11), PackedInt32Array(12, 11, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 22, 26), PackedInt32Array(27, 26, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(35, 36, 37, 38, 39, 40), PackedInt32Array(21, 41, 42, 43, 44, 17), PackedInt32Array(45, 46, 4), PackedInt32Array(13, 47, 48, 4, 3), PackedInt32Array(49, 50, 43), PackedInt32Array(51, 52, 53, 40, 39), PackedInt32Array(54, 55, 12), PackedInt32Array(54, 12, 16), PackedInt32Array(53, 54, 16, 56), PackedInt32Array(56, 57, 40), PackedInt32Array(34, 58, 30), PackedInt32Array(59, 34, 33, 14), PackedInt32Array(59, 14, 13, 3), PackedInt32Array(60, 0, 5, 20, 61), PackedInt32Array(53, 56, 40), PackedInt32Array(61, 62, 60), PackedInt32Array(19, 61, 20), PackedInt32Array(35, 10, 9, 63, 64, 36), PackedInt32Array(51, 39, 29, 28), PackedInt32Array(43, 51, 28, 44), PackedInt32Array(49, 43, 42), PackedInt32Array(49, 42, 45, 48), PackedInt32Array(48, 45, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-4231, -486, -3100, -491, -3036, -75, -2290, -109, -2464, -291, -2812, -274, -2818, -768, -2220, -797, -2199, -924, -724, -945, -712, -801, -258, -768, -262, -246, -659, -245, -655, -79, -32, -75, -19, -533, 782, -541, 820, 772, -19, 794, -44, 107, -650, 107, -633, 251, -256, 260, -256, 760, -642, 815, -718, 904, -2384, 904, -2473, 747, -2799, 751, -2837, 255, -2447, 226, -2434, 73, -3023, 82, -3083, 603, -4248, 620)])
-cell_size = 128.0
-border_size = 20.0
-agent_radius = 60.0
+vertices = PackedVector2Array(-677.57, 299.953, -306, 308.82, -306, 716.609, -667.758, 768.156, -782, 626, -782, 398, -758.281, -754.227, -305.727, -721.328, -279.406, -193.898, -706.25, 57, -782, -398, -782, -626, -910, 114, -910, -114, -974, 398, -974, 334, -3067.65, 32.6797, -3127.64, 553.648, -4197.21, 569.25, -4181.76, -436.211, -3141.26, -440.813, -3089.88, -173.844, -2807.11, -188.344, -2379.5, 22.1563, 40.3984, -214.156, 32.4688, -483.5, 733.43, -490.508, 768.563, 723.328, 29.1563, 742.719, 4.21094, 57, -14, -210.711, -14, -206, -88.3516, -206, -1934, -398, -1934, -334, -2444.07, 696.641, -2752.73, 700.422, -2783.32, 301.141, -2400.79, 272.703, -2290, 398, -2290, 626, -2290, -398, -2098, -398, -2098, -334, -1934, -114, -1934, -178, -2098, -178, -2098, -114, -2162, -114, -2162, 114, -1138, 114, -1138, 178, -974, 178, -974, 114, -1138, 334, -1138, 398, -2156.48, -874.602, -769.953, -894.344, -2177.26, -749.008, -2290, -626, -2771.11, -720.211, -741.047, 854, -2354.86, 854)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 10, 9, 0, 5), PackedInt32Array(12, 5, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21), PackedInt32Array(16, 21, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(24, 27, 28, 29), PackedInt32Array(30, 24, 29, 31), PackedInt32Array(32, 31, 29, 9, 8), PackedInt32Array(33, 10, 13, 34), PackedInt32Array(35, 36, 37, 38, 39, 40), PackedInt32Array(41, 42, 43, 23, 22), PackedInt32Array(13, 44, 45), PackedInt32Array(34, 13, 45, 43), PackedInt32Array(43, 45, 46), PackedInt32Array(46, 47, 48), PackedInt32Array(49, 50, 51, 39, 38), PackedInt32Array(52, 53, 12), PackedInt32Array(52, 12, 15), PackedInt32Array(51, 52, 15, 54), PackedInt32Array(54, 55, 39), PackedInt32Array(51, 54, 39), PackedInt32Array(56, 57, 6, 11, 58), PackedInt32Array(58, 11, 59, 60), PackedInt32Array(22, 60, 59, 41), PackedInt32Array(23, 43, 46, 48), PackedInt32Array(23, 48, 49, 38), PackedInt32Array(61, 62, 35, 40, 4, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4231, -486, -3100, -491, -3049, -226, -2854, -236, -2818, -768, -2220, -797, -2199, -924, -724, -945, -712, -801, -258, -768, -232, -247, -11, -261, -19, -533, 782, -541, 820, 772, -19, 794, -44, 107, -650, 107, -633, 251, -256, 260, -256, 760, -642, 815, -718, 904, -2384, 904, -2473, 747, -2799, 751, -2837, 255, -2447, 226, -2434, 73, -3023, 82, -3083, 603, -4248, 620)])
+agent_radius = 50.0
 
 [sub_resource type="GDScript" id="GDScript_ii6ab"]
 resource_name = "TroopSpawnButtonTESTING"
@@ -110,6 +113,10 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_2ufvk")
 color_ramp = SubResource("GradientTexture1D_4aak8")
 
+[sub_resource type="Environment" id="Environment_ue5al"]
+background_mode = 1
+tonemap_mode = 3
+
 [node name="K9_Dev_Room" type="Node2D"]
 script = ExtResource("1_alpff")
 
@@ -127,7 +134,7 @@ layer_0/tile_data = PackedInt32Array(-262178, 2, 0, -262168, 131074, 0, 393192, 
 [node name="Walls" type="TileMap" parent="NavigationRegion2D"]
 tile_set = ExtResource("3_i80vs")
 format = 2
-layer_0/tile_data = PackedInt32Array(-393218, 131072, 0, -65538, 131072, 2, -131074, 131072, 1, -196610, 131072, 1, -262146, 131072, 1, -327682, 131072, 1, -393219, 65536, 0, -393220, 65536, 0, -393221, 65536, 0, -393235, 65536, 0, -393236, 65536, 0, -393239, 0, 0, -393238, 65536, 0, -393237, 65536, 0, -327703, 0, 1, -262167, 0, 1, -196631, 0, 1, -131095, 0, 1, -65559, 0, 2, -65558, 65536, 2, -65557, 65536, 2, 131051, 65536, 0, 131050, 65536, 0, 131049, 0, 0, 196585, 0, 1, 262121, 0, 1, 327657, 0, 1, 393193, 0, 1, 458729, 0, 2, 524268, 0, 2, 458731, 65536, 2, 458730, 65536, 2, 524269, 65536, 2, 524270, 65536, 2, 524271, 65536, 2, 524272, 65536, 2, 524273, 65536, 2, 524274, 65536, 2, 524275, 65536, 2, 524276, 65536, 2, 524277, 65536, 2, 524278, 65536, 2, 524279, 65536, 2, 524280, 65536, 2, 524281, 65536, 2, 524282, 65536, 2, 524283, 131072, 2, 458750, 131072, 2, 393214, 131072, 1, 327678, 131072, 1, 262142, 131072, 1, 196606, 131072, 1, 131070, 131072, 0, 131069, 65536, 0, 131068, 65536, 0, -65539, 65536, 2, -65540, 65536, 2, 458748, 65536, 2, 458749, 65536, 2, 458732, 0, 1342177284, -65560, 4, 2, -131096, 131074, 1, -196632, 131074, 1, -262168, 131074, 0, -262169, 65538, 0, -262170, 65538, 0, -262171, 65538, 0, -262172, 65538, 0, -262173, 65538, 0, -262174, 65538, 0, -262175, 65538, 0, -262176, 65538, 0, -262177, 65538, 0, -262178, 2, 0, -196642, 2, 1, -131106, 2, 1, -65570, 2, 1, -34, 2, 1, 65502, 2, 1, 131038, 2, 1, 196574, 2, 1, 262110, 2, 1, 327646, 2, 1, 393182, 2, 2, 393192, 131074, 2, 327656, 131074, 1, 262120, 131074, 1, 196584, 131074, 1, 131048, 4, 1342177282, 393191, 131074, 1342177281, 393190, 131074, 1342177281, 393189, 131074, 1342177281, 393188, 131074, 1342177281, 393187, 131074, 1342177281, 393186, 131074, 1342177281, 393185, 131074, 1342177281, 393184, 131074, 1342177281, 393183, 131074, 1342177281, -262145, 2, 0, -327674, 2, 1342177280, 393222, 2, 805306368, 458751, 2, 1610612736, 393215, 2, 1, 327679, 2, 1, 262143, 2, 1, 196607, 2, 1, 131071, 131076, 0, -131073, 2, 1, -196609, 2, 1, -327680, 2, 1342177281, -327679, 2, 1342177281, -327678, 2, 1342177281, -327677, 2, 1342177281, -327676, 2, 1342177281, -327675, 2, 1342177281, -262138, 2, 805306369, -196602, 2, 805306369, -131066, 2, 805306369, -65530, 2, 805306369, 6, 2, 805306369, 65542, 2, 805306369, 131078, 2, 805306369, 196614, 2, 805306369, 262150, 2, 805306369, 327686, 2, 805306369, 393221, 2, 1610612737, 393220, 2, 1610612737, 393219, 2, 1610612737, 393218, 2, 1610612737, 393217, 2, 1610612737, 393216, 2, 1610612737, -65537, 131076, 1342177280, 65519, 4, 2, 65520, 65538, 0, 65521, 65538, 0, 65522, 65538, 0, 65523, 65538, 0, 65524, 65538, 0, 65525, 65538, 0, 65526, 65538, 0, 65527, 131074, 0, -9, 65540, 0, -10, 65540, 0, -11, 65540, 0, -12, 65540, 0, -13, 65540, 0, -14, 65540, 0, -15, 65540, 0, -16, 2, 2, -17, 4, 0, -196625, 65540, 2, -196624, 2, 0, -196623, 65540, 2, -196622, 65540, 2, -196621, 65540, 2, -196620, 65540, 2, -196619, 65540, 2, -196618, 65540, 2, -196617, 65540, 2, -196616, 65540, 2, -262152, 65540, 0, -262153, 65540, 0, -262154, 65540, 0, -262155, 65540, 0, -262156, 65540, 0, -262157, 65540, 0, -262158, 65540, 0, -262159, 65540, 0, -262160, 65540, 0, -262161, 65540, 0, -262151, 131076, 0, -196615, 131076, 1342177280, -196626, 131076, 805306368, -262162, 131076, 1610612736, 262127, 65540, 0, 262128, 65540, 0, 262129, 65540, 0, 262130, 65540, 0, 262131, 65540, 0, 262132, 65540, 0, 262133, 65540, 0, 262134, 65540, 0, 262135, 131074, 2, 262136, 65540, 0, 327672, 65540, 2, 327671, 65540, 2, 327670, 65540, 2, 327669, 65540, 2, 327668, 65540, 2, 327667, 65540, 2, 327666, 65540, 2, 327665, 65540, 2, 327664, 65540, 2, 327663, 65540, 2, 262137, 131076, 0, 327673, 131076, 1342177280, 327662, 131076, 805306368, 262126, 131076, 1610612736, -458770, 0, 0, -458769, 65536, 0, -458768, 65536, 0, -458767, 65536, 0, -458766, 65536, 0, -458765, 65536, 0, -458764, 65536, 0, -458763, 65536, 0, -458762, 65536, 0, -458761, 65536, 0, -458760, 65536, 0, -458759, 65536, 0, -458758, 131072, 0, -393222, 0, 6, -8, 4, 805306370, 65528, 4, 1610612738, -393234, 0, 1610612742, 458747, 0, 4)
+layer_0/tile_data = PackedInt32Array(-393218, 131072, 0, -131074, 131072, 1, -196610, 131072, 1, -262146, 131072, 1, -327682, 131072, 1, -393219, 65536, 0, -393220, 65536, 0, -393221, 65536, 0, -393235, 65536, 0, -393236, 65536, 0, -393239, 0, 0, -393238, 65536, 0, -393237, 65536, 0, -327703, 0, 1, -262167, 0, 1, -196631, 0, 1, -131095, 0, 1, 131051, 65536, 0, 131050, 65536, 0, 131049, 0, 0, 196585, 0, 1, 262121, 0, 1, 327657, 0, 1, 393193, 0, 1, 458729, 0, 2, 524268, 0, 2, 458731, 65536, 2, 458730, 65536, 2, 524269, 65536, 2, 524270, 65536, 2, 524271, 65536, 2, 524272, 65536, 2, 524273, 65536, 2, 524274, 65536, 2, 524275, 65536, 2, 524276, 65536, 2, 524277, 65536, 2, 524278, 65536, 2, 524279, 65536, 2, 524280, 65536, 2, 524281, 65536, 2, 524282, 65536, 2, 524283, 131072, 2, 458750, 131072, 2, 393214, 131072, 1, 327678, 131072, 1, 262142, 131072, 1, 196606, 131072, 1, 131070, 131072, 0, 131069, 65536, 0, 131068, 65536, 0, 458748, 65536, 2, 458749, 65536, 2, 458732, 0, 1342177284, -131096, 131074, 1, -196632, 131074, 1, -262168, 131074, 0, -262169, 65538, 0, -262170, 65538, 0, -262171, 65538, 0, -262172, 65538, 0, -262173, 65538, 0, -262174, 65538, 0, -262175, 65538, 0, -262176, 65538, 0, -262177, 65538, 0, -262178, 2, 0, -196642, 2, 1, -131106, 2, 1, -65570, 2, 1, -34, 2, 1, 65502, 2, 1, 131038, 2, 1, 196574, 2, 1, 262110, 2, 1, 327646, 2, 1, 393182, 2, 2, 393192, 131074, 2, 327656, 131074, 1, 262120, 131074, 1, 196584, 131074, 1, 131048, 4, 1342177282, 393191, 131074, 1342177281, 393190, 131074, 1342177281, 393189, 131074, 1342177281, 393188, 131074, 1342177281, 393187, 131074, 1342177281, 393186, 131074, 1342177281, 393185, 131074, 1342177281, 393184, 131074, 1342177281, 393183, 131074, 1342177281, -262145, 2, 0, -327674, 2, 1342177280, 393222, 2, 805306368, 458751, 2, 1610612736, 393215, 2, 1, 327679, 2, 1, 262143, 2, 1, 196607, 2, 1, 131071, 131076, 0, -131073, 2, 1, -196609, 2, 1, -327680, 2, 1342177281, -327679, 2, 1342177281, -327678, 2, 1342177281, -327677, 2, 1342177281, -327676, 2, 1342177281, -327675, 2, 1342177281, -262138, 2, 805306369, -196602, 2, 805306369, -131066, 2, 805306369, -65530, 2, 805306369, 6, 2, 805306369, 65542, 2, 805306369, 131078, 2, 805306369, 196614, 2, 805306369, 262150, 2, 805306369, 327686, 2, 805306369, 393221, 2, 1610612737, 393220, 2, 1610612737, 393219, 2, 1610612737, 393218, 2, 1610612737, 393217, 2, 1610612737, 393216, 2, 1610612737, 65519, 4, 2, 65520, 65538, 0, 65521, 65538, 0, 65522, 65538, 0, 65523, 65538, 0, 65524, 65538, 0, 65525, 65538, 0, 65526, 65538, 0, 65527, 131074, 0, -9, 65540, 0, -10, 65540, 0, -11, 65540, 0, -12, 65540, 0, -13, 65540, 0, -14, 65540, 0, -15, 65540, 0, -16, 2, 2, -17, 4, 0, -196625, 65540, 2, -196624, 2, 0, -196623, 65540, 2, -196622, 65540, 2, -196621, 65540, 2, -196620, 65540, 2, -196619, 65540, 2, -196618, 65540, 2, -196617, 65540, 2, -196616, 65540, 2, -262152, 65540, 0, -262153, 65540, 0, -262154, 65540, 0, -262155, 65540, 0, -262156, 65540, 0, -262157, 65540, 0, -262158, 65540, 0, -262159, 65540, 0, -262160, 65540, 0, -262161, 65540, 0, -262151, 131076, 0, -196615, 131076, 1342177280, -196626, 131076, 805306368, -262162, 131076, 1610612736, 262127, 65540, 0, 262128, 65540, 0, 262129, 65540, 0, 262130, 65540, 0, 262131, 65540, 0, 262132, 65540, 0, 262133, 65540, 0, 262134, 65540, 0, 262135, 131074, 2, 262136, 65540, 0, 327672, 65540, 2, 327671, 65540, 2, 327670, 65540, 2, 327669, 65540, 2, 327668, 65540, 2, 327667, 65540, 2, 327666, 65540, 2, 327665, 65540, 2, 327664, 65540, 2, 327663, 65540, 2, 262137, 131076, 0, 327673, 131076, 1342177280, 327662, 131076, 805306368, 262126, 131076, 1610612736, -458770, 0, 0, -458769, 65536, 0, -458768, 65536, 0, -458767, 65536, 0, -458766, 65536, 0, -458765, 65536, 0, -458764, 65536, 0, -458763, 65536, 0, -458762, 65536, 0, -458761, 65536, 0, -458760, 65536, 0, -458759, 65536, 0, -458758, 131072, 0, -393222, 0, 6, -8, 4, 805306370, 65528, 4, 1610612738, -393234, 0, 1610612742, 458747, 0, 4)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 position = Vector2(-1605, 245)
@@ -145,7 +152,7 @@ PLAYER_STATS = {
 }
 base_gold = 200
 
-[node name="HBoxContainer" parent="Player_0/GUI/HUD" index="1"]
+[node name="HBoxContainer" parent="Player_0/GUI/HUD" index="2"]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 87.0
@@ -171,6 +178,14 @@ position = Vector2(-3304, -372)
 [node name="FriendlySpawnPoints3" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="2"]
 position = Vector2(-3229, 105)
 
+[node name="BasicEnemy_000" parent="TheHiveMind/EnemyNPCs" index="0" instance=ExtResource("13_xg50i")]
+position = Vector2(164, -178)
+ENEMY_STATS = {
+"damage": 25,
+"health": 25,
+"walk_speed": 200.0
+}
+
 [node name="BasicFriendlyTroop" parent="TheHiveMind/FriendlyNPCs" index="0" instance=ExtResource("9_hltmn")]
 position = Vector2(-2957, -6)
 
@@ -185,7 +200,7 @@ position = Vector2(482, -238)
 heart_faction = "hostile"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.802209, 0.813949, 0.837776, 1)
+color = Color(0.310424, 0.326156, 0.358265, 1)
 
 [node name="FriendlyTroopSpawnButton" type="Node2D" parent="."]
 position = Vector2(-4160, 536)
@@ -236,15 +251,96 @@ position = Vector2(-2181, 296)
 rotation = 1.57681
 gate_health = 5
 
-[node name="BasicEnemy_000" parent="." instance=ExtResource("13_xg50i")]
-position = Vector2(164, -178)
-ENEMY_STATS = {
-"damage": 25,
-"health": 25,
-"walk_speed": 200.0
-}
-
 [node name="Duffs" type="Node" parent="."]
+
+[node name="PortalManager" parent="Duffs" instance=ExtResource("12_t2ivh")]
+
+[node name="Portal_000" parent="Duffs/PortalManager/Portals" index="0" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_cs77b")]
+position = Vector2(-3233, 651)
+linked_portal = NodePath("../Portal_001")
+faction = "friendly"
+
+[node name="Portal_001" parent="Duffs/PortalManager/Portals" index="1" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_cs77b")]
+position = Vector2(-350, 795)
+linked_portal = NodePath("../Portal_000")
+faction = "hostile"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ue5al")
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="AmbientOrangeLight" parent="Lighting" instance=ExtResource("14_hvywi")]
+
+[node name="AmbientOrangeLight2" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-542, -471)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight3" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-584, 698)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight4" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-2415, 809)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight5" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-2691, -636)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight8" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-3310, 53)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight6" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-1595, -199)
+scale = Vector2(1.7699, 1.7699)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="AmbientOrangeLight7" parent="Lighting" instance=ExtResource("14_hvywi")]
+position = Vector2(-1585, 285)
+scale = Vector2(1.7699, 1.7699)
+color = Color(1, 0.615547, 0.268456, 1)
+
+[node name="Torch" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-672, 925)
+
+[node name="Torch5" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-1602, 382)
+
+[node name="Torch6" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-1599, -113)
+
+[node name="Torch2" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-2498, 915)
+
+[node name="Torch3" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-1104, -622)
+
+[node name="Torch4" parent="Lighting" instance=ExtResource("15_6chd0")]
+position = Vector2(-1987, -617)
+
+[node name="Decor" type="Node" parent="."]
+
+[node name="MudSplat" parent="Decor" instance=ExtResource("16_by8xx")]
+position = Vector2(-2692, 577)
+rotation = -0.0432497
+scale = Vector2(1.26635, 1.26635)
+
+[node name="MudSplat2" parent="Decor" instance=ExtResource("16_by8xx")]
+position = Vector2(-579, -438)
+rotation = -0.0432497
+scale = Vector2(1.26635, 1.26635)
+
+[node name="MudSplat3" parent="Decor" instance=ExtResource("16_by8xx")]
+position = Vector2(-1606, -222)
+rotation = -1.57569
+scale = Vector2(1, 3.27899)
+
+[node name="MudSplat4" parent="Decor" instance=ExtResource("16_by8xx")]
+position = Vector2(-1572, 279)
+rotation = -1.57569
+scale = Vector2(1, 3.27899)
 
 [connection signal="body_entered" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="FriendlyTroopSpawnButton/InteractionRadius" to="FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
@@ -252,3 +348,4 @@ ENEMY_STATS = {
 [editable path="Player_0"]
 [editable path="Player_0/PlayerWeapon"]
 [editable path="TheHiveMind"]
+[editable path="Duffs/PortalManager"]

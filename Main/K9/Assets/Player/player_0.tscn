@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=19 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/gui_script.gd" id="6_iwycx"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="8_efr0t"]
 [ext_resource type="PackedScene" uid="uid://cg1tgik1raup3" path="res://Main/K9/Assets/win_lose_screen.tscn" id="8_io5ii"]
+[ext_resource type="Texture2D" uid="uid://efjtifdax32w" path="res://Main/K9/Assets/2D/UI/CastleUI.png" id="9_pv8eh"]
+[ext_resource type="Texture2D" uid="uid://cl31527500yi8" path="res://Main/K9/Assets/2D/UI/CastleUI_Panel.png" id="10_kvxd5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
 radius = 72.7805
@@ -172,7 +174,7 @@ rotation = 1.58381
 shape = SubResource("CircleShape2D_o561a")
 debug_color = Color(0, 0.65022, 0.105736, 0.42)
 
-[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_6mqcu")
 bus = &"Player"
 
@@ -203,19 +205,34 @@ grow_vertical = 1
 [node name="HUD" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 4.0
+offset_top = 175.0
+offset_right = 4.0
+offset_bottom = 687.0
+scale = Vector2(0.716554, 0.716554)
+
+[node name="CastlePanel" type="Node2D" parent="GUI/HUD"]
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/HUD/CastlePanel"]
+position = Vector2(182, 456)
+scale = Vector2(3.13398, 3.13398)
+texture = ExtResource("9_pv8eh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI/HUD/CastlePanel"]
+modulate = Color(0.687949, 0.309108, 0, 1)
+position = Vector2(182, 456)
+scale = Vector2(3.13398, 3.13398)
+texture = ExtResource("10_kvxd5")
 
 [node name="HP_Bar" type="TextureProgressBar" parent="GUI/HUD"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -18.0
-offset_right = 518.0
-offset_bottom = 494.0
+offset_left = 109.0
+offset_top = -47.0
+offset_right = 621.0
+offset_bottom = 465.0
 grow_vertical = 0
 scale = Vector2(0.283587, 0.283587)
 value = 75.0
@@ -227,10 +244,10 @@ tint_progress = Color(0.831373, 0, 0, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD"]
 layout_mode = 0
-offset_left = 1049.0
-offset_top = 599.0
-offset_right = 1136.0
-offset_bottom = 639.0
+offset_left = 74.0
+offset_top = 381.0
+offset_right = 161.0
+offset_bottom = 421.0
 
 [node name="TextureRect" type="TextureRect" parent="GUI/HUD/HBoxContainer"]
 modulate = Color(1, 0.517647, 0.384314, 1)
@@ -242,5 +259,13 @@ expand_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94902, 0.545098, 0, 1)
 text = "Coins"
+
+[node name="TroopsLabel" type="Label" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 107.459
+offset_top = 431.23
+offset_right = 161.459
+offset_bottom = 454.23
+text = "Troops: "
 
 [editable path="PlayerWeapon"]

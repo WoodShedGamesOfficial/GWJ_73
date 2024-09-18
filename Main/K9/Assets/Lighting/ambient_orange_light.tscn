@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6i737ycfrrw4"]
+
+[ext_resource type="Texture2D" uid="uid://bl82b7ojksmi1" path="res://Main/K9/Assets/2D/textures/SpotlightC.png" id="1_8l5be"]
+
+[node name="AmbientOrangeLight" type="PointLight2D"]
+position = Vector2(200, -36)
+scale = Vector2(4.19753, 4.19753)
+color = Color(1, 0.566341, 0.0899381, 1)
+shadow_enabled = true
+texture = ExtResource("1_8l5be")

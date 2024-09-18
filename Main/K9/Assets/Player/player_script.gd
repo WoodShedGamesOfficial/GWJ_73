@@ -10,6 +10,7 @@ class_name K9_player_controller
 @export var PLAYER_STATS = {
 	'health' : 100.00,
 	'walk_speed' : 300,
+	
 }
 
 @export var base_gold : int = 150
@@ -25,28 +26,34 @@ func _ready():
 	GlobalHiveMind.player_pos = global_position
 	add_to_group("Player")
 	add_to_group("Teleportable")
+	add_to_group('friendly')
 	
 	GlobalHiveMind.players_gold_coins = base_gold
 	
 	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
 	$GUI/HUD/HP_Bar.max_value = PLAYER_STATS.health
 	respawn_location = transform.origin
+	
+	
 	pass
 	
 
 func _process(delta):
+	var footstep_audio = $Footsteps
+	
 	isSprinting = Input.is_action_pressed("Sprint")
 	
 	GlobalHiveMind.player_pos = global_position
 	
 	if velocity.x or velocity.y != 0:
 		player_anim.play("Walk")
-		$Footsteps.playing = true
+		if footstep_audio.is_playing() != true:
+			footstep_audio.playing = true
 		#await $Footsteps.finished
 		#$Footsteps.pitch_scale = randf_range(.9, 1.5)
 	else:
 		player_anim.play("Idle")
-		$Footsteps.playing = false
+		footstep_audio.playing = false
 	
 	
 	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)

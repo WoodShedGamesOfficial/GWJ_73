@@ -124,25 +124,28 @@ func _process(delta):
 	
 	
 	for body in $AttackRadius.get_overlapping_bodies():
-		if body.is_in_group("Player") and $AttackTimer.is_stopped():
-			$AttackTimer.start(0.0)
-			look_at(body.transform.origin)
-			await $AttackTimer.timeout
-			attack(body)
+		if body != null:
+			if body.is_in_group("Player") and $AttackTimer.is_stopped():
+				$AttackTimer.start(0.0)
+				look_at(body.transform.origin)
+				await $AttackTimer.timeout
+				attack(body)
+				movement_target = transform.origin + Vector2(randf_range(50.0, 100.0), randf_range(50.0, 100.0))  
 		
 	
 	pass
 	
 
 func hurt(damage, damage_type):
+	var hurt_audio = $HURTAUDIOTEST
 	
 	if ENEMY_STATS.health > 0:
 		ENEMY_STATS.health -= damage
 		$BloodFX.restart()
 		$EnemyAnims.play("Hurt")
-		$HurtGrunt.pitch_scale = randf_range(.80, 1.5)
-		$HurtGrunt.play(0.0)
-		await $EnemyAnims.animation_finished
+		hurt_audio.pitch_scale = randf_range(.80, 1.5)
+		hurt_audio.play(0.0)
+		await $EnemyAnims.animation_finished and hurt_audio.finished
 		
 		#var blood_i = blood_splat_p.instantiate()
 	#
@@ -156,6 +159,7 @@ func hurt(damage, damage_type):
 var blood_splat_p = load('res://Main/K9/Assets/Fx/bloodsplat.tscn')
 
 func death():
+	var death_howl = $DeathHowl
 	var blood_i = blood_splat_p.instantiate()
 	var chance_to_scream = randf_range(0,100)
 	
@@ -166,10 +170,10 @@ func death():
 	blood_i.transform.origin = transform.origin
 	
 	if chance_to_scream >= 95:
-		$DeathHowl.stream = preload("res://Main/K9/Assets/Audio/SFX/Whilhelm_Scream.wav")
+		death_howl.stream = preload("res://Main/K9/Assets/Audio/SFX/Whilhelm_Scream.wav")
 	
-	$DeathHowl.pitch_scale = randf_range(.90, 1.5)
-	$DeathHowl.play(0.0)
+	death_howl.pitch_scale = randf_range(.90, 1.5)
+	death_howl.play(0.0)
 	await get_tree().create_timer(0.75).timeout
 	GlobalHiveMind.players_gold_coins += 25
 	queue_free()
@@ -197,10 +201,13 @@ func cancel_attack(body):
 
 func attack(body):
 	var damage = ENEMY_STATS.damage
+	var swords_clashing = $SwordClang
 	
 	if canAttack and body != null:    #body.has_method("hurt") and 
 		body.hurt(damage, damage_type)
 		print(str(name) + "hurt  " + str(body.name))
+		if swords_clashing.is_playing() != true:
+			swords_clashing.play()
 	
 	#for body in $HitBox.get_overlapping_bodies():
 		#if body.is_in_group("Player") or body.is_in_group("Troop") and canAttack == true:
@@ -216,11 +223,17 @@ func attack(body):
 
 #enemies can see player and troops
 func _on_player_visibility_area_body_entered(body):
+	
 	if body.is_in_group("Player"):
-		movement_target = body.transform.origin
+		if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
+				movement_target = body.transform.origin
+				look_at(body.transform.origin)
+		else:
+			movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+		
 		attackingPlayer = true
-		set_movement_target(movement_target)
-		print(str(movement_target))
+		#set_movement_target(movement_target)
+		#print(str(movement_target))
 	
 	pass # Replace with function body.
 

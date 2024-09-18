@@ -10,6 +10,8 @@ extends CharacterBody2D
 	'health' : 100, 
 }
 
+var canContinue : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CanvasLayer/WinLoseScreen.visible = false
@@ -45,6 +47,16 @@ func set_heart_faction():
 		
 	pass
 
+func _input(event):
+	var MM_path = load("res://Main/K9/Lvls/main_menu.tscn")
+	
+	if canContinue and Input.is_anything_pressed():
+		await get_tree().create_timer(2.5).timeout
+		get_tree().change_scene_to_packed(MM_path)
+		
+	pass
+	
+
 func hurt(damage, damage_type):
 	
 	if TOWERSTATS.health >= 1:
@@ -61,19 +73,27 @@ func hurt(damage, damage_type):
 
 func death_of_the_tower():
 	$HealthBar.visible = false
+	var MM_path = load("res://Main/K9/Lvls/main_menu.tscn")
+	
 	
 	match heart_faction:
 		"friendly":
+			$CanvasLayer/WinLoseScreen.update_stats_panel()
 			$CanvasLayer/WinLoseScreen.visible = true
 			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you got your ass kicked bro"
+			await get_tree().create_timer(5.0).timeout
+			$CanvasLayer/WinLoseScreen/Continue.visible = true
+			canContinue = true
 			#print('you lost')
-			await get_tree().create_timer(15.0).timeout or Input.is_anything_pressed()
-			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')
 		"hostile" :
+			$CanvasLayer/WinLoseScreen.update_stats_panel()
 			$CanvasLayer/WinLoseScreen.visible = true
 			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you destroyed their Tower!"
-			print('you won!')
-			await get_tree().create_timer(5.0)
-			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')
+			await get_tree().create_timer(5.0).timeout
+			$CanvasLayer/WinLoseScreen/Continue.visible = true
+			canContinue = true
+			#print('you won!')
+	#$CanvasLayer/WinLoseScreen.visible = true
+	$CanvasLayer/WinLoseScreen.update_stats_panel()
 	pass
 	

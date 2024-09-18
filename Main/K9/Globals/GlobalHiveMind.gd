@@ -9,7 +9,9 @@ var enemy_heart_pos_array = []
 var current_level : int
 var current_wave : int
 
+#idk just random troop names 
 var friendly_troops_names = []
+
 
 #currency
 var players_gold_coins : int = 0

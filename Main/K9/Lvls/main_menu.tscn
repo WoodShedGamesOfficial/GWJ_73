@@ -72,20 +72,20 @@ script = ExtResource("1_4gcck")
 dev_room_path = ExtResource("2_di7d8")
 
 [node name="GWJLabel" type="Label" parent="."]
-offset_left = 474.0
-offset_top = 48.0
-offset_right = 688.0
-offset_bottom = 71.0
+offset_left = 472.0
+offset_top = 151.0
+offset_right = 686.0
+offset_bottom = 174.0
 text = "A Godot Wild Jam #73 game"
 
 [node name="Title" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 489.0
-offset_top = 3.0
-offset_right = 699.0
-offset_bottom = 48.0
+offset_left = 487.0
+offset_top = 106.0
+offset_right = 697.0
+offset_bottom = 151.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Tower Wars
@@ -114,10 +114,10 @@ layout_mode = 2
 text = "Eject"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 518.0
-offset_top = 90.0
-offset_right = 646.0
-offset_bottom = 218.0
+offset_left = 516.0
+offset_top = 193.0
+offset_right = 644.0
+offset_bottom = 321.0
 texture = ExtResource("2_tc2fj")
 
 [node name="DevRoomButton" type="Button" parent="."]
@@ -286,3 +286,7 @@ text = "Godot wild Jam #73"
 libraries = {
 "": SubResource("AnimationLibrary_tj07h")
 }
+
+[node name="FunFacts" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

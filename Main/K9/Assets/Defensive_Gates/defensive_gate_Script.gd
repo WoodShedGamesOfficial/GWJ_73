@@ -15,12 +15,12 @@ func _ready():
 			add_to_group("Player")
 			add_to_group("Troop")
 			set_collision_mask_value(2, true)
-			set_collision_layer_value(5, true)
+			set_collision_layer_value(6, true)
 			#collision_mask != 5
 		"hostile" : 
 			add_to_group("Enemy")
 			set_collision_mask_value(5, true)
-			set_collision_layer_value(2, true)
+			set_collision_layer_value(6, true)
 			
 	
 	$health.text = str(gate_health)
