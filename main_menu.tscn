@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://qjp6sy5dl83u"]
+[gd_scene load_steps=14 format=3 uid="uid://qjp6sy5dl83u"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
 [ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
 [ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
+[ext_resource type="PackedScene" uid="uid://x2p0vcinf1a2" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/loading_screen.tscn" id="3_fb08x"]
 [ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/key_binds.tscn" id="4_8rsui"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
 [ext_resource type="PackedScene" uid="uid://bqedu3mvt1ib2" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/masteroptions.tscn" id="5_qmwj4"]
@@ -74,6 +75,7 @@ _data = {
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_4gcck")
 dev_room_path = ExtResource("2_di7d8")
+level_0_path = ExtResource("3_fb08x")
 
 [node name="GWJLabel" type="Label" parent="."]
 offset_left = 474.0

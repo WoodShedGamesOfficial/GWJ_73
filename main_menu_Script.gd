@@ -61,15 +61,14 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	var island_path = load("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
-	get_tree().change_scene_to_packed(island_path)
+	GlobalSaaebStuff.where_to_go = load("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
+	get_tree().change_scene_to_file("res://Main/SAGD/Saaeb's (Player 4) usless stuff/loading_screen.tscn")
 	pass
 	
 
 func goto_level_0():
-	var lvl0_p = load("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
-	
-	get_tree().change_scene_to_packed(lvl0_p)
+	get_tree().change_scene_to_packed(level_0_path)
+	GlobalSaaebStuff.where_to_go = load("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
 	pass
 	
 
