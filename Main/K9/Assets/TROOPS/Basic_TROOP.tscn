@@ -134,7 +134,6 @@ max_neighbors = 5
 max_speed = 150.0
 avoidance_layers = 3
 avoidance_mask = 3
-debug_enabled = true
 debug_path_custom_color = Color(0.733333, 0.172549, 1, 1)
 debug_path_custom_point_size = 2.0
 
