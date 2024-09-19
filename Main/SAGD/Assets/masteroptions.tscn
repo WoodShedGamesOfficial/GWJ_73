@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqedu3mvt1ib2"]
 
-[ext_resource type="Script" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/masteroptions.gd" id="1_lc7hw"]
+[ext_resource type="Script" path="res://Main/SAGD/Assets/masteroptions.gd" id="1_lc7hw"]
 
 [node name="Masteroptions" type="Control"]
 layout_mode = 3

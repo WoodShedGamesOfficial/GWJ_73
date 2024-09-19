@@ -128,6 +128,8 @@ libraries = {
 }
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 50.0
+path_max_distance = 20.0
 avoidance_enabled = true
 radius = 30.0
 max_neighbors = 5

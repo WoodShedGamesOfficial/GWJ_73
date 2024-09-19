@@ -61,6 +61,8 @@ func assign_faction():
 			if GlobalHiveMind.enemy_heart_pos_array.is_empty() != true:
 				nav_agent.target_position = GlobalHiveMind.enemy_heart_pos_array.front()
 			
+			print("enemy heart" + str(GlobalHiveMind.enemy_heart_pos_array.front()))
+			
 			$HitBox.set_collision_mask_value(2, true)
 			
 			name = GlobalLibrary.firendly_name_array.pick_random()
@@ -81,8 +83,9 @@ func assign_faction():
 			set_collision_mask_value(1, true) #detect player
 			
 			nav_agent.set_navigation_layer_value(2, true)
+			
 			if GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
-				nav_agent.target_position = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+				set_movement_target(GlobalHiveMind.friendly_tower_heart_pos_array.front())
 			
 			$AttackRadius.set_collision_mask_value(2, true)
 			$AttackRadius.set_collision_mask_value(1, true)
@@ -136,6 +139,7 @@ func _process(delta):
 	if TROOP_STATS.health <= 0 and not hasDied:
 		death()
 		hasDied = true
+	
 	pass
 
 
@@ -233,7 +237,7 @@ func attack():
 		if body.has_method('hurt'):
 			body.hurt(damage, damage_type)
 			$Audio/SwordClash.play(0.0)
-			print(name + str(faction) + "   hurt:   " + str(body.name))
+			#print(name + str(faction) + "   hurt:   " + str(body.name))
 	pass
 
 

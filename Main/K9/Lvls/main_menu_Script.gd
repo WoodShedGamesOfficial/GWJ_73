@@ -1,5 +1,8 @@
 extends Control
-class_name K9_Main_menu
+class_name K9_Main_menu_controller
+
+#var next_level : PackedScene = GlobalLibrary.level_path
+const LOADINGSCREEN = preload('res://Main/SAGD/Assets/loading_screen.tscn')
 
 @export var dev_room_path : PackedScene
 @export var level_0_path : PackedScene
@@ -88,15 +91,17 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	const island_path = preload("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
-	get_tree().change_scene_to_packed(island_path)
+	GlobalLibrary.level_path = preload('res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn')
+	#const island_path = preload("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
+	get_tree().change_scene_to_packed(LOADINGSCREEN)
 	pass
 	
 
 func goto_level_0():
-	const lvl0_p = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	#const lvl0_p = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	GlobalLibrary.level_path = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
 	
-	get_tree().change_scene_to_packed(lvl0_p)
+	get_tree().change_scene_to_packed(LOADINGSCREEN)
 	pass
 	
 
@@ -142,9 +147,10 @@ func toggle_credits_panel():
 	
 
 func start_level_0():
+	GlobalLibrary.level_path = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
 	
 	if level_0_path != null:
-		get_tree().change_scene_to_packed(level_0_path)
+		get_tree().change_scene_to_packed(LOADINGSCREEN)
 	else:
 		print("no level 0 assigned")
 	
