@@ -68,9 +68,24 @@ func spawn_enemy():
 	pass
 	
 
+const ENEMY_TROOP_P = preload("res://Main/K9/Assets/TROOPS/Basic_ENEMYTROOP.tscn")
+
 func add_enemy_resources():
 	
+	
 	GlobalHiveMind.enemies_gold_coins += 100
+	
+	print('the hivemind gets stronger')
+	
+	while GlobalHiveMind.enemies_gold_coins >= 250:
+		var enemy_i = ENEMY_TROOP_P.instantiate()
+		GlobalHiveMind.enemies_gold_coins -= 50
+		await get_tree().create_timer(0.5).timeout
+		$EnemyNPCs.add_child(enemy_i)
+		enemy_i.faction = 1
+		enemy_i.transform.origin = enemy_spawn_point_array.pick_random()
+		print(enemy_i.name)
+			
 	
 	pass
 	

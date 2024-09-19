@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://bvgo1sg5f3ja1"]
+[gd_scene load_steps=12 format=4 uid="uid://bvgo1sg5f3ja1"]
 
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_2keua"]
+[ext_resource type="Script" path="res://Main/K9/Lvls/Lvl_0/level_0_script.gd" id="1_qa2pk"]
 [ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="2_hbjpx"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="3_djy7d"]
 [ext_resource type="PackedScene" uid="uid://c6l5wlds2suxo" path="res://Main/K9/Assets/2D/textures/vfx/MudSplat.tscn" id="3_vyh4l"]
@@ -17,6 +18,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1942, 195, -1978, -356
 agent_radius = 80.0
 
 [node name="Lvl_0" type="Node2D"]
+position = Vector2(0, 4)
+script = ExtResource("1_qa2pk")
 
 [node name="World" type="Node" parent="."]
 
@@ -85,10 +88,14 @@ base_gold = 350
 [node name="EnemySpawnPoint" parent="TheHiveMind/EnemySpawnPoints" index="0"]
 position = Vector2(3095, -799)
 
+[node name="TroopSpawner" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint" index="0"]
+z_index = -1
+
 [node name="EnemySpawnPoint2" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="1"]
 position = Vector2(2699, -140)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint2"]
+z_index = -1
 position = Vector2(-2, -4)
 texture = ExtResource("6_tpqf7")
 
@@ -96,16 +103,21 @@ texture = ExtResource("6_tpqf7")
 position = Vector2(3070, -460)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint3"]
+z_index = -1
 position = Vector2(-2, -4)
 texture = ExtResource("6_tpqf7")
 
 [node name="FriendlySpawnPoints" parent="TheHiveMind/FriendlySpawnPoints" index="0"]
 position = Vector2(-2901, -431)
 
+[node name="TroopSpawner" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints" index="0"]
+z_index = -1
+
 [node name="FriendlySpawnPoints2" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="1"]
 position = Vector2(-3039, -757)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints2"]
+z_index = -1
 position = Vector2(16, -4)
 texture = ExtResource("6_tpqf7")
 
@@ -113,19 +125,23 @@ texture = ExtResource("6_tpqf7")
 position = Vector2(-2774, -679)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints3"]
+z_index = -1
 position = Vector2(16, -4)
 texture = ExtResource("6_tpqf7")
 
 [node name="WaveStart" parent="TheHiveMind/Timers" index="2"]
 autostart = true
 
+[node name="ResourceTimer" parent="TheHiveMind/Timers" index="3"]
+wait_time = 30.0
+
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(3062, -138)
 heart_faction = "hostile"
 
 [node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]
-position = Vector2(-3184, -856)
-rotation = -0.375899
+position = Vector2(-2635, -262)
+rotation = -0.0262283
 
 [node name="DefensiveGate" parent="." instance=ExtResource("3_djy7d")]
 position = Vector2(-2364, -568)

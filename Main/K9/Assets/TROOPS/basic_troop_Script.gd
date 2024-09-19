@@ -185,7 +185,9 @@ func hurt(damage, damage_type) -> int:
 		death()
 	
 	if is_in_group('enemy'):
-		GlobalHiveMind.players_gold_coins += 5
+		GlobalHiveMind.players_gold_coins += 10
+	elif is_in_group('enemy'):
+		GlobalHiveMind.enemies_gold_coins += 5
 	print(str(TROOP_STATS.health))
 	return TROOP_STATS.health
 	
@@ -208,13 +210,14 @@ func death():
 		$Audio/DeathSFX.pitch_scale = randf_range(.80, 2.0)
 		$Audio/DeathSFX.play(0.0)
 		#await $Audio/DeathSFX.finished
+		GlobalHiveMind.enemies_gold_coins += 25
 		print(name + "  died")
 		queue_free()
 	elif is_in_group('enemy'): 
 		GlobalHiveMind.enemy_troop_count.erase(name)
 		$Audio/DeathSFX.pitch_scale = randf_range(0.80, 1.6)
 		$Audio/DeathSFX.play(0.0)
-		GlobalHiveMind.players_gold_coins += 25
+		GlobalHiveMind.players_gold_coins += 50
 		#await $Audio/DeathSFX.finished
 		print(name + "  died")
 		queue_free()
