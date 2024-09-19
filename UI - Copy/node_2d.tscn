@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds1pspfsv24cy"]
+
+[ext_resource type="Texture2D" uid="uid://bh1qcfyb7glm6" path="res://icon.svg" id="1_arbjn"]
+[ext_resource type="Script" path="res://node_2d.gd" id="1_wo5vp"]
+[ext_resource type="PackedScene" uid="uid://deu2xp0ha60dd" path="res://character_body_2d.tscn" id="2_1t7cu"]
+[ext_resource type="Texture2D" uid="uid://dajrwr75cwwt6" path="res://1.jpeg" id="2_dkxqy"]
+[ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://key_binds.tscn" id="4_r5iqr"]
+[ext_resource type="PackedScene" uid="uid://bc5hj0xmjwvxa" path="res://input_button.tscn" id="5_epvu3"]
+[ext_resource type="Texture2D" uid="uid://dtpm3upor72pe" path="res://indicetator.png" id="5_llmk0"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wo5vp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(220.902, 147)
+scale = Vector2(4.68852, 4.68853)
+texture = ExtResource("2_dkxqy")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_1t7cu")]
+position = Vector2(250, 147)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(61, 64)
+zoom = Vector2(2, 2)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="KeyBinds" parent="GUI" instance=ExtResource("4_r5iqr")]
+
+[node name="Button" type="Button" parent="GUI/KeyBinds"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 371.0
+offset_top = -301.0
+offset_right = 573.0
+offset_bottom = -202.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 35
+text = "Settings"
+
+[node name="Button2" type="Button" parent="GUI/KeyBinds"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -579.0
+offset_top = -292.0
+offset_right = -371.0
+offset_bottom = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Exit to main menu"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_left = 111.0
+offset_top = 243.0
+offset_right = 151.0
+offset_bottom = 283.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(40, 40)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+position = Vector2(40, 40)
+scale = Vector2(4.689, 4.689)
+texture = ExtResource("2_dkxqy")
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/SubViewportContainer"]
+position = Vector2(17, 20)
+texture = ExtResource("5_llmk0")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(493, 256)
+texture = ExtResource("1_arbjn")
+
+[node name="InputButton" parent="." instance=ExtResource("5_epvu3")]
+offset_left = -144.0
+offset_top = 407.0
+offset_right = -144.0
+offset_bottom = 435.0
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(128, 404)
+texture = ExtResource("1_arbjn")
+
+[connection signal="pressed" from="GUI/KeyBinds/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/KeyBinds/Button2" to="." method="_on_button_2_pressed"]
