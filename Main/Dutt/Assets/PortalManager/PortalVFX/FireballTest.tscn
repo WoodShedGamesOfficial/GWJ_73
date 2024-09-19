@@ -1,0 +1,138 @@
+[gd_scene load_steps=18 format=3 uid="uid://bpfcupw7maq6j"]
+
+[ext_resource type="Shader" path="res://Modules/Projectiles/Fireball/FireballShader.gdshader" id="1_fus3l"]
+[ext_resource type="Material" uid="uid://colcrr8wiy7ow" path="res://Modules/Projectiles/Fireball/FireballMaterial.tres" id="1_gjdox"]
+[ext_resource type="Texture2D" uid="uid://cvnuh2m8cdq5s" path="res://icon.svg" id="2_0jdj0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lt67o"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4q2j1"]
+fractal_type = 2
+fractal_octaves = 2
+fractal_lacunarity = 0.5
+domain_warp_enabled = true
+domain_warp_amplitude = 20.0
+domain_warp_frequency = 0.01
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pouhc"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+bump_strength = 1.9
+noise = SubResource("FastNoiseLite_4q2j1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ma64i"]
+frequency = 0.035
+fractal_lacunarity = 1.4
+fractal_gain = 0.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ftvsx"]
+width = 64
+height = 64
+seamless = true
+seamless_blend_skirt = 0.5
+normalize = false
+noise = SubResource("FastNoiseLite_ma64i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28aan"]
+shader = ExtResource("1_fus3l")
+shader_parameter/light_color = Color(0, 0.368627, 0.615686, 1)
+shader_parameter/dark_color = Color(0, 0.0666667, 0.188235, 1)
+shader_parameter/horizontal_speed = 0.0
+shader_parameter/vertical_speed = -0.3
+shader_parameter/speed_modifier = -0.75
+shader_parameter/wave_strength = 0.0
+shader_parameter/wave_speed = 0.0
+shader_parameter/emission = 2.0
+shader_parameter/noise_edge_1 = 0.0
+shader_parameter/noise_edge_2 = 0.0
+shader_parameter/light_edge_1 = 2.0
+shader_parameter/light_edge_2 = 2.0
+shader_parameter/fading = false
+shader_parameter/fade_edge_1 = 0.15
+shader_parameter/fade_edge_2 = 1.2
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_pouhc")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_ftvsx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7xltx"]
+size = Vector2(128, 128)
+orientation = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uoqgv"]
+noise_type = 2
+fractal_type = 3
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_swfjq"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+bump_strength = 1.9
+noise = SubResource("FastNoiseLite_uoqgv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_27vd3"]
+frequency = 0.035
+fractal_lacunarity = 1.4
+fractal_gain = 0.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bdan4"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_27vd3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnocu"]
+shader = ExtResource("1_fus3l")
+shader_parameter/light_color = Color(0, 0.152941, 0.0823529, 1)
+shader_parameter/dark_color = Color(0, 0.537255, 0.247059, 1)
+shader_parameter/horizontal_speed = 0.1
+shader_parameter/vertical_speed = -0.0999999
+shader_parameter/speed_modifier = 2.25
+shader_parameter/wave_strength = 0.01
+shader_parameter/wave_speed = 5.0
+shader_parameter/emission = 1.6
+shader_parameter/noise_edge_1 = 1.0
+shader_parameter/noise_edge_2 = 0.15
+shader_parameter/light_edge_1 = 0.9
+shader_parameter/light_edge_2 = 1.2
+shader_parameter/fading = false
+shader_parameter/fade_edge_1 = -0.9
+shader_parameter/fade_edge_2 = -1.2
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_swfjq")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_bdan4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rq76n"]
+size = Vector2(128, 128)
+orientation = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xwu7s"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_lt67o")
+fixed_fps = 60
+local_coords = true
+
+[node name="FireSprite" type="Sprite2D" parent="."]
+material = ExtResource("1_gjdox")
+texture = ExtResource("2_0jdj0")
+
+[node name="WaterMesh" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_28aan")
+position = Vector2(128, 0)
+mesh = SubResource("PlaneMesh_7xltx")
+texture = ExtResource("2_0jdj0")
+
+[node name="PoisonMesh" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_fnocu")
+position = Vector2(256, 0)
+mesh = SubResource("PlaneMesh_rq76n")
+texture = SubResource("CompressedTexture2D_xwu7s")

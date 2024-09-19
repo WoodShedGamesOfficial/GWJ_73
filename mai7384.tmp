@@ -1,0 +1,162 @@
+[gd_scene load_steps=5 format=3 uid="uid://qjp6sy5dl83u"]
+
+[ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
+[ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
+[ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
+[ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gcck")
+dev_room_path = ExtResource("2_di7d8")
+
+[node name="GWJLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 48.0
+offset_right = 688.0
+offset_bottom = 71.0
+text = "A Godot Wild Jam #73 game"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_right = 105.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "TOWER WARS"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 322.0
+offset_right = 110.0
+offset_bottom = 366.0
+
+[node name="Start" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Options" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Credits" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Eject" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Eject"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 90.0
+offset_right = 646.0
+offset_bottom = 218.0
+texture = ExtResource("2_tc2fj")
+
+[node name="DevRoomButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1046.0
+offset_top = 599.0
+offset_right = 1129.0
+offset_bottom = 630.0
+text = "DevRoom
+"
+
+[node name="Options_panel" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 774.0
+offset_top = 98.0
+offset_right = 1074.0
+offset_bottom = 498.0
+
+[node name="Panel" type="Panel" parent="Options_panel"]
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 400.0
+
+[node name="Label" type="Label" parent="Options_panel"]
+layout_mode = 2
+offset_left = 91.0
+offset_top = 11.0
+offset_right = 391.0
+offset_bottom = 34.0
+text = "Options :"
+
+[node name="CreditsPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 458.0
+offset_top = 320.0
+offset_right = 658.0
+offset_bottom = 620.0
+
+[node name="Panel" type="Panel" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 201.0
+offset_bottom = 296.0
+
+[node name="Credits" type="Label" parent="CreditsPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Credits and links:"
+
+[node name="TextureRect" type="TextureRect" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 28.0
+offset_right = 1165.0
+offset_bottom = 1175.0
+scale = Vector2(0.0829654, 0.0829654)
+texture = ExtResource("4_tt0ui")
+
+[node name="Tutorial_confirm" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 148.0
+offset_top = 221.0
+offset_right = 448.0
+offset_bottom = 261.0
+
+[node name="Panel" type="Panel" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 100.0
+
+[node name="Label" type="Label" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 284.0
+offset_bottom = 37.0
+text = "would you like to play the tutorial?"
+
+[node name="Yes" type="Button" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 46.0
+offset_right = 83.0
+offset_bottom = 77.0
+text = "Yes"
+
+[node name="No" type="Button" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 44.0
+offset_right = 239.0
+offset_bottom = 75.0
+text = "No"

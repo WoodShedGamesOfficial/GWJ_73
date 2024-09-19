@@ -17,7 +17,9 @@ class_name K9_Main_menu
 #]
 
 func _ready():
+
 	get_tree().paused = false #for debug redundancy
+
 	
 	connect_buttons()
 	
@@ -86,13 +88,13 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	var island_path = load("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
+	const island_path = preload("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
 	get_tree().change_scene_to_packed(island_path)
 	pass
 	
 
 func goto_level_0():
-	var lvl0_p = load("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	const lvl0_p = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
 	
 	get_tree().change_scene_to_packed(lvl0_p)
 	pass

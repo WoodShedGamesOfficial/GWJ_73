@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalHiveMind="*res://Main/K9/Globals/GlobalHiveMind.gd"
 GlobalLibrary="*res://Main/K9/Globals/GlobalLibrary.gd"
+GlobalSaaeb="*res://Main/SAGD/Global_Saaeb.gd"
 
 [input]
 

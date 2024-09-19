@@ -1,7 +1,106 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0eafs0fgc2xr"]
+[gd_scene load_steps=17 format=3 uid="uid://b0eafs0fgc2xr"]
 
 [ext_resource type="Script" path="res://Main/Dutt/Assets/PortalManager/portal_script.gd" id="1_305fj"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="2_74jvm"]
+[ext_resource type="Shader" path="res://Main/Dutt/Assets/PortalManager/PortalVFX/portal_000.gdshader" id="2_tovlj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_78qct"]
+noise_type = 3
+frequency = 0.0012
+fractal_type = 2
+fractal_lacunarity = 10.0
+fractal_gain = 0.4
+domain_warp_frequency = 0.01
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mfsob"]
+width = 100
+height = 100
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.215
+bump_strength = 1.9
+noise = SubResource("FastNoiseLite_78qct")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xd6sn"]
+noise_type = 2
+frequency = 0.035
+fractal_lacunarity = 1.4
+fractal_gain = 0.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r2gqu"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_xd6sn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ut4ps"]
+shader = ExtResource("2_tovlj")
+shader_parameter/light_color = Color(0.897857, 0.000649573, 0.89785, 1)
+shader_parameter/dark_color = Color(0.266187, 4.75772e-05, 0.266185, 1)
+shader_parameter/horizontal_speed = 0.0
+shader_parameter/vertical_speed = -0.3
+shader_parameter/speed_modifier = 1.0
+shader_parameter/wave_strength = 0.1
+shader_parameter/wave_speed = 5.0
+shader_parameter/emission = 2.2
+shader_parameter/noise_edge_1 = 0.05
+shader_parameter/noise_edge_2 = 0.5
+shader_parameter/light_edge_1 = 0.9
+shader_parameter/light_edge_2 = 1.2
+shader_parameter/fading = false
+shader_parameter/fade_edge_1 = 1.5
+shader_parameter/fade_edge_2 = 0.3
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_mfsob")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_r2gqu")
+
+[sub_resource type="Curve" id="Curve_l42we"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.336364, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h3upf"]
+curve = SubResource("Curve_l42we")
+
+[sub_resource type="Curve" id="Curve_wpusf"]
+min_value = -3.0
+max_value = 5.0
+_data = [Vector2(0, -0.186813), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qhqlx"]
+curve = SubResource("Curve_wpusf")
+
+[sub_resource type="Curve" id="Curve_xbkbq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.06227, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2qxax"]
+curve = SubResource("Curve_xbkbq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vecog"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 1.8, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 0)
+emission_ring_height = 40.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 12.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.2
+radial_velocity_min = -10.0
+radial_velocity_max = 4.99998
+radial_velocity_curve = SubResource("CurveTexture_qhqlx")
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_2qxax")
+color = Color(0.552072, 0.00293424, 0.852966, 1)
+alpha_curve = SubResource("CurveTexture_h3upf")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3eg45"]
 radius = 22.0
@@ -10,19 +109,26 @@ height = 78.0
 [node name="Portal_000" type="Node2D"]
 script = ExtResource("1_305fj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.156863, 0.301961, 1)
-scale = Vector2(0.090247, 0.161434)
+[node name="PortalColorSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 0.458824)
+scale = Vector2(0.076, 0.135)
 texture = ExtResource("2_74jvm")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(1, 0.635294, 0.301961, 1)
-position = Vector2(-2, 0)
-scale = Vector2(0.0857221, 0.15334)
+[node name="PortalSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ut4ps")
+scale = Vector2(0.076, 0.135)
 texture = ExtResource("2_74jvm")
+
+[node name="PortalParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_vecog")
+lifetime = 3.0
 
 [node name="PortalArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortalArea"]
 shape = SubResource("CapsuleShape2D_3eg45")
