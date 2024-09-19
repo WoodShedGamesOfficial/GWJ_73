@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name K9s_Troop_creator
+#class_nam
 ##@experimental
 ##trying to simplify and replace Friendly/hostile troop code to unscrew the AI behavior
 
