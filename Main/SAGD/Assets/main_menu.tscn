@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
 [ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
 [ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
-[ext_resource type="PackedScene" uid="uid://x2p0vcinf1a2" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/loading_screen.tscn" id="3_fb08x"]
-[ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/key_binds.tscn" id="4_8rsui"]
+[ext_resource type="PackedScene" uid="uid://x2p0vcinf1a2" path="res://Main/SAGD/Assets/loading_screen.tscn" id="3_fb08x"]
+[ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://Main/SAGD/Assets/key_binds.tscn" id="4_8rsui"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
-[ext_resource type="PackedScene" uid="uid://bqedu3mvt1ib2" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/masteroptions.tscn" id="5_qmwj4"]
+[ext_resource type="PackedScene" uid="uid://bqedu3mvt1ib2" path="res://Main/SAGD/Assets/masteroptions.tscn" id="5_qmwj4"]
 [ext_resource type="Texture2D" uid="uid://bkfax83eg2w3q" path="res://Main/Woodshed_Games/WSSplash_Logo.png" id="5_yhaeg"]
-[ext_resource type="PackedScene" uid="uid://dcutibay8pkp8" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/muic_options.tscn" id="6_1ah18"]
-[ext_resource type="PackedScene" uid="uid://crcrh55sb1i3h" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/sfxoptions.tscn" id="7_bxsjj"]
+[ext_resource type="PackedScene" uid="uid://dcutibay8pkp8" path="res://Main/SAGD/Assets/muic_options.tscn" id="6_1ah18"]
+[ext_resource type="PackedScene" uid="uid://crcrh55sb1i3h" path="res://Main/SAGD/Assets/sfxoptions.tscn" id="7_bxsjj"]
 
 [sub_resource type="Animation" id="Animation_f4347"]
 length = 0.001
@@ -72,7 +72,13 @@ _data = {
 "Spash": SubResource("Animation_c3nw7")
 }
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_4gcck")
 dev_room_path = ExtResource("2_di7d8")
 level_0_path = ExtResource("3_fb08x")
@@ -85,6 +91,7 @@ offset_bottom = 71.0
 text = "A Godot Wild Jam #73 game"
 
 [node name="Title" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -161,6 +168,7 @@ offset_left = -56.0
 offset_top = 51.0
 offset_right = 426.5
 offset_bottom = 50.6
+script = null
 
 [node name="Mastersound" type="Label" parent="Options_panel"]
 layout_mode = 0
@@ -196,6 +204,7 @@ offset_top = 361.0
 offset_right = 59.0001
 offset_bottom = 361.0
 rotation = -1.57135
+script = null
 
 [node name="MuicOptions" parent="Options_panel" instance=ExtResource("6_1ah18")]
 layout_mode = 1
@@ -204,6 +213,7 @@ offset_top = 416.0
 offset_right = -240.0
 offset_bottom = 16.0
 rotation = -1.5708
+script = null
 
 [node name="Sfxoptions" parent="Options_panel" instance=ExtResource("7_bxsjj")]
 layout_mode = 1
@@ -212,6 +222,7 @@ offset_top = 466.0
 offset_right = 62.0
 offset_bottom = 466.0
 rotation = -1.5708
+script = null
 
 [node name="CreditsPanel" type="Control" parent="."]
 visible = false

@@ -45,7 +45,6 @@ tile_set = ExtResource("2_hbjpx")
 [node name="Player_0" parent="." instance=ExtResource("4_sj08y")]
 position = Vector2(-1876, -616)
 rotation = 1.32506
-scale = Vector2(1, 1)
 
 [node name="TheHiveMind" parent="." instance=ExtResource("5_habx7")]
 
@@ -85,15 +84,8 @@ position = Vector2(-1206, 718)
 [node name="FriendlySpawnPoints6" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="5"]
 position = Vector2(-994, 718)
 
-[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
-position = Vector2(-3137, -489)
-scale = Vector2(2.67108, 2.67108)
-heart_color = Color(0, 1, 0.596078, 1)
-
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(3062, -138)
-scale = Vector2(2.24127, 2.24127)
-heart_color = Color(0.924667, 0.000159217, 0.773509, 1)
 heart_faction = "hostile"
 
 [node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]

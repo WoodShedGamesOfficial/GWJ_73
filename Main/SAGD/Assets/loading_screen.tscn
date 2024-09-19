@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://x2p0vcinf1a2"]
 
-[ext_resource type="Script" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/loading_screen.gd" id="1_7s7mq"]
-[ext_resource type="Texture2D" uid="uid://c8rv5erbx4sr2" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/32x32_loading10.png" id="1_nhohf"]
+[ext_resource type="Script" path="res://Main/SAGD/Assets/loading_screen.gd" id="1_7s7mq"]
+[ext_resource type="Texture2D" uid="uid://nxjicu0qn78" path="res://Main/SAGD/32x32_loading10.png" id="1_nhohf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhh16"]
 atlas = ExtResource("1_nhohf")
