@@ -221,7 +221,7 @@ polygon = PackedVector2Array(-8, -44, -18, -41, -25, -10, -20, 28, -11, 36, 2, 3
 
 [node name="BasicEnemy_000" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 23
+collision_mask = 21
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_a2s8a")
@@ -250,11 +250,12 @@ debug_color = Color(0.972549, 0, 0, 0.419608)
 shape = SubResource("CircleShape2D_hg0o2")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_max_distance = 40.0
 navigation_layers = 2
-path_postprocessing = 1
 avoidance_enabled = true
 radius = 200.0
+neighbor_distance = 250.0
+max_neighbors = 2
+max_speed = 400.0
 avoidance_layers = 2
 avoidance_mask = 3
 

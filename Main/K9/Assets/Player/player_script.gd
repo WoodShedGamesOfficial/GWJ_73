@@ -133,6 +133,7 @@ func hurt(damage, damage_type):
 
 func player_death():
 	transform.origin = respawn_location
+	PLAYER_STATS.health = 100
 	GlobalHiveMind.players_gold_coins -= (GlobalHiveMind.players_gold_coins / 2)
 	print('player has died')
 	

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name K9_Main_menu
 
 @export var dev_room_path : PackedScene
@@ -30,6 +30,7 @@ func _ready():
 	
 
 func splash_time_baby():
+	
 	if GlobalLibrary.hasSplashed == false:
 		$SplashScreen/SplashAnim.play("Spash")
 		GlobalLibrary.hasSplashed = true
@@ -38,6 +39,7 @@ func splash_time_baby():
 		$SplashScreen.queue_free()
 	else:
 		$SplashScreen.queue_free()
+	
 	pass
 
 
@@ -56,11 +58,12 @@ func connect_buttons():
 	
 
 func _input(event):
+	
 	if Input.is_anything_pressed() and get_tree().current_scene.get_node_or_null('SplashScreen') and $SplashScreen/SplashAnim.is_playing():
 		$SplashScreen.queue_free()
-		
 	else:
 		return 
+	
 	pass
 	
 

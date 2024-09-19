@@ -11,7 +11,7 @@ var names = [
  "Nathan", "Olivia", "Parker", "Quinn", "Rachel", "Sarah", "Thomas", "Ursula", "Vincent", "William", "Xander", "Yvette",
  "Zachary", "Abigail", "Benjamin", "Chloe", "Daniel", "Emily", "Finn", "Gabrielle", "Harry", "Isla", "Jacob", "Katherine",
  "Liam", "Maya", "Nathan", "Olivia", "Parker", "Quinn", "Rachel", "Sarah", "Thomas", "Ursula", "Vincent",
- "William", "Xander", "Yvette", "Zachary"
+ "William", "Xander", "Yvette", "Zachary", "SAGD", "DevinGD", "TQ", "Dutt"
 ]
 
 
@@ -55,9 +55,12 @@ func _ready():
 	
 	if GlobalHiveMind.enemy_heart_pos_array.is_empty() != true:
 		movement_target_position = GlobalHiveMind.enemy_heart_pos_array.front()
+		set_movement_target(movement_target_position)
 	
 	add_to_group("Player")
 	add_to_group("Troop")
+	$GoopVfx.restart()
+	
 	
 	pass
 	
@@ -91,7 +94,7 @@ func _physics_process(delta):
 	velocity = (current_agent_position.direction_to(next_path_position) * TROOPSTATS.walk_speed)
 	move_and_slide()
 	
-	look_at(navigation_agent.get_next_path_position())
+	#look_at(navigation_agent.get_next_path_position())
 	
 	for body in $AttackRadius.get_overlapping_bodies():
 		if body != null:
@@ -113,8 +116,11 @@ func _process(delta):
 			if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
 				movement_target_position = body.transform.origin
 				look_at(body.transform.origin)
+				set_movement_target(movement_target_position)
 		else:
+			look_at(navigation_agent.get_next_path_position())
 			movement_target_position = GlobalHiveMind.enemy_heart_pos_array.front()
+			set_movement_target(movement_target_position)
 	
 	pass
 	
@@ -131,7 +137,7 @@ func prepare_attack(body):
 	
 
 func attack(body):
-	var damage = TROOPSTATS.damage
+	var damage = randi_range(TROOPSTATS.damage, (TROOPSTATS.damage * 2))
 	var attack_sfx = $SFX/AttackSFX
 
 	#print("troop attacked" + body.name)
@@ -169,8 +175,9 @@ func death():
 	print(name + "  died")
 	
 	GlobalHiveMind.enemies_gold_coins += 50
-	GlobalHiveMind.friendly_troops_names.erase(name)
+	GlobalHiveMind.friendly_troops_names.erase(self.name)
 	$SFX/DeathSFX.play(0.0)
+	$GoopVfx.restart()
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
 	
@@ -184,4 +191,16 @@ func cancel_attack(body):
 	if body.is_in_group("Enemy"):
 		canAttack = false
 		attack_timer.stop()
+	pass # Replace with function body.
+
+
+func _on_visiblility_radius_body_entered(body):
+	if body.is_in_group("Enemy"):
+			if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
+					movement_target_position = body.transform.origin
+					look_at(body.transform.origin)
+					set_movement_target(movement_target_position)
+			else:
+				movement_target_position = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+				set_movement_target(movement_target_position)
 	pass # Replace with function body.

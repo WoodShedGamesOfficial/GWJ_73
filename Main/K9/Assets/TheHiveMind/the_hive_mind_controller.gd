@@ -9,12 +9,12 @@ class_name K9s_Hive_Mind_Manager
 ##im still practicing better docs so bear with me
 
 
-@export var enemy_troop_array = [preload('res://Main/K9/Assets/Enemies/basic_enemy_000.tscn') ]
+@export var enemy_troop_array = [preload("res://Main/K9/Assets/TROOPS/Basic_ENEMYTROOP.tscn") ]
 
 var enemy_spawn_point_array = []
 
 @export var isAwake : bool = true
-
+var spawn_time : float = randf_range(3.5, 7.5)
 
 
 # --function blocks
@@ -33,7 +33,12 @@ func _ready():
 	$Timers/SpawnTimer.connect('timeout', spawn_enemy)
 	$Timers/ResourceTimer.connect('timeout', add_enemy_resources)
 	
+	$SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius.monitoring = false
+	await  $Timers/WaveStart.timeout
+	$SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius.monitoring = true
+	
 	if isAwake:
+		$Timers/SpawnTimer.wait_time = spawn_time
 		$Timers/SpawnTimer.start()
 	
 	
@@ -41,14 +46,24 @@ func _ready():
 	pass # Replace with function body.
 	
 
+func _process(delta):
+	if $Timers/WaveStart.is_stopped() != true:
+		$SpawnButtons/FriendlyTroopSpawnButton/Label.text = ("Time till start:  " + str($Timers/WaveStart.time_left))
+		print(str($Timers/WaveStart.time_left))
+	else:
+		$SpawnButtons/FriendlyTroopSpawnButton/Label.text = str('price of  troop : 50')
+	pass
+
 func spawn_enemy():
 	
 	var enemy_p = enemy_troop_array.pick_random()
 	var enemy_i = enemy_p.instantiate()
 	
 	$EnemyNPCs.add_child(enemy_i)
+	enemy_i.faction = 1
 	enemy_i.transform.origin = enemy_spawn_point_array.pick_random()
-	print("enemy spawned" + str(enemy_i.transform.origin))
+	$Timers/SpawnTimer.wait_time = randf_range(3.5, 7.5)
+	print("enemy spawned" + str($Timers/SpawnTimer.wait_time))
 	
 	pass
 	

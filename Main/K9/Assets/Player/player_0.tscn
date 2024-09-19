@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=21 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -11,9 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://cg1tgik1raup3" path="res://Main/K9/Assets/win_lose_screen.tscn" id="8_io5ii"]
 [ext_resource type="Texture2D" uid="uid://efjtifdax32w" path="res://Main/K9/Assets/2D/UI/CastleUI.png" id="9_pv8eh"]
 [ext_resource type="Texture2D" uid="uid://cl31527500yi8" path="res://Main/K9/Assets/2D/UI/CastleUI_Panel.png" id="10_kvxd5"]
+[ext_resource type="Texture2D" uid="uid://dw0wwtwbbjjx6" path="res://Main/K9/Assets/2D/Arrow.png" id="12_hdiom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
-radius = 72.7805
+radius = 34.5254
 
 [sub_resource type="Animation" id="Animation_aa37j"]
 resource_name = "Idle"
@@ -131,6 +132,22 @@ func _input(event):
 	pass
 "
 
+[sub_resource type="GDScript" id="GDScript_e533t"]
+resource_name = "CompassScript"
+script/source = "extends Marker2D
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if GlobalHiveMind.enemy_heart_pos_array.is_empty() != true:
+		look_at(GlobalHiveMind.enemy_heart_pos_array.front())
+	
+	
+	pass
+"
+
 [node name="Player_0" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_ww0cy")
@@ -167,6 +184,10 @@ speed_scale = 2.0
 [node name="PlayerWeapon" parent="." instance=ExtResource("4_0tm40")]
 position = Vector2(39, 0)
 rotation = 1.58381
+WEAPON_STATS = {
+"attack_speed": 1.25,
+"damage": 2
+}
 
 [node name="TroopInteractRadius" type="Area2D" parent="."]
 
@@ -267,5 +288,15 @@ offset_top = 431.23
 offset_right = 161.459
 offset_bottom = 454.23
 text = "Troops: "
+
+[node name="Compass" type="Marker2D" parent="."]
+script = SubResource("GDScript_e533t")
+
+[node name="Arrow" type="Sprite2D" parent="Compass"]
+modulate = Color(1, 0.733333, 0.356863, 1)
+position = Vector2(90, -2.38419e-07)
+rotation = 1.57019
+scale = Vector2(0.323386, 0.323386)
+texture = ExtResource("12_hdiom")
 
 [editable path="PlayerWeapon"]

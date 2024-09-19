@@ -11,7 +11,7 @@ noise = SubResource("FastNoiseLite_wmgrt")
 shader = ExtResource("1_uyyw8")
 shader_parameter/radius = 0.31
 shader_parameter/effectControl = 0.719
-shader_parameter/burnSpeed = 0.01
+shader_parameter/burnSpeed = 0.009
 shader_parameter/shape = 1.0
 shader_parameter/textureNoise = SubResource("NoiseTexture2D_kav3p")
 

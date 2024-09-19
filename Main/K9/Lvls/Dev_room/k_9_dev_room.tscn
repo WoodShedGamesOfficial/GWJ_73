@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cc7v8ymum2h4t" path="res://Main/Dutt/Assets/PortalManager/portal_manager.tscn" id="12_t2ivh"]
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="13_1ky3d"]
 [ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="13_cs77b"]
-[ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_000.tscn" id="13_xg50i"]
+[ext_resource type="PackedScene" uid="uid://ds3lqjy5iicbd" path="res://Main/K9/Assets/Enemies/basic_enemy_LEGACY.tscn" id="13_xg50i"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="14_2kicj"]
 [ext_resource type="PackedScene" uid="uid://c6i737ycfrrw4" path="res://Main/K9/Assets/Lighting/ambient_orange_light.tscn" id="14_hvywi"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="14_tka2k"]

@@ -92,8 +92,10 @@ func _physics_process(delta):
 
 	if seesEnemy:
 		movement_target = current_enemy.transform.origin
+		set_movement_target(movement_target)
 	elif GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
 		movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+		set_movement_target(movement_target)
 	
 	velocity = current_agent_position.direction_to(next_path_position) * ENEMY_STATS.walk_speed
 	
@@ -121,6 +123,7 @@ func _process(delta):
 		look_at(movement_target)
 	if target == null and GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
 		movement_target = GlobalHiveMind.enemy_heart_pos_array.front()
+		set_movement_target(movement_target)
 	
 	
 	for body in $AttackRadius.get_overlapping_bodies():
@@ -131,6 +134,9 @@ func _process(delta):
 				await $AttackTimer.timeout
 				attack(body)
 				movement_target = transform.origin + Vector2(randf_range(50.0, 100.0), randf_range(50.0, 100.0))  
+				set_movement_target(movement_target)
+				await get_tree().create_timer(3.0).timeout
+				return
 		
 	
 	pass
@@ -138,19 +144,26 @@ func _process(delta):
 
 func hurt(damage, damage_type):
 	var hurt_audio = $HURTAUDIOTEST
+	var blood_i = blood_splat_p.instantiate()
+	
+	#=========
 	
 	if ENEMY_STATS.health > 0:
+		
 		ENEMY_STATS.health -= damage
+		
+		get_tree().current_scene.add_child(blood_i)
+		blood_i.transform.origin = transform.origin
+		
 		$BloodFX.restart()
 		$EnemyAnims.play("Hurt")
+		
 		hurt_audio.pitch_scale = randf_range(.80, 1.5)
 		hurt_audio.play(0.0)
+		
 		await $EnemyAnims.animation_finished and hurt_audio.finished
 		
-		#var blood_i = blood_splat_p.instantiate()
-	#
-		#get_tree().current_scene.add_child(blood_i)
-		#blood_i.transform.origin = transform.origin
+		return
 	else:
 		death()
 	pass
@@ -200,7 +213,7 @@ func cancel_attack(body):
 
 
 func attack(body):
-	var damage = ENEMY_STATS.damage
+	var damage = randi_range(ENEMY_STATS.damage, (ENEMY_STATS.damage * 2))
 	var swords_clashing = $SwordClang
 	
 	if canAttack and body != null:    #body.has_method("hurt") and 
@@ -228,8 +241,10 @@ func _on_player_visibility_area_body_entered(body):
 		if body.transform.origin.distance_to(transform.origin) < transform.origin.distance_to(body.transform.origin):
 				movement_target = body.transform.origin
 				look_at(body.transform.origin)
+				set_movement_target(movement_target)
 		else:
 			movement_target = GlobalHiveMind.friendly_tower_heart_pos_array.front()
+			set_movement_target(movement_target)
 		
 		attackingPlayer = true
 		#set_movement_target(movement_target)

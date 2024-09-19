@@ -13,14 +13,19 @@ func _ready():
 	match faction:
 		"friendly" :
 			add_to_group("Player")
-			add_to_group("Troop")
+			add_to_group("friendly")
 			set_collision_mask_value(2, true)
+			
 			set_collision_layer_value(6, true)
+			set_collision_layer_value(5, true)
 			#collision_mask != 5
 		"hostile" : 
-			add_to_group("Enemy")
+			add_to_group("enemy")
 			set_collision_mask_value(5, true)
-			set_collision_layer_value(6, true)
+			set_collision_mask_value(1, true)
+			set_collision_mask_value(6, true)
+			
+			set_collision_layer_value(2, true)
 			
 	
 	$health.text = str(gate_health)
@@ -46,6 +51,7 @@ func destroy_gate():
 		$Sprites/ToothyGate.queue_free()
 		set_collision_layer_value(2, false)
 		set_collision_layer_value(5, false)
+		set_collision_layer_value(1, false)
 		DisableMode.DISABLE_MODE_MAKE_STATIC
 		gate_Destroyed = true
 	else:

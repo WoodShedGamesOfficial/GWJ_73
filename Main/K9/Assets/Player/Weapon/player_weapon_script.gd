@@ -4,7 +4,7 @@ extends Node2D
 @onready var melee_hitbox = $MeleeHitbox
 
 @export var WEAPON_STATS = {
-	"damage" : 25,
+	"damage" : 5,
 	"attack_speed" : 1.25,
 }
 
@@ -23,8 +23,8 @@ func _input(event):
 	pass
 
 func attack(body):
-	if body.is_in_group("Enemy") and body.has_method("hurt"):
-		var damage = randi_range(WEAPON_STATS.damage, (WEAPON_STATS.damage * 2))
+	if body.is_in_group("enemy") and body.has_method("hurt"):
+		var damage = randi_range(WEAPON_STATS.damage, (WEAPON_STATS.damage * 5))
 		var damage_type = "blunt"
 		
 		body.hurt(damage, damage_type)
