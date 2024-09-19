@@ -4,14 +4,46 @@ class_name K9_Main_menu
 @export var dev_room_path : PackedScene
 @export var level_0_path : PackedScene
 
-
+#var fun_facts_array = [ #LEGACY
+	#"The tallest tower in the world is the Burj Khalifa, standing at 2,717 feet tall!",
+	#"one of the oldest towers in the world was built around 10650 - 9650 BCE!",
+	#"Ophiocordyceps unilateralis is a type of predatory fungus that hijacks its hosts bodily functions",
+	#'You would have to build a tower 452.03 million miles high to reach the closest point in Jupiters Orbit.',
+	#"One 'Astronomical Unit' is roughly equivalent to: 92955807.267 imperial miles",
+	#"It's roughly 1,000 AU to the inner region of our solar system",
+	#"The deepest hole on earth is the Kora Superdeep Borehole, spanning 40,230ft deep with a rough 9 inch diameter",
+	#"Sơn Đoòng cave passage is the largest known cave passage in the world by volume... you could fit so much spaghetti in that",
+	#
+#]
 
 func _ready():
+
+	get_tree().paused = false #for debug redundancy
+
+	
 	connect_buttons()
 	
 	settup_menu() #hides credits and options panel
+	
+	splash_time_baby()
+	
+	
 	pass
 	
+
+func splash_time_baby():
+	
+	if GlobalLibrary.hasSplashed == false:
+		$SplashScreen/SplashAnim.play("Spash")
+		GlobalLibrary.hasSplashed = true
+		await $SplashScreen/SplashAnim.animation_finished
+		GlobalLibrary.hasSplashed = true
+		$SplashScreen.queue_free()
+	else:
+		$SplashScreen.queue_free()
+	
+	pass
+
 
 func connect_buttons():
 	
@@ -27,10 +59,23 @@ func connect_buttons():
 	pass
 	
 
+func _input(event):
+	
+	if Input.is_anything_pressed() and get_tree().current_scene.get_node_or_null('SplashScreen') and $SplashScreen/SplashAnim.is_playing():
+		$SplashScreen.queue_free()
+	else:
+		return 
+	
+	pass
+	
+
 func settup_menu():
 	$Options_panel.visible = false
 	$CreditsPanel.visible = false
 	$Tutorial_confirm.visible = false
+	
+	$FunFacts.text = GlobalLibrary.fun_facts_array.pick_random()
+	
 	pass
 	
 
@@ -43,14 +88,15 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	GlobalLibrary.level_path = load("res://Main/K9/Lvls/tutorial_island/tutorial_island.tscn")
-	get_tree().change_scene_to_file('res://Main/K9/Lvls/load_screen.tscn')
+	const island_path = preload("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
+	get_tree().change_scene_to_packed(island_path)
 	pass
 	
 
 func goto_level_0():
-	GlobalLibrary.level_path = load('res://Main/K9/Lvls/Lvl_0/level_0.tscn')
-	get_tree().change_scene_to_file("res://Main/K9/Lvls/load_screen.tscn")
+	const lvl0_p = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	
+	get_tree().change_scene_to_packed(lvl0_p)
 	pass
 	
 
@@ -60,7 +106,6 @@ func go_to_devRoom():
 		get_tree().change_scene_to_packed(dev_room_path)
 	else:
 		print("no dev_room path assigned")
-	
 	
 	pass
 	

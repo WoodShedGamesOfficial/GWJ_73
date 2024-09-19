@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://7p387hc5oya"]
+
+[ext_resource type="Script" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate_Script.gd" id="1_7ajfd"]
+[ext_resource type="Texture2D" uid="uid://bqr068fidfh66" path="res://Main/K9/Assets/2D/Sprites/Gates/ToothyGate.png" id="2_4mycy"]
+[ext_resource type="Texture2D" uid="uid://cbhxb2666eimd" path="res://Main/K9/Assets/2D/Sprites/Gates/Frame.png" id="3_2tqjd"]
+[ext_resource type="Texture2D" uid="uid://btaugqnwkp138" path="res://Main/K9/Assets/2D/Sprites/Gates/Eyeball.png" id="4_gesj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eojc"]
+size = Vector2(117, 445)
+
+[sub_resource type="Curve" id="Curve_v28id"]
+min_value = -45.0
+max_value = 90.0
+_data = [Vector2(0, -36.0989), 0.0, 0.0, 0, 0, Vector2(1, 49.9451), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kd4hm"]
+curve = SubResource("Curve_v28id")
+
+[sub_resource type="Curve" id="Curve_cnkpl"]
+_data = [Vector2(0, 0.43956), 0.0, 0.0, 0, 0, Vector2(0.493151, 0.956044), 0.0, 0.0, 0, 0, Vector2(1, 0.274725), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c0lji"]
+curve = SubResource("Curve_cnkpl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkcsc"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(80, 160, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -45.0
+angle_max = 45.0
+angle_curve = SubResource("CurveTexture_kd4hm")
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.25
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_c0lji")
+
+[sub_resource type="Gradient" id="Gradient_jagg3"]
+offsets = PackedFloat32Array(0.373333, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xiq5b"]
+noise_type = 3
+frequency = 0.0389
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i2lc5"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_jagg3")
+noise = SubResource("FastNoiseLite_xiq5b")
+
+[node name="DefensiveGate" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_7ajfd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 8.5)
+rotation = 1.57323
+shape = SubResource("RectangleShape2D_2eojc")
+
+[node name="DustFX" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_qkcsc")
+texture = SubResource("NoiseTexture2D_i2lc5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.85
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 192.66
+avoidance_enabled = false
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="ToothyGate" type="Sprite2D" parent="Sprites"]
+position = Vector2(-2, -81)
+scale = Vector2(2.31919, 2.31919)
+texture = ExtResource("2_4mycy")
+
+[node name="Frame" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -82)
+scale = Vector2(2.33861, 2.33861)
+texture = ExtResource("3_2tqjd")
+
+[node name="Eyeball" type="Sprite2D" parent="Sprites"]
+modulate = Color(0.332513, 0.58246, 1.92523e-07, 1)
+position = Vector2(-1, -112)
+scale = Vector2(1.43405, 1.43405)
+texture = ExtResource("4_gesj4")
+
+[node name="health" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -47.0
+offset_right = 29.0
+offset_bottom = -24.0
+text = "health"

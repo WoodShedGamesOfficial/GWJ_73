@@ -10,8 +10,16 @@ extends CharacterBody2D
 	'health' : 100, 
 }
 
+var canContinue : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CanvasLayer/WinLoseScreen.visible = false
+	
+	$HealthBar.max_value = TOWERSTATS.health
+	$HealthBar.value = TOWERSTATS.health
+	
+	$HealthBar/Label.text = str(TOWERSTATS.health)
 	
 	set_heart_faction()
 	
@@ -22,6 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 
 func set_heart_faction():
@@ -38,11 +47,23 @@ func set_heart_faction():
 		
 	pass
 
+func _input(event):
+	var MM_path = load("res://Main/K9/Lvls/main_menu.tscn")
+	
+	if canContinue and Input.is_anything_pressed():
+		await get_tree().create_timer(2.5).timeout
+		get_tree().change_scene_to_packed(MM_path)
+		
+	pass
+	
+
 func hurt(damage, damage_type):
 	
-	if TOWERSTATS.health > 0:
+	if TOWERSTATS.health >= 1:
 		TOWERSTATS.health -= damage
 		towerheart_animations.play("Hurt")
+		$HealthBar.value = TOWERSTATS.health
+		$HealthBar/Label.text = str(TOWERSTATS.health)
 		print('hurt enemy tower')
 	else:
 		death_of_the_tower()
@@ -51,15 +72,28 @@ func hurt(damage, damage_type):
 	
 
 func death_of_the_tower():
+	$HealthBar.visible = false
+	var MM_path = load("res://Main/K9/Lvls/main_menu.tscn")
+	
 	
 	match heart_faction:
 		"friendly":
-			print('you lost')
+			$CanvasLayer/WinLoseScreen.update_stats_panel()
+			$CanvasLayer/WinLoseScreen.visible = true
+			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you got your ass kicked bro"
 			await get_tree().create_timer(5.0).timeout
-			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')
+			$CanvasLayer/WinLoseScreen/Continue.visible = true
+			canContinue = true
+			#print('you lost')
 		"hostile" :
-			print('you won!')
-			await get_tree().create_timer(5.0)
-			get_tree().change_scene_to_file('res://Main/K9/Lvls/main_menu.tscn')
+			$CanvasLayer/WinLoseScreen.update_stats_panel()
+			$CanvasLayer/WinLoseScreen.visible = true
+			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you destroyed their Tower!"
+			await get_tree().create_timer(5.0).timeout
+			$CanvasLayer/WinLoseScreen/Continue.visible = true
+			canContinue = true
+			#print('you won!')
+	#$CanvasLayer/WinLoseScreen.visible = true
+	$CanvasLayer/WinLoseScreen.update_stats_panel()
 	pass
 	

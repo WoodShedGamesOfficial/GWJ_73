@@ -1,12 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=21 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="3_612tq"]
 [ext_resource type="PackedScene" uid="uid://c4a0iofxtkuen" path="res://Main/K9/Assets/Player/Weapon/player_weapon.tscn" id="4_0tm40"]
+[ext_resource type="AudioStream" uid="uid://b30ytb6dd5pg4" path="res://Main/K9/Assets/Audio/267492__snudio_records__footsteps-on-forest-ground.ogg" id="5_6mqcu"]
+[ext_resource type="PackedScene" uid="uid://sv7l5kycqjet" path="res://Main/K9/Assets/Player/pause_menu.tscn" id="6_gqqi6"]
+[ext_resource type="Script" path="res://Main/K9/Assets/Player/gui_script.gd" id="6_iwycx"]
+[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="8_efr0t"]
+[ext_resource type="PackedScene" uid="uid://cg1tgik1raup3" path="res://Main/K9/Assets/win_lose_screen.tscn" id="8_io5ii"]
+[ext_resource type="Texture2D" uid="uid://efjtifdax32w" path="res://Main/K9/Assets/2D/UI/CastleUI.png" id="9_pv8eh"]
+[ext_resource type="Texture2D" uid="uid://cl31527500yi8" path="res://Main/K9/Assets/2D/UI/CastleUI_Panel.png" id="10_kvxd5"]
+[ext_resource type="Texture2D" uid="uid://dw0wwtwbbjjx6" path="res://Main/K9/Assets/2D/Arrow.png" id="12_hdiom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldltp"]
-radius = 72.7805
+radius = 34.5254
 
 [sub_resource type="Animation" id="Animation_aa37j"]
 resource_name = "Idle"
@@ -112,6 +120,34 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_o561a"]
 radius = 408.54
 
+[sub_resource type="GDScript" id="GDScript_8yo3n"]
+resource_name = "GUI_controller"
+script/source = "extends Control
+
+
+func _input(event):
+	if Input.is_action_just_pressed(\"ui_end\"):
+		get_tree().paused =! get_tree().paused
+		$Pause_Menu.visible =! $Pause_Menu.visible
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_e533t"]
+resource_name = "CompassScript"
+script/source = "extends Marker2D
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if GlobalHiveMind.enemy_heart_pos_array.is_empty() != true:
+		look_at(GlobalHiveMind.enemy_heart_pos_array.front())
+	
+	
+	pass
+"
+
 [node name="Player_0" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_ww0cy")
@@ -148,6 +184,10 @@ speed_scale = 2.0
 [node name="PlayerWeapon" parent="." instance=ExtResource("4_0tm40")]
 position = Vector2(39, 0)
 rotation = 1.58381
+WEAPON_STATS = {
+"attack_speed": 1.25,
+"damage": 2
+}
 
 [node name="TroopInteractRadius" type="Area2D" parent="."]
 
@@ -155,6 +195,108 @@ rotation = 1.58381
 shape = SubResource("CircleShape2D_o561a")
 debug_color = Color(0, 0.65022, 0.105736, 0.42)
 
-[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6mqcu")
+bus = &"Player"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("6_iwycx")
+
+[node name="GUI" type="Control" parent="GUI"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_8yo3n")
+
+[node name="Pause_Menu" parent="GUI/GUI" instance=ExtResource("6_gqqi6")]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+grow_vertical = 1
+
+[node name="WinLoseScreen" parent="GUI" instance=ExtResource("8_io5ii")]
+
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 175.0
+offset_right = 4.0
+offset_bottom = 687.0
+scale = Vector2(0.716554, 0.716554)
+
+[node name="CastlePanel" type="Node2D" parent="GUI/HUD"]
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/HUD/CastlePanel"]
+position = Vector2(182, 456)
+scale = Vector2(3.13398, 3.13398)
+texture = ExtResource("9_pv8eh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI/HUD/CastlePanel"]
+modulate = Color(0.687949, 0.309108, 0, 1)
+position = Vector2(182, 456)
+scale = Vector2(3.13398, 3.13398)
+texture = ExtResource("10_kvxd5")
+
+[node name="HP_Bar" type="TextureProgressBar" parent="GUI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 109.0
+offset_top = -47.0
+offset_right = 621.0
+offset_bottom = 465.0
+grow_vertical = 0
+scale = Vector2(0.283587, 0.283587)
+value = 75.0
+fill_mode = 3
+texture_under = ExtResource("8_efr0t")
+texture_progress = ExtResource("8_efr0t")
+tint_under = Color(0.0495185, 3.5346e-08, 0.0185641, 1)
+tint_progress = Color(0.831373, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 381.0
+offset_right = 161.0
+offset_bottom = 421.0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/HUD/HBoxContainer"]
+modulate = Color(1, 0.517647, 0.384314, 1)
+layout_mode = 2
+texture = ExtResource("8_efr0t")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="GUI/HUD/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94902, 0.545098, 0, 1)
+text = "Coins"
+
+[node name="TroopsLabel" type="Label" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 107.459
+offset_top = 431.23
+offset_right = 161.459
+offset_bottom = 454.23
+text = "Troops: "
+
+[node name="Compass" type="Marker2D" parent="."]
+script = SubResource("GDScript_e533t")
+
+[node name="Arrow" type="Sprite2D" parent="Compass"]
+modulate = Color(1, 0.733333, 0.356863, 1)
+position = Vector2(90, -2.38419e-07)
+rotation = 1.57019
+scale = Vector2(0.323386, 0.323386)
+texture = ExtResource("12_hdiom")
 
 [editable path="PlayerWeapon"]

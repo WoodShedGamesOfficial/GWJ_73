@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0ijb8wnix7am"]
+
+[ext_resource type="Texture2D" uid="uid://bl82b7ojksmi1" path="res://Main/K9/Assets/2D/textures/SpotlightC.png" id="1_qtnof"]
+
+[sub_resource type="Gradient" id="Gradient_gfcxr"]
+offsets = PackedFloat32Array(0, 0.101695, 0.661017, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 0.00784314, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xvxq4"]
+gradient = SubResource("Gradient_gfcxr")
+
+[sub_resource type="Curve" id="Curve_20st6"]
+_data = [Vector2(0, 0.362637), 0.0, 0.0, 0, 0, Vector2(0.308219, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.296703), -2.40659, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0top3"]
+curve = SubResource("Curve_20st6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wi61l"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+gravity = Vector3(0, -49, 0)
+scale_curve = SubResource("CurveTexture_0top3")
+color_ramp = SubResource("GradientTexture1D_xvxq4")
+
+[sub_resource type="Gradient" id="Gradient_ysy1w"]
+offsets = PackedFloat32Array(0.54, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bhlry"]
+noise_type = 0
+frequency = 0.037
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kkl3h"]
+width = 64
+height = 64
+color_ramp = SubResource("Gradient_ysy1w")
+noise = SubResource("FastNoiseLite_bhlry")
+
+[node name="Torch" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1, 73)
+color = Color(0.941356, 0.392152, 0, 1)
+shadow_enabled = true
+texture = ExtResource("1_qtnof")
+texture_scale = 1.65
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.446546, 0.184148, 0.0497578, 1)
+polygon = PackedVector2Array(-21, -7, -12, 3, 12, 3, 20, -10, 25, -7, 15, 14, 4, 76, -5, 77, -13, 15, -29, -2)
+
+[node name="TorchFlame" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_wi61l")
+texture = SubResource("NoiseTexture2D_kkl3h")
+lifetime = 1.75

@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://krjhmw7cd1a4"]
+[gd_scene load_steps=23 format=3 uid="uid://krjhmw7cd1a4"]
 
 [ext_resource type="Texture2D" uid="uid://dwx827ay683wc" path="res://Main/K9/Assets/2D/textures/ImpactFXA.png" id="1_3onqd"]
 [ext_resource type="Script" path="res://Main/K9/Assets/TowerHeart/tower_heart_script.gd" id="1_lmpey"]
 [ext_resource type="Texture2D" uid="uid://saqp4ywo6r83" path="res://Main/K9/Assets/2D/Sprites/TowerHeart/Heart.png" id="2_qnt5t"]
 [ext_resource type="Texture2D" uid="uid://bpooemth7u6a8" path="res://Main/K9/Assets/2D/Sprites/TowerHeart/Throne.png" id="3_dor7h"]
+[ext_resource type="Texture2D" uid="uid://dr4br6uhth1ww" path="res://Main/K9/Assets/2D/UI/StatBar.png" id="5_7cwo7"]
+[ext_resource type="Texture2D" uid="uid://mamgagx6galk" path="res://Main/K9/Assets/2D/UI/StatBarOutline.png" id="6_2on1e"]
 
 [sub_resource type="Animation" id="Animation_2qnci"]
 resource_name = "Hurt"
@@ -273,6 +275,27 @@ noise = SubResource("FastNoiseLite_qp7wt")
 [sub_resource type="CircleShape2D" id="CircleShape2D_6htv0"]
 radius = 51.0392
 
+[sub_resource type="GDScript" id="GDScript_rqko1"]
+resource_name = "WinLosePanel"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+#updates the info on the win lose screen to be accurate
+func update_stats_panel():
+	$VBoxContainer/FreindlyLosses.text
+	$VBoxContainer/EnemyLosses.text
+	$VBoxContainer/CoinSpent.text
+	$VBoxContainer/Time.text
+	pass
+	
+"
+
 [node name="TowerHeart" type="CharacterBody2D"]
 collision_layer = 18
 script = ExtResource("1_lmpey")
@@ -312,3 +335,104 @@ explosiveness = 0.75
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_6htv0")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -48.0
+offset_top = -100.0
+offset_right = 452.0
+offset_bottom = 400.0
+scale = Vector2(0.18116, 0.0516846)
+value = 50.0
+texture_under = ExtResource("5_7cwo7")
+texture_over = ExtResource("6_2on1e")
+texture_progress = ExtResource("5_7cwo7")
+tint_under = Color(0.884728, 0.419135, 0.670475, 1)
+tint_over = Color(0.407843, 0, 0, 1)
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="HealthBar"]
+layout_mode = 0
+offset_left = 226.32
+offset_top = 19.3481
+offset_right = 266.32
+offset_bottom = 42.3481
+scale = Vector2(2.74205, 7.70629)
+text = "int"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WinLoseScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_rqko1")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/WinLoseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -250.0
+offset_right = 150.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
+layout_mode = 2
+
+[node name="WinLoseLabel" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0.909804, 0, 1)
+text = "You mighta won?"
+
+[node name="Stats" type="Label" parent="CanvasLayer/WinLoseScreen"]
+layout_mode = 2
+offset_left = 448.0
+offset_top = 124.0
+offset_right = 491.0
+offset_bottom = 147.0
+size_flags_horizontal = 4
+text = "Stats:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinLoseScreen"]
+layout_mode = 2
+offset_left = 427.0
+offset_top = 175.0
+offset_right = 727.0
+offset_bottom = 675.0
+theme_override_constants/separation = 80
+
+[node name="FreindlyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Friendly Losses:"
+
+[node name="EnemyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Enemy Losses:"
+
+[node name="CoinSpent" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Total Coin Spent:"
+
+[node name="Time" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Time to conquest:   "
+
+[node name="Continue" type="Label" parent="CanvasLayer/WinLoseScreen"]
+visible = false
+layout_mode = 0
+offset_left = 477.0
+offset_top = 540.0
+offset_right = 684.0
+offset_bottom = 563.0
+theme_override_colors/font_color = Color(0.760784, 0.384314, 0.2, 1)
+text = "Press anything to continue"

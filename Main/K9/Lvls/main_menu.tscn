@@ -1,9 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://qjp6sy5dl83u"]
+[gd_scene load_steps=10 format=3 uid="uid://qjp6sy5dl83u"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
 [ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
 [ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
+[ext_resource type="Texture2D" uid="uid://d3t0ockacrjap" path="res://Main/K9/Assets/2D/TitleCardV0.5.png" id="3_4fvbt"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
+[ext_resource type="Texture2D" uid="uid://bkfax83eg2w3q" path="res://Main/Woodshed_Games/WSSplash_Logo.png" id="5_yhaeg"]
+
+[sub_resource type="Animation" id="Animation_f4347"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_c3nw7"]
+resource_name = "Spash"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tj07h"]
+_data = {
+"RESET": SubResource("Animation_f4347"),
+"Spash": SubResource("Animation_c3nw7")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -15,25 +78,39 @@ grow_vertical = 2
 script = ExtResource("1_4gcck")
 dev_room_path = ExtResource("2_di7d8")
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(0.572988, 0.572988, 0.572988, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4fvbt")
+expand_mode = 2
+
 [node name="GWJLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 474.0
-offset_top = 48.0
-offset_right = 688.0
-offset_bottom = 71.0
+offset_left = 11.0
+offset_top = 622.0
+offset_right = 225.0
+offset_bottom = 645.0
 text = "A Godot Wild Jam #73 game"
 
 [node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -105.0
-offset_right = 105.0
-offset_bottom = 45.0
+offset_left = 487.0
+offset_top = 106.0
+offset_right = 697.0
+offset_bottom = 151.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
-text = "TOWER WARS"
+text = "Tower Wars
+"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -59,11 +136,12 @@ layout_mode = 2
 text = "Eject"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 518.0
-offset_top = 90.0
-offset_right = 646.0
-offset_bottom = 218.0
+offset_left = 527.0
+offset_top = 246.0
+offset_right = 655.0
+offset_bottom = 374.0
 texture = ExtResource("2_tc2fj")
 
 [node name="DevRoomButton" type="Button" parent="."]
@@ -76,6 +154,7 @@ text = "DevRoom
 "
 
 [node name="Options_panel" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_left = 774.0
 offset_top = 98.0
@@ -96,7 +175,8 @@ offset_bottom = 34.0
 text = "Options :"
 
 [node name="CreditsPanel" type="Control" parent="."]
-layout_mode = 1
+visible = false
+layout_mode = 3
 anchors_preset = 0
 offset_left = 458.0
 offset_top = 320.0
@@ -136,7 +216,7 @@ offset_bottom = 68.0
 
 [node name="Credit" type="Label" parent="CreditsPanel/VBoxContainer"]
 layout_mode = 2
-text = "@siverKnight"
+text = "@Dutt1ez"
 
 [node name="Credit2" type="Label" parent="CreditsPanel/VBoxContainer"]
 layout_mode = 2
@@ -148,14 +228,15 @@ text = "@Dave the Dev"
 
 [node name="Credit4" type="Label" parent="CreditsPanel/VBoxContainer"]
 layout_mode = 2
-text = "@BrickSilver"
+text = "@woodshed games"
 
 [node name="Tutorial_confirm" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
-offset_left = 148.0
-offset_top = 221.0
-offset_right = 448.0
-offset_bottom = 261.0
+offset_left = 273.0
+offset_top = 361.0
+offset_right = 573.0
+offset_bottom = 401.0
 
 [node name="Panel" type="Panel" parent="Tutorial_confirm"]
 layout_mode = 0
@@ -185,3 +266,53 @@ offset_top = 44.0
 offset_right = 239.0
 offset_bottom = 75.0
 text = "No"
+
+[node name="SplashScreen" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="SplashScreen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="SplashScreen/Control"]
+color = Color(0.101961, 0.0431373, 0.0313726, 1)
+polygon = PackedVector2Array(-238, -155, 1384, -195, 1340, 769, -216, 745)
+
+[node name="TextureRect" type="TextureRect" parent="SplashScreen/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_top = -12.0
+offset_right = 1147.0
+offset_bottom = 1388.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.320865, 0.320865)
+texture = ExtResource("5_yhaeg")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SplashScreen/Control"]
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="SplashScreen/Control"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 551.0
+offset_right = 663.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(1, 0.678431, 0, 1)
+text = "Godot wild Jam #73"
+
+[node name="SplashAnim" type="AnimationPlayer" parent="SplashScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_tj07h")
+}
+
+[node name="FunFacts" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

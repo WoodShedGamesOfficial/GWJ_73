@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyam4fomgjqem"]
+[gd_scene load_steps=15 format=3 uid="uid://dyam4fomgjqem"]
 
-[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="1_a2uut"]
+[ext_resource type="Texture2D" uid="uid://c8ki4ghninvf8" path="res://Main/K9/Assets/2D/textures/vfx/BloobSplatB.png" id="1_vtpro"]
+[ext_resource type="Texture2D" uid="uid://dwx827ay683wc" path="res://Main/K9/Assets/2D/textures/ImpactFXA.png" id="2_4ecyh"]
+[ext_resource type="Texture2D" uid="uid://s6dy0jrd2k0d" path="res://Main/K9/Assets/2D/Sprites/PlainSquare.png" id="3_arwhj"]
 
 [sub_resource type="GDScript" id="GDScript_4ub2b"]
 resource_name = "bpscript"
@@ -9,72 +11,104 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation_degrees = randi_range(5, 95)
-	scale.x = randf_range(1.00, 3.00)
+	rotation_degrees = randi_range(-45, 95)
+	scale.x = randf_range(.75, 3.00)
 	scale.y = randf_range(1.00, 3.00)
 	
-	await get_tree().create_timer(90.0).timeout
+	await get_tree().create_timer(60.0).timeout
+	
+	queue_free()
 	pass # Replace with function body.
 "
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_10msr"]
-texture = ExtResource("1_a2uut")
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_37i4f"]
-default_input_values = [0, 0.0, 1, 0.25]
-operator = 1
-
-[sub_resource type="VisualShader" id="VisualShader_jm4t6"]
+[sub_resource type="Shader" id="Shader_x1765"]
 code = "shader_type canvas_item;
-render_mode blend_mix;
 
-uniform sampler2D tex_frg_2;
+uniform sampler2D textureNoise: repeat_enable;
+uniform float radius: hint_range(0.0, 1.0) = 0.459;
+uniform float effectControl: hint_range(0.0, 1.0) = 0.309;
+uniform float burnSpeed: hint_range(0.0, 1.0) = 0.076;
+uniform float shape: hint_range(0.0, 1.0) = 1.0;
 
-
+uniform vec4 my_color : source_color = vec4(.5, .5, .5, 1.0);
 
 void fragment() {
-// Texture2D:2
-	vec4 n_out2p0 = texture(tex_frg_2, UV);
+    vec2 centerDistVec = vec2(0.5) - UV;
+    
+	float distToCircleEdge = length(centerDistVec) * radius;
+	float distToSquareEdge = 0.5*(0.5 - min(min(UV.x, 1.0 - UV.x), min(UV.y, 1.0 - UV.y)));
+	float distToEdge = mix(distToCircleEdge,distToSquareEdge,shape);
 
+    float gradient = smoothstep(0.5, 0.5 - radius, distToEdge);
 
-// FloatOp:3
-	float n_in3p1 = 0.25000;
-	float n_out3p0 = n_out2p0.x - n_in3p1;
+    vec2 direction = vec2(0, 1) * burnSpeed;
+    float noiseValue = texture(textureNoise, UV + direction * TIME).r;
 
+    float opacity = step(radius, mix(gradient, noiseValue, effectControl) - distToEdge);
 
-// Output:0
-	COLOR.a = n_out3p0;
-
-
+    COLOR = texture(TEXTURE, UV) * vec4(1.0, 1.0, 1.0, opacity) * mix(COLOR, my_color, .5);
 }
 "
-graph_offset = Vector2(-332.975, -19.3973)
-mode = 1
-flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_10msr")
-nodes/fragment/2/position = Vector2(-360, 80)
-nodes/fragment/3/node = SubResource("VisualShaderNodeFloatOp_37i4f")
-nodes/fragment/3/position = Vector2(120, 180)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8q3ph"]
-shader = SubResource("VisualShader_jm4t6")
+[sub_resource type="Gradient" id="Gradient_lmj74"]
+offsets = PackedFloat32Array(0.237288, 0.59322)
 
-[sub_resource type="Gradient" id="Gradient_11yj3"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wu3gs"]
+frequency = 0.045
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vkv04"]
-fractal_type = 2
-fractal_lacunarity = 3.075
-fractal_gain = -0.16
-domain_warp_enabled = true
-domain_warp_type = 2
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_56clp"]
+color_ramp = SubResource("Gradient_lmj74")
+noise = SubResource("FastNoiseLite_wu3gs")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rsl43"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqpyc"]
+shader = SubResource("Shader_x1765")
+shader_parameter/radius = 0.489
+shader_parameter/effectControl = 0.539
+shader_parameter/burnSpeed = 0.001
+shader_parameter/shape = 1.0
+shader_parameter/my_color = Color(1, 0, 0, 1)
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_56clp")
+
+[sub_resource type="Shader" id="Shader_0ccr8"]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise : repeat_enable;
+uniform vec2 scroll = vec2(0.05, 0.05);
+
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	vec4 noise_col = texture(noise, UV + scroll * TIME);
+	COLOR = noise_col;
+	
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="Gradient" id="Gradient_md14r"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a7jnx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8q8or"]
 width = 128
 height = 128
-color_ramp = SubResource("Gradient_11yj3")
-noise = SubResource("FastNoiseLite_vkv04")
+seamless = true
+color_ramp = SubResource("Gradient_md14r")
+noise = SubResource("FastNoiseLite_a7jnx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3j5a"]
+shader = SubResource("Shader_0ccr8")
+shader_parameter/scroll = Vector2(0.009, 0.009)
+shader_parameter/noise = SubResource("NoiseTexture2D_8q8or")
 
 [node name="bloodsplat" type="Node2D"]
 z_index = -1
@@ -82,6 +116,16 @@ script = SubResource("GDScript_4ub2b")
 
 [node name="BloodsplatA" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0.0980392, 1)
-material = SubResource("ShaderMaterial_8q3ph")
 position = Vector2(1, 0)
-texture = SubResource("NoiseTexture2D_rsl43")
+texture = ExtResource("1_vtpro")
+
+[node name="BloodsplatB" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_mqpyc")
+position = Vector2(1, 0)
+texture = ExtResource("2_4ecyh")
+
+[node name="PlainSquare" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_g3j5a")
+texture = ExtResource("3_arwhj")

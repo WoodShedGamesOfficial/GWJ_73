@@ -1,0 +1,366 @@
+[gd_scene load_steps=14 format=3 uid="uid://qjp6sy5dl83u"]
+
+[ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
+[ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
+[ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
+[ext_resource type="PackedScene" uid="uid://x2p0vcinf1a2" path="res://Main/SAGD/Assets/loading_screen.tscn" id="3_fb08x"]
+[ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://Main/SAGD/Assets/key_binds.tscn" id="4_8rsui"]
+[ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
+[ext_resource type="PackedScene" uid="uid://bqedu3mvt1ib2" path="res://Main/SAGD/Assets/masteroptions.tscn" id="5_qmwj4"]
+[ext_resource type="Texture2D" uid="uid://bkfax83eg2w3q" path="res://Main/Woodshed_Games/WSSplash_Logo.png" id="5_yhaeg"]
+[ext_resource type="PackedScene" uid="uid://dcutibay8pkp8" path="res://Main/SAGD/Assets/muic_options.tscn" id="6_1ah18"]
+[ext_resource type="PackedScene" uid="uid://crcrh55sb1i3h" path="res://Main/SAGD/Assets/sfxoptions.tscn" id="7_bxsjj"]
+
+[sub_resource type="Animation" id="Animation_f4347"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_c3nw7"]
+resource_name = "Spash"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tj07h"]
+_data = {
+"RESET": SubResource("Animation_f4347"),
+"Spash": SubResource("Animation_c3nw7")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gcck")
+dev_room_path = ExtResource("2_di7d8")
+level_0_path = ExtResource("3_fb08x")
+
+[node name="GWJLabel" type="Label" parent="."]
+offset_left = 474.0
+offset_top = 48.0
+offset_right = 688.0
+offset_bottom = 71.0
+text = "A Godot Wild Jam #73 game"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 482.0
+offset_top = 2.0
+offset_right = 692.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Tower Conquest"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+offset_left = 70.0
+offset_top = 322.0
+offset_right = 110.0
+offset_bottom = 366.0
+
+[node name="Start" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Options" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Credits" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Eject" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Eject"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 518.0
+offset_top = 90.0
+offset_right = 646.0
+offset_bottom = 218.0
+texture = ExtResource("2_tc2fj")
+
+[node name="DevRoomButton" type="Button" parent="."]
+offset_left = 1046.0
+offset_top = 599.0
+offset_right = 1129.0
+offset_bottom = 630.0
+text = "DevRoom
+"
+
+[node name="Options_panel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 774.0
+offset_top = 98.0
+offset_right = 1074.0
+offset_bottom = 498.0
+
+[node name="Panel" type="Panel" parent="Options_panel"]
+layout_mode = 2
+offset_left = -45.0
+offset_right = 345.0
+offset_bottom = 485.0
+
+[node name="Label" type="Label" parent="Options_panel"]
+layout_mode = 2
+offset_left = 91.0
+offset_top = 11.0
+offset_right = 391.0
+offset_bottom = 34.0
+text = "Options :"
+
+[node name="KeyBinds" parent="Options_panel" instance=ExtResource("4_8rsui")]
+layout_mode = 1
+offset_left = -56.0
+offset_top = 51.0
+offset_right = 426.5
+offset_bottom = 50.6
+script = null
+
+[node name="Mastersound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 314.265
+offset_right = 317.635
+offset_bottom = 364.265
+theme_override_font_sizes/font_size = 21
+text = "Master Sound"
+
+[node name="Musicsound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 370.265
+offset_right = 317.635
+offset_bottom = 420.265
+theme_override_font_sizes/font_size = 21
+text = "Music Sound"
+
+[node name="SFXsound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 418.265
+offset_right = 317.635
+offset_bottom = 468.265
+theme_override_font_sizes/font_size = 21
+text = "SFX Sound"
+
+[node name="Masteroptions" parent="Options_panel" instance=ExtResource("5_qmwj4")]
+layout_mode = 1
+offset_left = 59.0001
+offset_top = 361.0
+offset_right = 59.0001
+offset_bottom = 361.0
+rotation = -1.57135
+script = null
+
+[node name="MuicOptions" parent="Options_panel" instance=ExtResource("6_1ah18")]
+layout_mode = 1
+offset_left = 59.9999
+offset_top = 416.0
+offset_right = -240.0
+offset_bottom = 16.0
+rotation = -1.5708
+script = null
+
+[node name="Sfxoptions" parent="Options_panel" instance=ExtResource("7_bxsjj")]
+layout_mode = 1
+offset_left = 62.0
+offset_top = 466.0
+offset_right = 62.0
+offset_bottom = 466.0
+rotation = -1.5708
+script = null
+
+[node name="CreditsPanel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.0
+offset_top = 320.0
+offset_right = 658.0
+offset_bottom = 620.0
+
+[node name="Panel" type="Panel" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 201.0
+offset_bottom = 296.0
+
+[node name="Credits" type="Label" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 2.0
+offset_right = 170.0
+offset_bottom = 25.0
+text = "Credits and links:"
+
+[node name="TextureRect" type="TextureRect" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 137.0
+offset_right = 1174.0
+offset_bottom = 1284.0
+scale = Vector2(0.125915, 0.125915)
+texture = ExtResource("4_tt0ui")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPanel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 28.0
+offset_right = 51.0
+offset_bottom = 68.0
+
+[node name="Credit" type="Label" parent="CreditsPanel/VBoxContainer"]
+layout_mode = 2
+text = "@siverKnight"
+
+[node name="Credit2" type="Label" parent="CreditsPanel/VBoxContainer"]
+layout_mode = 2
+text = "@Saaeb Game Dev"
+
+[node name="Credit3" type="Label" parent="CreditsPanel/VBoxContainer"]
+layout_mode = 2
+text = "@Dave the Dev"
+
+[node name="Credit4" type="Label" parent="CreditsPanel/VBoxContainer"]
+layout_mode = 2
+text = "@woodshed games"
+
+[node name="Tutorial_confirm" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 148.0
+offset_top = 221.0
+offset_right = 448.0
+offset_bottom = 261.0
+
+[node name="Panel" type="Panel" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 100.0
+
+[node name="Label" type="Label" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 284.0
+offset_bottom = 37.0
+text = "would you like to play the tutorial?"
+
+[node name="Yes" type="Button" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 46.0
+offset_right = 83.0
+offset_bottom = 77.0
+text = "Yes"
+
+[node name="No" type="Button" parent="Tutorial_confirm"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 44.0
+offset_right = 239.0
+offset_bottom = 75.0
+text = "No"
+
+[node name="SplashScreen" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="SplashScreen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="SplashScreen/Control"]
+visible = false
+color = Color(0.101961, 0.0431373, 0.0313726, 1)
+polygon = PackedVector2Array(-238, -155, 1384, -195, 1340, 769, -216, 745)
+
+[node name="TextureRect" type="TextureRect" parent="SplashScreen/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_top = -12.0
+offset_right = 1147.0
+offset_bottom = 1388.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.320865, 0.320865)
+texture = ExtResource("5_yhaeg")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SplashScreen/Control"]
+visible = false
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="SplashScreen/Control"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 551.0
+offset_right = 663.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(1, 0.678431, 0, 1)
+text = "Godot wild Jam #73"
+
+[node name="SplashAnim" type="AnimationPlayer" parent="SplashScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_tj07h")
+}

@@ -13,27 +13,50 @@ class_name K9_player_controller
 	
 }
 
+@export var base_gold : int = 150
+
 var isSprinting : bool
+
+#respawning
+var respawn_location : Vector2
 
 # function blocks ->
 
 func _ready():
 	GlobalHiveMind.player_pos = global_position
 	add_to_group("Player")
+	add_to_group("Teleportable")
+	add_to_group('friendly')
+	
+	GlobalHiveMind.players_gold_coins = base_gold
+	
+	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
+	$GUI/HUD/HP_Bar.max_value = PLAYER_STATS.health
+	respawn_location = transform.origin
+	
+	
 	pass
 	
 
 func _process(delta):
+	var footstep_audio = $Footsteps
+	
 	isSprinting = Input.is_action_pressed("Sprint")
 	
 	GlobalHiveMind.player_pos = global_position
 	
 	if velocity.x or velocity.y != 0:
 		player_anim.play("Walk")
+		if footstep_audio.is_playing() != true:
+			footstep_audio.playing = true
+		#await $Footsteps.finished
+		#$Footsteps.pitch_scale = randf_range(.9, 1.5)
 	else:
 		player_anim.play("Idle")
+		footstep_audio.playing = false
 	
 	
+	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
 	pass
 	
 
@@ -60,6 +83,10 @@ func _physics_process(delta):
 		velocity.y = move_toward(velocity.y, 0, PLAYER_STATS.walk_speed)
 		#player_anim.play("Idle")
 	
+	#velocity = velocity.normalized()
+	
+	#if velocity != Vector2.ZERO:
+		#print(str(velocity))
 	
 	move_and_slide()
 	
@@ -80,8 +107,8 @@ func _input(event):
 		player_cam.zoom.x += zoom_step
 		player_cam.zoom.y += zoom_step
 	
-	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.5, 3)
-	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.5, 3)
+	player_cam.zoom.x = clamp(player_cam.zoom.x, 0.20, 1.5)
+	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.20, 1.5)
 	
 	
 	pass
@@ -105,7 +132,9 @@ func hurt(damage, damage_type):
 	
 
 func player_death():
-	
+	transform.origin = respawn_location
+	PLAYER_STATS.health = 100
+	GlobalHiveMind.players_gold_coins -= (GlobalHiveMind.players_gold_coins / 2)
 	print('player has died')
 	
 	pass
