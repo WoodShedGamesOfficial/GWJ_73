@@ -90,6 +90,7 @@ texture = ExtResource("3_4fvbt")
 expand_mode = 2
 
 [node name="GWJLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 11.0
 offset_top = 622.0
 offset_right = 225.0
@@ -112,6 +113,7 @@ text = "Tower Wars
 "
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 70.0
 offset_top = 322.0
 offset_right = 110.0
@@ -135,6 +137,7 @@ text = "Eject"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 527.0
 offset_top = 246.0
 offset_right = 655.0
@@ -142,6 +145,7 @@ offset_bottom = 374.0
 texture = ExtResource("2_tc2fj")
 
 [node name="DevRoomButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1046.0
 offset_top = 599.0
 offset_right = 1129.0
@@ -309,5 +313,6 @@ libraries = {
 }
 
 [node name="FunFacts" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
