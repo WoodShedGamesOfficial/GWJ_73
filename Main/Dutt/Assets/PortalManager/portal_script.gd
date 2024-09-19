@@ -15,8 +15,12 @@ signal teleport_requested(body: Node2D, from_portal: Portal, to_portal: Portal)
 
 @onready var portal_area : Area2D = %PortalArea
 @onready var nav_link : NavigationLink2D = %NavigationLink2D
+@onready var portal_color_sprite : Sprite2D = %PortalColorSprite
 
 
+var friendly_color = Color("00ff0075")
+var hostile_color = Color("ff000075")
+var neutral_color = Color("ff00ff75")
 var bodies_in_area : Array[Node2D] = []
 
 
@@ -31,11 +35,14 @@ func _ready():
 	match faction:
 		"friendly":
 			nav_link.set_navigation_layer_value(1, true)
+			portal_color_sprite.modulate = friendly_color
 		"hostile":
 			nav_link.set_navigation_layer_value(2, true)
+			portal_color_sprite.modulate = hostile_color
 		"neutral":
 			nav_link.set_navigation_layer_value(1, true)
 			nav_link.set_navigation_layer_value(2, true)
+			portal_color_sprite.modulate = neutral_color
 
 
 func receive_teleport_body(body: Node2D):
