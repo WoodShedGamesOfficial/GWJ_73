@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bvgo1sg5f3ja1"]
+[gd_scene load_steps=12 format=4 uid="uid://bvgo1sg5f3ja1"]
 
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_2keua"]
 [ext_resource type="Script" path="res://Main/K9/Lvls/Lvl_0/level_0_script.gd" id="1_qa2pk"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cnmh5ydxt0x45" path="res://Main/K9/Assets/2D/Sprites/TroopSpawner.png" id="6_tpqf7"]
 [ext_resource type="PackedScene" uid="uid://b0ijb8wnix7am" path="res://Main/K9/Assets/Lighting/torch_A.tscn" id="7_lthtg"]
 [ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="10_2f8xu"]
-[ext_resource type="PackedScene" uid="uid://78d8d4y6ftyu" path="res://Main/K9/Assets/coin_pickup.tscn" id="11_jq1sy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_txw3b"]
 vertices = PackedVector2Array(-2448, -400, -2448, -390.852, -3199.8, -318.039, -3204.28, -801.852, -2512, -688, 3151.47, -839.43, 3166.44, -31.7422, 2604.31, -50.3516, 2610.4, -412.5, 2576, -835.344, 2576, -688, -2512, -835.648, -2353.6, -400, -2288, -688, -1903.55, -443.578, -784, 824.57, -1888.55, 827.75, -1861.89, 194.07, -1603.3, 240.367, -1348.6, -1439.68, 624, -1457.07, 624, -528, -496, -1040, -2288, -845.883, -1599.29, -840.609, -1218.69, 238.594, -784, -1040, -1264, -217.008, -1264, -1104, 688, 820.328, -560, 823.922, -560, -240, -368, -240, 688, 688, 1577.12, 190.328, 2119, 816.219, 912, 819.688, 912, 688, 1220.18, 150.469, 1587.22, -834, 2288, -834, 2288, -560, 2119, -397.609, 2512, -560, 2512, -688, 688, 464, -368, -304, -304, -304, -144, -240, -304, -528, -560, -528, -560, -752, -496, -752, -80, -528, -80, -464, -144, -464, 688, -240, 912, -528, 848, -528, 848, -1459.05, 1216.19, -1462.3, 1231.99, -889.219, 912, 464, -1352.22, -1104, -1354.92, -1131.19)
@@ -135,17 +134,9 @@ autostart = true
 [node name="ResourceTimer" parent="TheHiveMind/Timers" index="3"]
 wait_time = 30.0
 
-[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
-TOWERSTATS = {
-"health": 350
-}
-
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(3062, -138)
 heart_faction = "hostile"
-TOWERSTATS = {
-"health": 2000
-}
 
 [node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]
 position = Vector2(-2635, -262)
@@ -204,55 +195,20 @@ position = Vector2(2105, -108)
 [node name="Torch9" parent="Lighting" instance=ExtResource("7_lthtg")]
 position = Vector2(2105, -108)
 
-[node name="Coins" type="Node" parent="."]
+[node name="Portal_000" parent="." node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
+position = Vector2(-1522, 23)
+linked_portal = NodePath("../Portal_002")
+faction = "friendly"
 
-[node name="Portal_000" parent="Coins" node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
-position = Vector2(-2682, -843)
-linked_portal = NodePath("../Portal_001")
-
-[node name="Portal_001" parent="Coins" node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
-position = Vector2(64.9999, 864)
+[node name="Portal_001" parent="." node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
+position = Vector2(1307, -241)
 linked_portal = NodePath("../Portal_000")
+faction = "friendly"
 
-[node name="Portal_002" parent="Coins" node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
-position = Vector2(1542, -831)
+[node name="Portal_002" parent="." node_paths=PackedStringArray("linked_portal") instance=ExtResource("10_2f8xu")]
+position = Vector2(79, 815)
 linked_portal = NodePath("../Portal_000")
-
-[node name="CoinPickup" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(-1393, -1499)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup2" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(-1169, -1492)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup3" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(-1409, -1285)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup4" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(834, -1513)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup5" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(1288, -1523)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup6" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(1048, -1535)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup7" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(841, -1283)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup8" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(1283, -1297)
-scale = Vector2(0.581221, 0.581221)
-
-[node name="CoinPickup9" parent="Coins" instance=ExtResource("11_jq1sy")]
-position = Vector2(1067, -1310)
-scale = Vector2(0.581221, 0.581221)
+faction = "friendly"
 
 [editable path="World/MudSplat"]
 [editable path="World/MudSplat2"]

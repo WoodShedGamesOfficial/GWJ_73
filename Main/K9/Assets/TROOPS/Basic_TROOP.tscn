@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5xln5gwhvmby"]
+[gd_scene load_steps=24 format=3 uid="uid://c5xln5gwhvmby"]
 
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="1_nc3vu"]
 [ext_resource type="Script" path="res://Main/K9/Assets/TROOPS/basic_troop_Script.gd" id="1_sd5ys"]
@@ -87,6 +87,9 @@ _data = {
 "Walk": SubResource("Animation_ib11r")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kuhxo"]
+polygon = PackedVector2Array(-13, -39, -23, -7, -15, 35, 1, 45, 13, 34, 28, 1, 9, -37)
+
 [sub_resource type="LabelSettings" id="LabelSettings_1nhpi"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
@@ -99,6 +102,51 @@ radius = 519.001
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0rif"]
 radius = 87.0517
+
+[sub_resource type="Gradient" id="Gradient_axruq"]
+offsets = PackedFloat32Array(0, 0.483051, 1)
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vawt3"]
+gradient = SubResource("Gradient_axruq")
+
+[sub_resource type="Curve" id="Curve_cqyks"]
+_data = [Vector2(0, 0.428571), 0.0, 0.0, 0, 0, Vector2(0.479452, 0.956044), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d6dn7"]
+curve = SubResource("Curve_cqyks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r377p"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 296.435, 0)
+radial_accel_min = -30.0
+radial_accel_max = 60.0
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_d6dn7")
+color_ramp = SubResource("GradientTexture1D_vawt3")
+turbulence_enabled = true
+turbulence_noise_strength = 0.25
+
+[sub_resource type="Gradient" id="Gradient_rvwtq"]
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0466667, 0.0466667, 0.0466667, 0.0466667, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxhfu"]
+frequency = 0.0031
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mkpty"]
+width = 128
+height = 128
+seamless = true
+color_ramp = SubResource("Gradient_rvwtq")
+noise = SubResource("FastNoiseLite_oxhfu")
 
 [node name="BasicTroop" type="CharacterBody2D"]
 collision_layer = 0
@@ -126,6 +174,9 @@ texture = ExtResource("2_ljdod")
 libraries = {
 "": SubResource("AnimationLibrary_l3a0m")
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprites"]
+occluder = SubResource("OccluderPolygon2D_kuhxo")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 target_desired_distance = 50.0
@@ -169,6 +220,7 @@ debug_color = Color(0.647445, 0.521158, 0, 0.42)
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_02xtc")
+volume_db = -2.0
 bus = &"NPCs"
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="Audio"]
@@ -177,6 +229,7 @@ bus = &"NPCs"
 
 [node name="SwordClash" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("5_4aha7")
+volume_db = -5.0
 bus = &"NPCs"
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -185,6 +238,15 @@ wait_time = 1.5
 [node name="NavTimer" type="Timer" parent="."]
 wait_time = 1.5
 autostart = true
+
+[node name="GoopVfx" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_r377p")
+texture = SubResource("NoiseTexture2D_mkpty")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.75
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="body_entered" from="AttackRadius" to="." method="_on_attack_radius_body_entered"]

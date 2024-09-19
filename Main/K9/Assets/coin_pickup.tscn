@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://78d8d4y6ftyu"]
+
+[ext_resource type="Texture2D" uid="uid://dj7v74337grfc" path="res://Main/K9/Assets/2D/CoinPickup.png" id="1_1n4b3"]
+
+[sub_resource type="GDScript" id="GDScript_yc7e7"]
+resource_name = "CoinScript"
+script/source = "extends Node2D
+
+@onready var animation_player = $AnimationPlayer
+
+func _ready():
+	animation_player.play(\"Spin\")
+	pass
+	
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group(\"Player\"):
+		GlobalHiveMind.players_gold_coins += 150
+		queue_free()
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3fa8j"]
+radius = 40.0
+
+[sub_resource type="Animation" id="Animation_4kqra"]
+resource_name = "Spin"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinPickup:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.015, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoinPickup:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_g0ypw"]
+resource_name = "Bob"
+
+[sub_resource type="Animation" id="Animation_7e0uc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinPickup:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoinPickup:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hn0b2"]
+_data = {
+"Bob": SubResource("Animation_g0ypw"),
+"RESET": SubResource("Animation_7e0uc"),
+"Spin": SubResource("Animation_4kqra")
+}
+
+[node name="CoinPickup" type="Node2D"]
+script = SubResource("GDScript_yc7e7")
+
+[node name="CoinPickup" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+texture = ExtResource("1_1n4b3")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3fa8j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hn0b2")
+}
+autoplay = "Spin"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

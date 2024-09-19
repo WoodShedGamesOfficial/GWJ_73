@@ -236,63 +236,54 @@ avoidance_layers = 3
 [node name="NavigationObstacle2D19" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3655, 645)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D20" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3877, 918)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D21" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3799, 1212)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D22" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3625, 1542)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D23" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3973, 1509)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D24" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3232, -230)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D25" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(4027, 634)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D26" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(2931, 1279)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D27" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko"]
 position = Vector2(3384, 1128)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
@@ -403,63 +394,54 @@ avoidance_layers = 3
 [node name="NavigationObstacle2D19" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3655, 645)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D20" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3877, 918)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D21" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3799, 1212)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D22" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3625, 1542)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D23" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3973, 1509)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D24" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3232, -230)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D25" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(4027, 634)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D26" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(2931, 1279)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 
 [node name="NavigationObstacle2D27" type="NavigationObstacle2D" parent="World/WorldNav/obstacles/Plachinko2"]
 position = Vector2(3384, 1128)
 rotation = 0.148079
-scale = Vector2(1, 1)
 radius = 100.0
 avoidance_layers = 3
 

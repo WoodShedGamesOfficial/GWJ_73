@@ -37,7 +37,7 @@ func _ready():
 	
 	TROOP_STATS.walk_speed = randf_range(100.0, 450.0)
 	
-	
+	$GoopVfx.emitting = true
 	pass
 	
 
@@ -250,14 +250,14 @@ func _on_nav_timer_timeout():
 		'friendly' :
 			for body in $AttackRadius.get_overlapping_bodies():
 				if body != null and body.is_in_group('enemy'):
-					nav_agent.target_position = body.global_transform.origin
+					nav_agent.target_position = body.transform.origin
 					#$AttackTimer.start()
 				elif GlobalHiveMind.enemy_heart_pos_array.is_empty() != true:
 					nav_agent.target_position = GlobalHiveMind.enemy_heart_pos_array.front()
 		'hostile' :
 			for body in $AttackRadius.get_overlapping_bodies():
 				if body != null and body.is_in_group('Player') or body.is_in_group('friendly'):
-					nav_agent.target_position = body.global_transform.origin
+					nav_agent.target_position = body.transform.origin
 					#$AttackTimer.start()
 				elif GlobalHiveMind.friendly_tower_heart_pos_array.is_empty() != true:
 					nav_agent.target_position = GlobalHiveMind.friendly_tower_heart_pos_array.front()
