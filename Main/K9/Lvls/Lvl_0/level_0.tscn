@@ -80,9 +80,7 @@ scale = Vector2(2.78529, 2.70438)
 [node name="Player_0" parent="." instance=ExtResource("4_sj08y")]
 position = Vector2(-1876, -616)
 rotation = 1.32506
-
-base_gold = 350
-
+base_gold = 500
 
 [node name="TheHiveMind" parent="." instance=ExtResource("5_habx7")]
 
@@ -132,7 +130,6 @@ texture = ExtResource("6_tpqf7")
 
 [node name="WaveStart" parent="TheHiveMind/Timers" index="2"]
 autostart = true
-
 
 [node name="ResourceTimer" parent="TheHiveMind/Timers" index="3"]
 wait_time = 30.0

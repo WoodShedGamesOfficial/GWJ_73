@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcutibay8pkp8"]
 
-[ext_resource type="Script" path="res://Main/SAGD/Saaeb's (Player 4) usless stuff/muic_options.gd" id="1_ff0i5"]
+[ext_resource type="Script" path="res://Main/SAGD/Assets/muic_options.gd" id="1_ff0i5"]
 
 [node name="MuicOptions" type="Control"]
 layout_mode = 3

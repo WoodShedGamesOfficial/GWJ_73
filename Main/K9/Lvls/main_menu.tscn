@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://qjp6sy5dl83u"]
+[gd_scene load_steps=14 format=3 uid="uid://qjp6sy5dl83u"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/main_menu_Script.gd" id="1_4gcck"]
 [ext_resource type="PackedScene" uid="uid://b215wnaw6ienu" path="res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn" id="2_di7d8"]
 [ext_resource type="Texture2D" uid="uid://0jiohaxm2jcg" path="res://icon.svg" id="2_tc2fj"]
 [ext_resource type="Texture2D" uid="uid://d3t0ockacrjap" path="res://Main/K9/Assets/2D/TitleCardV0.5.png" id="3_4fvbt"]
 [ext_resource type="Texture2D" uid="uid://cavv54w0li324" path="res://Main/K9/Assets/2D/Sprites/qr-code.png" id="4_tt0ui"]
+[ext_resource type="PackedScene" uid="uid://c7a6on241gshp" path="res://Main/SAGD/Assets/key_binds.tscn" id="5_vcg1q"]
 [ext_resource type="Texture2D" uid="uid://bkfax83eg2w3q" path="res://Main/Woodshed_Games/WSSplash_Logo.png" id="5_yhaeg"]
+[ext_resource type="PackedScene" uid="uid://bqedu3mvt1ib2" path="res://Main/SAGD/Assets/masteroptions.tscn" id="6_rge0t"]
+[ext_resource type="PackedScene" uid="uid://dcutibay8pkp8" path="res://Main/SAGD/Assets/muic_options.tscn" id="7_7qju2"]
+[ext_resource type="PackedScene" uid="uid://crcrh55sb1i3h" path="res://Main/SAGD/Assets/sfxoptions.tscn" id="8_8c1aq"]
 
 [sub_resource type="Animation" id="Animation_f4347"]
 length = 0.001
@@ -156,17 +160,104 @@ text = "DevRoom
 [node name="Options_panel" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 765.0
+offset_top = 59.0
+offset_right = 1065.0
+offset_bottom = 459.0
+
+[node name="SAGD" type="Node" parent="Options_panel"]
+
+[node name="Panel" type="Panel" parent="Options_panel"]
+layout_mode = 2
+offset_left = -45.0
+offset_right = 345.0
+offset_bottom = 485.0
+
+[node name="Label" type="Label" parent="Options_panel"]
+layout_mode = 2
+offset_left = 91.0
+offset_top = 11.0
+offset_right = 391.0
+offset_bottom = 34.0
+text = "Options :"
+
+[node name="KeyBinds" parent="Options_panel" instance=ExtResource("5_vcg1q")]
+layout_mode = 1
+offset_left = -56.0
+offset_top = 51.0
+offset_right = 426.5
+offset_bottom = 50.6
+script = null
+
+[node name="Mastersound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 314.265
+offset_right = 317.635
+offset_bottom = 364.265
+theme_override_font_sizes/font_size = 21
+text = "Master Sound"
+
+[node name="Musicsound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 370.265
+offset_right = 317.635
+offset_bottom = 420.265
+theme_override_font_sizes/font_size = 21
+text = "Music Sound"
+
+[node name="SFXsound" type="Label" parent="Options_panel"]
+layout_mode = 0
+offset_left = 76.6353
+offset_top = 418.265
+offset_right = 317.635
+offset_bottom = 468.265
+theme_override_font_sizes/font_size = 21
+text = "SFX Sound"
+
+[node name="Masteroptions" parent="Options_panel" instance=ExtResource("6_rge0t")]
+layout_mode = 1
+offset_left = 59.0001
+offset_top = 361.0
+offset_right = 59.0001
+offset_bottom = 361.0
+rotation = -1.57135
+script = null
+
+[node name="MuicOptions" parent="Options_panel" instance=ExtResource("7_7qju2")]
+layout_mode = 1
+offset_left = 59.9999
+offset_top = 416.0
+offset_right = -240.0
+offset_bottom = 16.0
+rotation = -1.5708
+script = null
+
+[node name="Sfxoptions" parent="Options_panel" instance=ExtResource("8_8c1aq")]
+layout_mode = 1
+offset_left = 62.0
+offset_top = 466.0
+offset_right = 62.0
+offset_bottom = 466.0
+rotation = -1.5708
+script = null
+
+[node name="Options_panel_Legacy" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_left = 774.0
 offset_top = 98.0
 offset_right = 1074.0
 offset_bottom = 498.0
 
-[node name="Panel" type="Panel" parent="Options_panel"]
+[node name="Panel" type="Panel" parent="Options_panel_Legacy"]
 layout_mode = 2
 offset_right = 300.0
 offset_bottom = 400.0
 
-[node name="Label" type="Label" parent="Options_panel"]
+[node name="Label" type="Label" parent="Options_panel_Legacy"]
 layout_mode = 2
 offset_left = 91.0
 offset_top = 11.0

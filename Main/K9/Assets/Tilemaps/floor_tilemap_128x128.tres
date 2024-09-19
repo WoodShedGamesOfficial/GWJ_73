@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://c6sg2wbsi15u8"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://c6sg2wbsi15u8"]
 
 [ext_resource type="Texture2D" uid="uid://cfu40vrilmd0v" path="res://Main/K9/Assets/2D/textures/GrassTilemap_128x128.png" id="1_ypngx"]
 [ext_resource type="Texture2D" uid="uid://dsqg71ypdspx1" path="res://Main/K9/Assets/2D/textures/GrassTilemap_B_128x128.png" id="2_fjf5j"]
 [ext_resource type="Texture2D" uid="uid://dudky7jnmh0n0" path="res://Main/K9/Assets/2D/textures/WoorFloor_TileMap_A.png" id="3_bpre4"]
 [ext_resource type="Texture2D" uid="uid://ck0p1oitucqbt" path="res://Main/K9/Assets/2D/textures/sand_tilemap_128x128.png" id="4_yt2a5"]
 [ext_resource type="Texture2D" uid="uid://bu4hrx7q4h6rh" path="res://Main/K9/Assets/2D/textures/grass_128x128.png" id="5_enlqk"]
+[ext_resource type="Texture2D" uid="uid://cdlrcfc00ooyp" path="res://Main/K9/Assets/2D/textures/StoneFloor.png" id="6_ww1ok"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ltjd2"]
 texture = ExtResource("1_ypngx")
@@ -63,6 +64,11 @@ texture = ExtResource("5_enlqk")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_baalq"]
+texture = ExtResource("6_ww1ok")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_ltjd2")
@@ -70,3 +76,4 @@ sources/1 = SubResource("TileSetAtlasSource_ssh6f")
 sources/2 = SubResource("TileSetAtlasSource_smdq0")
 sources/3 = SubResource("TileSetAtlasSource_01rag")
 sources/4 = SubResource("TileSetAtlasSource_be5vj")
+sources/5 = SubResource("TileSetAtlasSource_baalq")

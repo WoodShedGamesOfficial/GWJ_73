@@ -84,6 +84,7 @@ dev_room_path = ExtResource("2_di7d8")
 level_0_path = ExtResource("3_fb08x")
 
 [node name="GWJLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 474.0
 offset_top = 48.0
 offset_right = 688.0
@@ -104,6 +105,7 @@ theme_override_font_sizes/font_size = 32
 text = "Tower Conquest"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 70.0
 offset_top = 322.0
 offset_right = 110.0
@@ -126,6 +128,7 @@ layout_mode = 2
 text = "Eject"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 518.0
 offset_top = 90.0
 offset_right = 646.0
@@ -133,6 +136,7 @@ offset_bottom = 218.0
 texture = ExtResource("2_tc2fj")
 
 [node name="DevRoomButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1046.0
 offset_top = 599.0
 offset_right = 1129.0
