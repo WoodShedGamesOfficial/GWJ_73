@@ -40,8 +40,8 @@ shader_parameter/dark_color = Color(0.266187, 4.75772e-05, 0.266185, 1)
 shader_parameter/horizontal_speed = 0.0
 shader_parameter/vertical_speed = -0.3
 shader_parameter/speed_modifier = 1.0
-shader_parameter/wave_strength = 0.1
-shader_parameter/wave_speed = 5.0
+shader_parameter/wave_strength = 0.05
+shader_parameter/wave_speed = 3.0
 shader_parameter/emission = 2.2
 shader_parameter/noise_edge_1 = 0.05
 shader_parameter/noise_edge_2 = 0.5
@@ -103,17 +103,12 @@ hue_variation_min = -2.23517e-08
 hue_variation_max = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3eg45"]
-radius = 22.0
-height = 78.0
+radius = 18.0
+height = 65.0
 
 [node name="Portal_000" type="Node2D"]
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_305fj")
-
-[node name="PortalColorSprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-modulate = Color(1, 0, 0, 0.458824)
-scale = Vector2(0.076, 0.135)
-texture = ExtResource("2_74jvm")
 
 [node name="PortalSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ut4ps")
@@ -125,17 +120,13 @@ unique_name_in_owner = true
 amount = 500
 process_material = SubResource("ParticleProcessMaterial_vecog")
 lifetime = 3.0
+local_coords = true
 
 [node name="PortalArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortalArea"]
 shape = SubResource("CapsuleShape2D_3eg45")
-
-[node name="NavigationLink2D" type="NavigationLink2D" parent="."]
-unique_name_in_owner = true
-navigation_layers = 0
 
 [connection signal="body_entered" from="PortalArea" to="." method="_on_portal_area_body_entered"]
 [connection signal="body_exited" from="PortalArea" to="." method="_on_portal_area_body_exited"]
