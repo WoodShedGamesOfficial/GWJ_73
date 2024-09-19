@@ -1,12 +1,63 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4pr4nbcepcdp"]
+[gd_scene load_steps=26 format=3 uid="uid://b4pr4nbcepcdp"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/FriendlyArmy/basic_friendly_troop_script.gd" id="1_10r6t"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="1_52hbr"]
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="2_5ow4f"]
 [ext_resource type="PackedScene" uid="uid://rl2xa3envu3y" path="res://Main/K9/Assets/Fx/blood_spray_fx.tscn" id="4_vqw4e"]
+[ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="5_uvehc"]
+[ext_resource type="AudioStream" uid="uid://c4j0nka7q4f7v" path="res://Main/K9/Assets/Audio/SFX/DeathC.ogg" id="6_hvnpb"]
+[ext_resource type="AudioStream" uid="uid://dry1h6ir2l4rn" path="res://Main/K9/Assets/Audio/SFX/SwordClang_B.ogg" id="7_5pqa1"]
+
+[sub_resource type="Gradient" id="Gradient_ypvqt"]
+offsets = PackedFloat32Array(0, 0.483051, 1)
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vawt3"]
+gradient = SubResource("Gradient_ypvqt")
+
+[sub_resource type="Curve" id="Curve_31pnd"]
+_data = [Vector2(0, 0.428571), 0.0, 0.0, 0, 0, Vector2(0.479452, 0.956044), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d6dn7"]
+curve = SubResource("Curve_31pnd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_em70x"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 296.435, 0)
+radial_accel_min = -30.0
+radial_accel_max = 60.0
+scale_curve = SubResource("CurveTexture_d6dn7")
+color_ramp = SubResource("GradientTexture1D_vawt3")
+
+[sub_resource type="Gradient" id="Gradient_rvwtq"]
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0466667, 0.0466667, 0.0466667, 0.0466667, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxhfu"]
+frequency = 0.0031
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kflx5"]
+width = 128
+height = 128
+seamless = true
+color_ramp = SubResource("Gradient_rvwtq")
+noise = SubResource("FastNoiseLite_oxhfu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lmbc"]
-radius = 53.0848
+radius = 26.0192
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8lk6"]
+size = Vector2(80, 80)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbg4l"]
+radius = 106.005
 
 [sub_resource type="Animation" id="Animation_gmni1"]
 resource_name = "Idle"
@@ -73,9 +124,6 @@ _data = {
 "Walk": SubResource("Animation_q3muj")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8lk6"]
-size = Vector2(80, 80)
-
 [sub_resource type="LabelSettings" id="LabelSettings_jpxua"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
@@ -83,9 +131,15 @@ shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.462745)
 shadow_offset = Vector2(-3, 3)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6diit"]
+radius = 575.147
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_41mhf"]
+polygon = PackedVector2Array(-13, -39, -23, -7, -15, 35, 1, 45, 13, 34, 28, 1, 9, -37)
+
 [node name="BasicFriendlyTroop" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 30
+collision_mask = 14
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -96,18 +150,24 @@ TROOPSTATS = {
 "walk_speed": 200.0
 }
 
+[node name="GoopVfx" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_em70x")
+texture = SubResource("NoiseTexture2D_kflx5")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.75
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_5lmbc")
 
-[node name="FriendlyAnim" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_clswq")
-}
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 200.0
-path_max_distance = 25.0
+avoidance_enabled = true
+radius = 150.0
+max_neighbors = 2
+avoidance_layers = 16
+avoidance_mask = 19
 
 [node name="BloodFX" parent="." instance=ExtResource("4_vqw4e")]
 
@@ -120,14 +180,17 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_n8lk6")
 debug_color = Color(0.621912, 0.533596, 0, 0.42)
 
-[node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -78.0
-offset_right = 21.0
-offset_bottom = -55.0
-text = "Name"
-label_settings = SubResource("LabelSettings_jpxua")
-text_direction = 1
+[node name="AttackRadius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
+shape = SubResource("CircleShape2D_bbg4l")
+debug_color = Color(0.972549, 0, 0, 0.419608)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -144,3 +207,49 @@ modulate = Color(0.384314, 1, 0.54902, 1)
 position = Vector2(-1, 1)
 rotation = 1.56772
 texture = ExtResource("2_5ow4f")
+
+[node name="FriendlyAnim" type="AnimationPlayer" parent="Sprites"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_clswq")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -78.0
+offset_right = 28.0
+offset_bottom = -55.0
+text = "Name"
+label_settings = SubResource("LabelSettings_jpxua")
+text_direction = 1
+
+[node name="VisiblilityRadius" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisiblilityRadius"]
+shape = SubResource("CircleShape2D_6diit")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_41mhf")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_uvehc")
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_hvnpb")
+
+[node name="AttackSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_5pqa1")
+
+[connection signal="body_entered" from="AttackRadius" to="." method="prepare_attack"]
+[connection signal="body_exited" from="AttackRadius" to="." method="cancel_attack"]
+[connection signal="body_entered" from="VisiblilityRadius" to="." method="_on_visiblility_radius_body_entered"]

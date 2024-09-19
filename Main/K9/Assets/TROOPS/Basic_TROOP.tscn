@@ -1,0 +1,191 @@
+[gd_scene load_steps=15 format=3 uid="uid://c5xln5gwhvmby"]
+
+[ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="1_nc3vu"]
+[ext_resource type="Script" path="res://Main/K9/Assets/TROOPS/basic_troop_Script.gd" id="1_sd5ys"]
+[ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_ljdod"]
+[ext_resource type="AudioStream" uid="uid://bi5qnteu6128r" path="res://Main/K9/Assets/Audio/SFX/Death_A.ogg" id="4_02xtc"]
+[ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="4_t7tfk"]
+[ext_resource type="AudioStream" uid="uid://ctri741ilja0" path="res://Main/K9/Assets/Audio/SFX/SwordClang_A.ogg" id="5_4aha7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wdqng"]
+radius = 23.7697
+
+[sub_resource type="Animation" id="Animation_mh6ln"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ind76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Feet:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ib11r"]
+resource_name = "Walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Feet:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l3a0m"]
+_data = {
+"Idle": SubResource("Animation_mh6ln"),
+"RESET": SubResource("Animation_ind76"),
+"Walk": SubResource("Animation_ib11r")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_1nhpi"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_colhv"]
+radius = 519.001
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y0rif"]
+radius = 87.0517
+
+[node name="BasicTroop" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_sd5ys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wdqng")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 1)
+rotation = 1.57776
+texture = ExtResource("1_nc3vu")
+
+[node name="Feet" type="Sprite2D" parent="Sprites"]
+visible = false
+modulate = Color(0.392835, 0.875707, 0.954039, 1)
+position = Vector2(-2, -3)
+rotation = 1.57776
+texture = ExtResource("2_ljdod")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+libraries = {
+"": SubResource("AnimationLibrary_l3a0m")
+}
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 30.0
+max_neighbors = 5
+max_speed = 150.0
+avoidance_layers = 3
+avoidance_mask = 3
+debug_enabled = true
+debug_path_custom_color = Color(0.733333, 0.172549, 1, 1)
+debug_path_custom_point_size = 2.0
+
+[node name="NameLabel" type="Marker2D" parent="."]
+
+[node name="Name" type="Label" parent="NameLabel"]
+offset_left = -22.0
+offset_top = -92.0
+offset_right = 25.0
+offset_bottom = -69.0
+text = "Name"
+label_settings = SubResource("LabelSettings_1nhpi")
+
+[node name="AttackRadius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
+shape = SubResource("CircleShape2D_colhv")
+debug_color = Color(2.59906e-06, 0.63579, 0.412909, 0.42)
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_y0rif")
+debug_color = Color(0.647445, 0.521158, 0, 0.42)
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_02xtc")
+bus = &"NPCs"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_t7tfk")
+bus = &"NPCs"
+
+[node name="SwordClash" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_4aha7")
+bus = &"NPCs"
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="NavTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
+[connection signal="body_entered" from="AttackRadius" to="." method="_on_attack_radius_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="attack"]
+[connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]

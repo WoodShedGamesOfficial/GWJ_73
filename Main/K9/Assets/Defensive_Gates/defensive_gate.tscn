@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://7p387hc5oya"]
+[gd_scene load_steps=14 format=3 uid="uid://7p387hc5oya"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate_Script.gd" id="1_7ajfd"]
+[ext_resource type="Texture2D" uid="uid://bqr068fidfh66" path="res://Main/K9/Assets/2D/Sprites/Gates/ToothyGate.png" id="2_4mycy"]
+[ext_resource type="Texture2D" uid="uid://cbhxb2666eimd" path="res://Main/K9/Assets/2D/Sprites/Gates/Frame.png" id="3_2tqjd"]
+[ext_resource type="Texture2D" uid="uid://btaugqnwkp138" path="res://Main/K9/Assets/2D/Sprites/Gates/Eyeball.png" id="4_gesj4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2eojc"]
 size = Vector2(117, 445)
@@ -53,30 +56,15 @@ color_ramp = SubResource("Gradient_jagg3")
 noise = SubResource("FastNoiseLite_xiq5b")
 
 [node name="DefensiveGate" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_7ajfd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 8.5)
+rotation = 1.57323
 shape = SubResource("RectangleShape2D_2eojc")
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.47797, 0.544349, 0.626098, 1)
-polygon = PackedVector2Array(-53, -139, 43, -140, 51, 162, -47, 164)
-
-[node name="Polygon2D2" type="Polygon2D" parent="."]
-position = Vector2(-6, -52)
-scale = Vector2(0.688297, 0.688297)
-color = Color(0.846184, 0.37914, 0.0810306, 1)
-polygon = PackedVector2Array(-74, -134, -40, -69, 45, -69, 81, -134, 72, -199, 26, -233, -38, -236, -70, -207)
-
-[node name="Polygon2D3" type="Polygon2D" parent="."]
-position = Vector2(2, 63)
-rotation = -3.12304
-scale = Vector2(0.737088, 0.737088)
-color = Color(0.846184, 0.37914, 0.0810306, 1)
-polygon = PackedVector2Array(-74, -134, -40, -69, 45, -69, 81, -134, 72, -199, 26, -233, -38, -236, -70, -207)
 
 [node name="DustFX" type="GPUParticles2D" parent="."]
 emitting = false
@@ -89,6 +77,25 @@ explosiveness = 0.85
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 192.66
+avoidance_enabled = false
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="ToothyGate" type="Sprite2D" parent="Sprites"]
+position = Vector2(-2, -81)
+scale = Vector2(2.31919, 2.31919)
+texture = ExtResource("2_4mycy")
+
+[node name="Frame" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -82)
+scale = Vector2(2.33861, 2.33861)
+texture = ExtResource("3_2tqjd")
+
+[node name="Eyeball" type="Sprite2D" parent="Sprites"]
+modulate = Color(0.332513, 0.58246, 1.92523e-07, 1)
+position = Vector2(-1, -112)
+scale = Vector2(1.43405, 1.43405)
+texture = ExtResource("4_gesj4")
 
 [node name="health" type="Label" parent="."]
 offset_left = -21.0

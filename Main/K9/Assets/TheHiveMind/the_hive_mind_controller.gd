@@ -1,10 +1,20 @@
 extends Node
+class_name K9s_Hive_Mind_Manager
+##@experimental
+
+##README   v ಠ益ಠ v 
+
+##yet another version of my cool lil AI managment baby
+
+##im still practicing better docs so bear with me
 
 
-@export var enemy_troop_array = [preload('res://Main/K9/Assets/Enemies/basic_enemy_000.tscn') ]
+@export var enemy_troop_array = [preload("res://Main/K9/Assets/TROOPS/Basic_ENEMYTROOP.tscn") ]
 
 var enemy_spawn_point_array = []
 
+@export var isAwake : bool = true
+var spawn_time : float = randf_range(3.5, 7.5)
 
 
 # --function blocks
@@ -21,13 +31,28 @@ func _ready():
 	#enemy_tower_heart = $TowerHearts/EnemyHeart.global_transform.origin
 	
 	$Timers/SpawnTimer.connect('timeout', spawn_enemy)
-	$Timers/SpawnTimer.start()
-	
-	
 	$Timers/ResourceTimer.connect('timeout', add_enemy_resources)
+	
+	$SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius.monitoring = false
+	await  $Timers/WaveStart.timeout
+	$SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius.monitoring = true
+	
+	if isAwake:
+		$Timers/SpawnTimer.wait_time = spawn_time
+		$Timers/SpawnTimer.start()
+	
+	
 	
 	pass # Replace with function body.
 	
+
+func _process(delta):
+	if $Timers/WaveStart.is_stopped() != true:
+		$SpawnButtons/FriendlyTroopSpawnButton/Label.text = ("Time till start:  " + str($Timers/WaveStart.time_left))
+		print(str($Timers/WaveStart.time_left))
+	else:
+		$SpawnButtons/FriendlyTroopSpawnButton/Label.text = str('price of  troop : 50')
+	pass
 
 func spawn_enemy():
 	
@@ -35,15 +60,32 @@ func spawn_enemy():
 	var enemy_i = enemy_p.instantiate()
 	
 	$EnemyNPCs.add_child(enemy_i)
+	enemy_i.faction = 1
 	enemy_i.transform.origin = enemy_spawn_point_array.pick_random()
-	print("enemy spawned" + str(enemy_i.transform.origin))
+	$Timers/SpawnTimer.wait_time = randf_range(3.5, 7.5)
+	print("enemy spawned" + str($Timers/SpawnTimer.wait_time))
 	
 	pass
 	
 
+const ENEMY_TROOP_P = preload("res://Main/K9/Assets/TROOPS/Basic_ENEMYTROOP.tscn")
+
 func add_enemy_resources():
 	
+	
 	GlobalHiveMind.enemies_gold_coins += 100
+	
+	print('the hivemind gets stronger')
+	
+	while GlobalHiveMind.enemies_gold_coins >= 250:
+		var enemy_i = ENEMY_TROOP_P.instantiate()
+		GlobalHiveMind.enemies_gold_coins -= 50
+		await get_tree().create_timer(0.5).timeout
+		$EnemyNPCs.add_child(enemy_i)
+		enemy_i.faction = 1
+		enemy_i.transform.origin = enemy_spawn_point_array.pick_random()
+		print(enemy_i.name)
+			
 	
 	pass
 	

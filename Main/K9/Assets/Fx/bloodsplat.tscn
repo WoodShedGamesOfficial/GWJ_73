@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://dyam4fomgjqem"]
+[gd_scene load_steps=15 format=3 uid="uid://dyam4fomgjqem"]
 
-[ext_resource type="Texture2D" uid="uid://bl82b7ojksmi1" path="res://Main/K9/Assets/2D/textures/SpotlightC.png" id="1_xgu6o"]
+[ext_resource type="Texture2D" uid="uid://c8ki4ghninvf8" path="res://Main/K9/Assets/2D/textures/vfx/BloobSplatB.png" id="1_vtpro"]
 [ext_resource type="Texture2D" uid="uid://dwx827ay683wc" path="res://Main/K9/Assets/2D/textures/ImpactFXA.png" id="2_4ecyh"]
 [ext_resource type="Texture2D" uid="uid://s6dy0jrd2k0d" path="res://Main/K9/Assets/2D/Sprites/PlainSquare.png" id="3_arwhj"]
 
@@ -11,84 +11,15 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation_degrees = randi_range(5, 95)
-	scale.x = randf_range(1.00, 3.00)
+	rotation_degrees = randi_range(-45, 95)
+	scale.x = randf_range(.75, 3.00)
 	scale.y = randf_range(1.00, 3.00)
 	
-	await get_tree().create_timer(90.0).timeout
+	await get_tree().create_timer(60.0).timeout
+	
+	queue_free()
 	pass # Replace with function body.
 "
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_703iu"]
-texture = ExtResource("1_xgu6o")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vkv04"]
-fractal_type = 2
-fractal_lacunarity = 3.075
-fractal_gain = -0.16
-domain_warp_enabled = true
-domain_warp_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rsl43"]
-width = 128
-height = 128
-noise = SubResource("FastNoiseLite_vkv04")
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_hyerw"]
-texture = SubResource("NoiseTexture2D_rsl43")
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wsgyt"]
-texture = SubResource("NoiseTexture2D_rsl43")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_oxg1a"]
-
-[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_50okl"]
-default_input_values = [1, Vector2(2, 1), 2, Vector2(0, 0)]
-function = 1
-
-[sub_resource type="VisualShader" id="VisualShader_g6qq0"]
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform sampler2D tex_frg_2;
-
-
-
-void fragment() {
-// UVFunc:6
-	vec2 n_in6p1 = vec2(2.00000, 1.00000);
-	vec2 n_in6p2 = vec2(0.00000, 0.00000);
-	vec2 n_out6p0 = (UV - n_in6p2) * n_in6p1 + n_in6p2;
-
-
-// Texture2D:2
-	vec4 n_out2p0 = texture(tex_frg_2, n_out6p0);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out2p0.xyz);
-
-
-}
-"
-graph_offset = Vector2(-683.015, 0.213028)
-mode = 1
-flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_703iu")
-nodes/fragment/2/position = Vector2(-60, -40)
-nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_hyerw")
-nodes/fragment/3/position = Vector2(-280, 260)
-nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_wsgyt")
-nodes/fragment/4/position = Vector2(-920, 0)
-nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_oxg1a")
-nodes/fragment/5/position = Vector2(60, 320)
-nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_50okl")
-nodes/fragment/6/position = Vector2(-400, 40)
-nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 2, 0, 0, 0, 6, 0, 2, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2ctn"]
-shader = SubResource("VisualShader_g6qq0")
 
 [sub_resource type="Shader" id="Shader_x1765"]
 code = "shader_type canvas_item;
@@ -184,11 +115,9 @@ z_index = -1
 script = SubResource("GDScript_4ub2b")
 
 [node name="BloodsplatA" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 0, 0.0980392, 1)
-material = SubResource("ShaderMaterial_y2ctn")
 position = Vector2(1, 0)
-texture = SubResource("NoiseTexture2D_rsl43")
+texture = ExtResource("1_vtpro")
 
 [node name="BloodsplatB" type="Sprite2D" parent="."]
 visible = false
@@ -197,5 +126,6 @@ position = Vector2(1, 0)
 texture = ExtResource("2_4ecyh")
 
 [node name="PlainSquare" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_g3j5a")
 texture = ExtResource("3_arwhj")

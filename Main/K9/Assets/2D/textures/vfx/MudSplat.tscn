@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6l5wlds2suxo"]
+
+[ext_resource type="Shader" path="res://Main/K9/Assets/2D/textures/vfx/MudSplat.gdshader" id="1_uyyw8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wmgrt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kav3p"]
+noise = SubResource("FastNoiseLite_wmgrt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71vg0"]
+shader = ExtResource("1_uyyw8")
+shader_parameter/radius = 0.31
+shader_parameter/effectControl = 0.719
+shader_parameter/burnSpeed = 0.009
+shader_parameter/shape = 1.0
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_kav3p")
+
+[sub_resource type="Gradient" id="Gradient_wnoyk"]
+offsets = PackedFloat32Array(0.186667, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.439058, 0.209499, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_auav1"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_odp8w"]
+color_ramp = SubResource("Gradient_wnoyk")
+noise = SubResource("FastNoiseLite_auav1")
+
+[node name="MudSplat" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_71vg0")
+texture = SubResource("NoiseTexture2D_odp8w")
