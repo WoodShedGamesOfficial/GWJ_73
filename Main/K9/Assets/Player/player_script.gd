@@ -62,6 +62,8 @@ func _process(delta):
 	
 	
 	$GUI/DeathLabel/DeathLabel2.text = str( "%.2f" % $GUI/DeathLabel/Respawn_Timer.time_left)
+	
+	$GUI/HUD/HP_Bar/Label.text = str(PLAYER_STATS.health)
 	#$GUI/Label.text = str(GlobalHiveMind.players_gold_coins)
 	pass
 	
@@ -117,6 +119,9 @@ func _input(event):
 	player_cam.zoom.y = clamp(player_cam.zoom.y, 0.20, 1.5)
 	
 	
+	#if Input.is_action_just_pressed("Attack"):
+		#$PlayerWeapon.attack(damage)
+	
 	pass
 	
 
@@ -133,7 +138,7 @@ func hurt(damage, damage_type):
 		#"sharp" :
 			#print("bleeding  " + str(damage_type))
 	
-	print("took damage : " + str(damage) + "  /  " + str(damage_type) + "current health" + str(PLAYER_STATS.health))
+	#print("took damage : " + str(damage) + "  /  " + str(damage_type) + "current health" + str(PLAYER_STATS.health))
 	pass
 	
 
@@ -166,6 +171,6 @@ func player_death():
 	GlobalHiveMind.players_gold_coins -= (GlobalHiveMind.players_gold_coins / 2)
 	$GUI/DeathLabel.visible = false
 	isDead = false
-	print('player has died')
+	#print('player has died')
 	
 	pass

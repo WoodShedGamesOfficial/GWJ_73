@@ -59,14 +59,18 @@ func set_heart_faction():
 
 func _input(event):
 	#GlobalLibrary.level_path = preload("res://Main/K9/Lvls/FinalLevel/final_level.tscn")
-	var mm_path = preload('res://Main/K9/Lvls/main_menu.tscn')
+	#var mm_path = preload('res://Main/K9/Lvls/main_menu.tscn')
 	
-	if canContinue and Input.is_anything_pressed():
-		#await get_tree().create_timer(2.5).timeout
-		if LOADSCREEN == null:
-			get_tree().change_scene_to_packed(mm_path)
-		else:
-			get_tree().change_scene_to_packed(LOADSCREEN)
+	#if canContinue and Input.is_anything_pressed():
+		#get_tree().change_scene_to_packed(MAIN_MENU)
+		
+		##await get_tree().create_timer(2.5).timeout
+		#if LOADSCREEN == null:
+			##emit_signal('towers_death', heart_faction)
+			#get_tree().change_scene_to_packed(MAIN_MENU)
+		#else:
+			##emit_signal('towers_death', heart_faction)
+			#get_tree().change_scene_to_packed(MAIN_MENU)
 		
 	pass
 	
@@ -101,9 +105,12 @@ func death_of_the_tower():
 			$CanvasLayer/WinLoseScreen/WinLoseLabel.text = "you got your ass kicked bro"
 				
 			GlobalLibrary.level_path = MAIN_MENU
-				
+			
+			
 			await get_tree().create_timer(5.0).timeout
 				
+			emit_signal('towers_death', heart_faction)
+			
 			$CanvasLayer/WinLoseScreen/Continue.visible = true
 				
 			canContinue = true
@@ -119,13 +126,18 @@ func death_of_the_tower():
 				
 			GlobalLibrary.level_path = LEVEL_PATH_ON_WIN
 				
+				
 			await get_tree().create_timer(5.0).timeout
 				
 			$CanvasLayer/WinLoseScreen/Continue.visible = true
 				
+			emit_signal('towers_death')
+			print("emitted level trans signal")
+			
 			canContinue = true
 			#print('you won!')
 	#$CanvasLayer/WinLoseScreen.visible = true
+	
 	$CanvasLayer/WinLoseScreen.update_stats_panel()
 	pass
 	

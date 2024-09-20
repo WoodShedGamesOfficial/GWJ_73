@@ -408,3 +408,5 @@ libraries = {
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="MenuAnim" type="AnimationPlayer" parent="."]

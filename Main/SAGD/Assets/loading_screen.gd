@@ -15,13 +15,8 @@ func _ready():
 	GlobalLibrary.friendly_losses = 0
 	GlobalLibrary.enemy_losses = 0
 	GlobalLibrary.total_gold_spent = 0
-	pass
-
-func _input(event):
-	if Input.is_anything_pressed() and fakeLoadReady == true:
-		get_tree().change_scene_to_packed(GlobalLibrary.level_path)
-	pass
 	
+	pass
 
 
 func _on_timer_timeout():
@@ -36,4 +31,5 @@ func _on_timer_2_timeout():
 	$Label3.visible = true
 	
 	await get_tree().create_timer(1.5).timeout
+	
 	get_tree().change_scene_to_packed(GlobalLibrary.level_path)

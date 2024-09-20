@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=32 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -137,6 +137,10 @@ font_color = Color(1, 0.239216, 0.262745, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lbucs"]
+font_size = 64
+font_color = Color(0, 0.921919, 0.213041, 1)
 
 [sub_resource type="GDScript" id="GDScript_e533t"]
 resource_name = "CompassScript"
@@ -355,6 +359,15 @@ texture_under = ExtResource("8_efr0t")
 texture_progress = ExtResource("8_efr0t")
 tint_under = Color(0.0495185, 3.5346e-08, 0.0185641, 1)
 tint_progress = Color(0.831373, 0, 0, 1)
+
+[node name="Label" type="Label" parent="GUI/HUD/HP_Bar"]
+layout_mode = 0
+offset_left = 142.199
+offset_top = 215.557
+offset_right = 389.199
+offset_bottom = 303.557
+text = "number"
+label_settings = SubResource("LabelSettings_lbucs")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD"]
 layout_mode = 0

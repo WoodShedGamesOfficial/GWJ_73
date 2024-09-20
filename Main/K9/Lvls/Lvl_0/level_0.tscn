@@ -436,6 +436,8 @@ autoplay = true
 mix_target = 1
 bus = &"World"
 
+[connection signal="towers_death" from="TheHiveMind/TowerHearts/EnemyHeart" to="." method="_on_enemy_heart_towers_death"]
+[connection signal="towers_death" from="TheHiveMind/TowerHearts/PlayersHeart" to="TheHiveMind" method="_on_players_heart_towers_death"]
 [connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
 [connection signal="finished" from="BKMusic" to="." method="_on_bk_music_finished"]

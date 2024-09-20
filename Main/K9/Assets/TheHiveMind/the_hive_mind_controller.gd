@@ -16,6 +16,12 @@ var enemy_spawn_point_array = []
 @export var isAwake : bool = true
 var spawn_time : float = randf_range(3.5, 7.5)
 
+const LEVEL_0 = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+const MAIN_MENU = preload("res://Main/K9/Lvls/main_menu.tscn")
+const LOAD_SCREEN = preload("res://Main/K9/Lvls/load_screen.tscn")
+const K_9_DEV_ROOM = preload("res://Main/K9/Lvls/Dev_room/k_9_dev_room.tscn")
+
+
 
 # --function blocks
 
@@ -92,3 +98,12 @@ func add_enemy_resources():
 	
 	pass
 	
+
+
+func _on_players_heart_towers_death():
+	printt("heart destroyed, hivemind changing levels" )
+	
+	
+	
+	
+	pass # Replace with function body.

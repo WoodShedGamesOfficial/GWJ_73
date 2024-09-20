@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cha4djm5388ox"]
+[gd_scene load_steps=24 format=4 uid="uid://cha4djm5388ox"]
 
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_cqyc0"]
 [ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="2_vg4lo"]
@@ -12,6 +12,19 @@
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="10_n4q2i"]
 [ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="11_3yywd"]
 [ext_resource type="PackedScene" uid="uid://78d8d4y6ftyu" path="res://Main/K9/Assets/coin_pickup.tscn" id="12_q8f0l"]
+
+[sub_resource type="GDScript" id="GDScript_1offw"]
+resource_name = "TutIslandScript"
+script/source = "extends Node2D
+
+const LEVEL_0 = preload(\"res://Main/K9/Lvls/Lvl_0/level_0.tscn\")
+
+func _on_enemy_heart_2_towers_death():
+	GlobalHiveMind.friendly_tower_heart_pos_array.clear()
+	GlobalHiveMind.enemy_heart_pos_array.clear()
+	get_tree().change_scene_to_packed(LEVEL_0)
+	pass # Replace with function body.
+"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nlfxp"]
 vertices = PackedVector2Array(1616.52, -57.1797, 2408.25, -79.5391, 2390.36, 186.008, 1601.54, 725.25, 2385.26, 727.75, 2404.2, 272.398, 7509.23, -151.469, 10642.1, 357.906, 10665, 594.898, 7859.31, 624, 7498.24, 159.477, 12864.3, -223.078, 12887.7, 590.398, 12075.2, 614.5, 12086.2, 326.148, 12103.8, 263.188, 4778.56, 227.633, 4805.61, 730.641, 3159.84, 743.367, 3164.85, 258.5, 3234.13, 176.094, 7460.88, 624, 7473.7, 239.359, 12080.9, -204.008, 12048, 265.781, 12048, 272, 11914.6, 272, 10718.2, 327.813, 3152, 258.727, 3152, 240, 10717.2, -171.492, 4847.66, 177.5, 2480, 240, 2480, 271, 3240.12, -74.6563, 4824.67, -88.3594)
@@ -123,6 +136,7 @@ scale_curve = SubResource("CurveTexture_ni2pw")
 color_ramp = SubResource("GradientTexture1D_w350g")
 
 [node name="Tutorial_Island" type="Node2D"]
+script = SubResource("GDScript_1offw")
 
 [node name="World" type="Node" parent="."]
 
@@ -145,6 +159,7 @@ tile_set = ExtResource("2_vg4lo")
 [node name="Labels" type="Node" parent="."]
 
 [node name="Welcome" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = -698.0
 offset_top = -167.0
 offset_right = -470.0
@@ -153,6 +168,7 @@ text = "welcome to tower wars, Commander. Your goal is to conquor the enemies he
 "
 
 [node name="Welcome2" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 157.0
 offset_top = 145.0
 offset_right = 385.0
@@ -167,6 +183,7 @@ LMB or space to attack and
 interact"
 
 [node name="Welcome3" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 1488.0
 offset_top = 28.0
 offset_right = 1716.0
@@ -174,6 +191,7 @@ offset_bottom = 457.0
 text = "When the hivemind is active, you spawn troops here"
 
 [node name="Welcome4" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 2106.0
 offset_top = 621.0
 offset_right = 2334.0
@@ -181,6 +199,7 @@ offset_bottom = 1050.0
 text = "Portals take you either from the battlefield to your tower or vice versa, they are a common mode of transport. Cheaper tham petrol anyways. Fun fact: they're slightly nausea inducing. "
 
 [node name="Welcome5" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 3098.0
 offset_top = 152.0
 offset_right = 3326.0
@@ -188,6 +207,7 @@ offset_bottom = 581.0
 text = "You can pass through friendly gates but your enemies cannot and vice versa... until they break it... Fun fact: The gates are made of possibly human teeth"
 
 [node name="Welcome6" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 4605.0
 offset_top = 123.0
 offset_right = 4833.0
@@ -197,6 +217,7 @@ text = "You can hold shift to sprint great distances, faster than a panther.
 Use this to gather gold before the hivemind awakens"
 
 [node name="Welcome7" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 9992.0
 offset_top = 528.0
 offset_right = 10220.0
@@ -206,6 +227,7 @@ text = "This portal will take you back to the tower.
 Fun fact: Necromancers *with enough practice* can murder and revive you all in less than a day!"
 
 [node name="Welcome8" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 11645.0
 offset_top = 210.0
 offset_right = 11873.0
@@ -213,6 +235,7 @@ offset_bottom = 639.0
 text = "You will always have better luck with your troops help to destroy enemy facilities"
 
 [node name="Welcome9" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 12388.0
 offset_top = 53.0
 offset_right = 12616.0
@@ -221,6 +244,7 @@ text = "Gather your troops or lead the charge yourself to destroy the enemies he
 "
 
 [node name="Welcome10" type="RichTextLabel" parent="Labels"]
+z_index = -1
 offset_left = 8242.0
 offset_top = 99.0
 offset_right = 8470.0
@@ -393,5 +417,6 @@ position = Vector2(6575, 209)
 [node name="CoinPickup6" parent="Coins" instance=ExtResource("12_q8f0l")]
 position = Vector2(6930, 209)
 
+[connection signal="towers_death" from="TheHiveMind/TowerHearts/EnemyHeart2" to="." method="_on_enemy_heart_2_towers_death"]
 [connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
