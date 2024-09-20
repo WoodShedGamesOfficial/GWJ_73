@@ -220,7 +220,7 @@ debug_color = Color(0.647445, 0.521158, 0, 0.42)
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_02xtc")
-volume_db = -2.0
+volume_db = -25.0
 bus = &"NPCs"
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="Audio"]
@@ -229,7 +229,7 @@ bus = &"NPCs"
 
 [node name="SwordClash" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("5_4aha7")
-volume_db = -5.0
+volume_db = -25.0
 bus = &"NPCs"
 
 [node name="AttackTimer" type="Timer" parent="."]

@@ -10,10 +10,14 @@ extends CharacterBody2D
 	'health' : 100, 
 }
 
+@export var LEVEL_PATH_ON_WIN : PackedScene = preload('res://Main/K9/Lvls/Lvl_0/level_0.tscn')
+
 var canContinue : bool = false
 var playerWon : bool
+var final_level : bool = false
 
-
+const MAIN_MENU = preload("res://Main/K9/Lvls/main_menu.tscn")
+const FINAL_LEVEL = preload("res://Main/K9/Lvls/FinalLevel/final_level.tscn")
 const LOADSCREEN = preload('res://Main/SAGD/Assets/loading_screen.tscn')
 
 # Called when the node enters the scene tree for the first time.
@@ -46,7 +50,7 @@ func set_heart_faction():
 
 		"hostile" :
 			GlobalHiveMind.enemy_heart_pos_array.append(global_transform.origin)
-			add_to_group("Enemy")
+			add_to_group("enemy")
 			
 		
 	pass
@@ -83,36 +87,47 @@ func death_of_the_tower():
 	$HealthBar.visible = false
 	var MM_path = load("res://Main/K9/Lvls/main_menu.tscn")
 	
-	
+		
+
 	match heart_faction:
+			
 		"friendly":
+				
 			playerWon = false
 			$CanvasLayer/WinLoseScreen.update_stats_panel()
 			$CanvasLayer/WinLoseScreen.visible = true
-			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you got your ass kicked bro"
-			
-			GlobalLibrary.level_path = preload("res://Main/K9/Lvls/FinalLevel/final_level.tscn")
-			
+			$CanvasLayer/WinLoseScreen/WinLoseLabel.text = "you got your ass kicked bro"
+				
+			GlobalLibrary.level_path = MAIN_MENU
+				
 			await get_tree().create_timer(5.0).timeout
-			
+				
 			$CanvasLayer/WinLoseScreen/Continue.visible = true
+				
 			canContinue = true
-			
-			#print('you lost')
+				
+				#print('you lost')
 		"hostile" :
+				
 			playerWon = true
+			
 			$CanvasLayer/WinLoseScreen.update_stats_panel()
 			$CanvasLayer/WinLoseScreen.visible = true
-			$CanvasLayer/WinLoseScreen/PanelContainer/WinLoseLabel.text = "you destroyed their Tower!"
-			
-			GlobalLibrary.level_path = preload('res://Main/K9/Lvls/main_menu.tscn')
-			
+			$CanvasLayer/WinLoseScreen/WinLoseLabel.text = "you destroyed their Tower!"
+				
+			GlobalLibrary.level_path = LEVEL_PATH_ON_WIN
+				
 			await get_tree().create_timer(5.0).timeout
-			
+				
 			$CanvasLayer/WinLoseScreen/Continue.visible = true
+				
 			canContinue = true
 			#print('you won!')
 	#$CanvasLayer/WinLoseScreen.visible = true
 	$CanvasLayer/WinLoseScreen.update_stats_panel()
 	pass
 	
+
+func set_final_level():
+	final_level = true
+	pass

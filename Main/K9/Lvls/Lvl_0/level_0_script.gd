@@ -7,3 +7,4 @@ class_name K9s_level_manager
 func _ready():
 	GlobalHiveMind.enemies_gold_coins = hiveminds_base_gold
 	pass # Replace with function body.
+ 

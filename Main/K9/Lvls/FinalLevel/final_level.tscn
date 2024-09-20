@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bi7r0outi0sx7"]
+[gd_scene load_steps=11 format=4 uid="uid://bi7r0outi0sx7"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/FinalLevel/final_level_script.gd" id="1_k3pnr"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_uqu6n"]
@@ -7,115 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="4_fxocl"]
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="5_mrkm8"]
 [ext_resource type="Texture2D" uid="uid://cnmh5ydxt0x45" path="res://Main/K9/Assets/2D/Sprites/TroopSpawner.png" id="6_a68qm"]
-[ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="8_fnnrs"]
+[ext_resource type="Script" path="res://Main/K9/Assets/TowerHeart/tower_heart_script.gd" id="8_46kck"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="8_rsk4w"]
-[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="9_sdfbf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_px5f3"]
 vertices = PackedVector2Array(7408, 1008, 4624, 1008, 4624, -112, 7408, -112, 11760, 1712, 11760, 2856.16, 11646.9, 2678.1, 11635.6, 1613.46, 7668.99, 2576, 6222.86, 2863.99, 6320, 2576, 1936.55, -527.648, 2288, -607.602, 2288, -48, 7632, 1232, 7632, -336, 10288, 944, 10288, 1594.14, 8400, 1520, 5584, -624, 5584, -669.313, 5717.91, -665.383, 6149.95, -2059.49, 6149.09, -652.742, 5676.8, -1766.03, 2224, 1520, 2224, 1521.23, 1302.13, 1504.46, 1332.01, -568.867, 11661, -624, 12012, -622.359, 12012, 1618.84, 11856.6, 1616.61, 10512, -48, 10512, -624, 1904, -688, 1937.27, -688, 1621.01, -611.883, 4400, 1232, 6192, 1520, 6192, 1556.82, 6150.55, 1556.64, 5712, 1520, 2512, 944, 5769.03, 1556.67, 5712, 1556.89, 2512, -48, 2512, -624, 4400, -336, 6320, -624, 10288, -624, 10288, -48, 11824, 1648, 11824, 1712, 2512, 1520, 2288, 944, 2288, 1520, 6276.64, -649.008, 6320, -648.797, 5648, -1766.35, 5648, -1808, 8400, 1567.1, 10512, 1597.35, 10512, 944, 5736.93, 2840.81, 6143.8, 2536.86, 6320, 2541.38, 2014.09, -2084.98, 1904, -1808, 1641.91, -2063.43, 11855.1, 1648)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 6, 5, 9, 10), PackedInt32Array(11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21), PackedInt32Array(22, 23, 21, 24), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33, 34), PackedInt32Array(35, 36, 11, 37), PackedInt32Array(38, 39, 40, 41, 42, 43), PackedInt32Array(44, 45, 42), PackedInt32Array(46, 47, 19, 48), PackedInt32Array(49, 50, 51, 15), PackedInt32Array(52, 53, 4, 7, 33), PackedInt32Array(42, 54, 43), PackedInt32Array(55, 56, 25, 28, 37, 11), PackedInt32Array(57, 58, 49, 48), PackedInt32Array(24, 59, 60, 22), PackedInt32Array(17, 61, 18), PackedInt32Array(14, 18, 39, 38), PackedInt32Array(7, 62, 63), PackedInt32Array(9, 64, 44, 65), PackedInt32Array(65, 66, 10, 9), PackedInt32Array(41, 65, 44), PackedInt32Array(67, 22, 60, 68, 69), PackedInt32Array(37, 69, 68, 35), PackedInt32Array(55, 11, 13), PackedInt32Array(55, 13, 46, 43), PackedInt32Array(32, 70, 52, 33), PackedInt32Array(33, 7, 63, 51), PackedInt32Array(51, 63, 16, 15), PackedInt32Array(49, 15, 48), PackedInt32Array(23, 57, 48, 19), PackedInt32Array(41, 44, 42), PackedInt32Array(48, 38, 43, 46), PackedInt32Array(23, 19, 21)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1253, -638, 1221, 1583, 4462, 1642, 5687, 1637, 5655, 2917, 6221, 2944, 11877, 2936, 11889, 2585, 11940, 1550, 11555, 1556, 11566, 2596, 6224.34, 2458.9, 6230, 1637, 8392, 1647, 12092, 1700, 12092, -702, 6278, -729, 5562, -750, 2439, -724, 2017, -628, 2022, -1728, 5599.7, -1686.9, 5645, -474, 6229, -486, 6230, -2139, 2012, -2165, 1563, -2139, 1542, -681)])
 agent_radius = 80.0
-
-[sub_resource type="GDScript" id="GDScript_p4mte"]
-resource_name = "TroopSpawnButtonTESTING"
-script/source = "extends Node2D
-
-@onready var interaction_radius = $InteractionRadius
-
-var canInteract : bool
-
-@export var troop_p = preload(\"res://Main/K9/Assets/TROOPS/Basic_TROOP.tscn\")
-@export var price_of_troop : int = 50
-
-var spawn_points_array = []
-var players_wallet = GlobalHiveMind.players_gold_coins
-
-
-# function bloack
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	for points in $\"../../FriendlySpawnPoints\".get_children():
-		spawn_points_array.append(points.transform.origin)
-	
-	
-	#GlobalHiveMind.players_gold_coins = 500
-	pass # Replace with function body.
-
-func _input(event):
-	if Input.is_action_just_released(\"ui_accept\") and canInteract and GlobalHiveMind.players_gold_coins >= price_of_troop:
-		spawn_friendly_troop()
-	pass
-	
-
-
-func _on_interaction_radius_body_entered(body):
-	if body.is_in_group(\"Player\"):
-		canInteract = true
-	
-	pass # Replace with function body.
-
-
-func _on_interaction_radius_body_exited(body):
-	if body.is_in_group(\"Player\"):
-		canInteract = false
-	
-	pass # Replace with function body.
-
-
-func spawn_friendly_troop():
-	var troop_i = troop_p.instantiate() ##troop instance
-	
-	var hivemind_friendlymanager = $\"../../FriendlyNPCs\"
-	
-	hivemind_friendlymanager.add_child(troop_i)
-	troop_i.global_transform.origin = spawn_points_array.pick_random()
-	$SpawnFX.restart()
-	GlobalHiveMind.players_gold_coins -= price_of_troop
-	print(\"troops position\" )
-	pass
-	
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2s8js"]
-radius = 69.0072
-
-[sub_resource type="Curve" id="Curve_wpjy1"]
-min_value = -360.0
-max_value = 360.0
-_data = [Vector2(0, -146.374), 0.0, 0.0, 0, 0, Vector2(0.986301, 280.879), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_2vflq"]
-curve = SubResource("Curve_wpjy1")
-
-[sub_resource type="Gradient" id="Gradient_havv6"]
-offsets = PackedFloat32Array(0, 0.491525, 0.889831, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.303233, 0.303233, 0.303233, 1, 0.728822, 0.728822, 0.728822, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_w350g"]
-gradient = SubResource("Gradient_havv6")
-
-[sub_resource type="Curve" id="Curve_6y0v6"]
-_data = [Vector2(0, 0.076923), 0.0, 0.0, 0, 0, Vector2(0.739726, 0.164835), -0.668498, -0.668498, 0, 0, Vector2(1, 0.076923), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_ni2pw"]
-curve = SubResource("Curve_6y0v6")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kthl0"]
-particle_flag_disable_z = true
-angle_min = -0.299989
-angle_max = 1.07288e-05
-angle_curve = SubResource("CurveTexture_2vflq")
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_min = 60.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_ni2pw")
-color_ramp = SubResource("GradientTexture1D_w350g")
 
 [node name="Final_Level" type="Node2D"]
 script = ExtResource("1_k3pnr")
@@ -641,48 +540,13 @@ TOWERSTATS = {
 [node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
 position = Vector2(11852, 286)
 scale = Vector2(5.87331, 5.87331)
-heart_faction = "hostile"
+script = ExtResource("8_46kck")
 TOWERSTATS = {
 "health": 2000
 }
 
 [node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]
 rotation = -0.0186007
-
-[node name="FriendlyTroopSpawnButton2" type="Node2D" parent="TheHiveMind/SpawnButtons" index="1"]
-position = Vector2(1293, -602)
-rotation = -0.0111818
-script = SubResource("GDScript_p4mte")
-
-[node name="Label" type="Label" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
-offset_left = -71.0
-offset_top = -83.0
-offset_right = 78.0
-offset_bottom = -60.0
-text = "Spawn infantry : 50"
-
-[node name="InteractionRadius" type="Area2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius"]
-shape = SubResource("CircleShape2D_2s8js")
-
-[node name="Marker2D" type="Marker2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
-position = Vector2(15, 402)
-
-[node name="SpawnFX" type="GPUParticles2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
-position = Vector2(-1.81326, 3.70297)
-emitting = false
-amount = 32
-process_material = SubResource("ParticleProcessMaterial_kthl0")
-texture = ExtResource("8_fnnrs")
-lifetime = 0.65
-one_shot = true
-explosiveness = 0.8
-
-[node name="PlainCircle" type="Sprite2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
-modulate = Color(0.384314, 0.658824, 0.396078, 1)
-scale = Vector2(0.154175, 0.154175)
-texture = ExtResource("9_sdfbf")
 
 [node name="DefensiveGate" parent="." instance=ExtResource("8_rsk4w")]
 position = Vector2(2345, 270)
@@ -767,9 +631,6 @@ faction = "hostile"
 
 [node name="Eyeball" parent="HsotileGate6/Sprites" index="2"]
 modulate = Color(0.925129, 0, 0.353862, 1)
-
-[connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2" method="_on_interaction_radius_body_entered"]
-[connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2" method="_on_interaction_radius_body_exited"]
 
 [editable path="World/MudSplat"]
 [editable path="World/MudSplat2"]

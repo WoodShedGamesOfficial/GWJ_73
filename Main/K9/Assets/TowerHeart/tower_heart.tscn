@@ -288,10 +288,10 @@ func _ready():
 
 #updates the info on the win lose screen to be accurate
 func update_stats_panel():
-	$VBoxContainer/FreindlyLosses.text
-	$VBoxContainer/EnemyLosses.text
-	$VBoxContainer/CoinSpent.text
-	$VBoxContainer/Time.text
+	$PanelContainer/VBoxContainer/FreindlyLosses/Label3.text = str(GlobalLibrary.friendly_losses)
+	$PanelContainer/VBoxContainer/EnemyLosses/Label2.text = str(GlobalLibrary.enemy_losses)
+	$PanelContainer/VBoxContainer/CoinSpent/Label.text = str(GlobalLibrary.total_gold_spent)
+	#$VBoxContainer/Time.text
 	pass
 	
 "
@@ -370,6 +370,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_rqko1")
 
+[node name="WinLoseLabel" type="Label" parent="CanvasLayer/WinLoseScreen"]
+layout_mode = 2
+offset_left = 503.0
+offset_top = 47.0
+offset_right = 636.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0.909804, 0, 1)
+text = "You mighta won?"
+
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/WinLoseScreen"]
 layout_mode = 1
 anchors_preset = 8
@@ -387,45 +398,63 @@ grow_vertical = 2
 [node name="Panel" type="Panel" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
 layout_mode = 2
 
-[node name="WinLoseLabel" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinLoseScreen/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0, 0.909804, 0, 1)
-text = "You mighta won?"
-
-[node name="Stats" type="Label" parent="CanvasLayer/WinLoseScreen"]
-layout_mode = 2
-offset_left = 448.0
-offset_top = 124.0
-offset_right = 491.0
-offset_bottom = 147.0
-size_flags_horizontal = 4
-text = "Stats:"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinLoseScreen"]
-layout_mode = 2
-offset_left = 427.0
-offset_top = 175.0
-offset_right = 727.0
-offset_bottom = 675.0
 theme_override_constants/separation = 80
 
-[node name="FreindlyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+[node name="FreindlyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Friendly Losses:"
 
-[node name="EnemyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+[node name="Label3" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer/FreindlyLosses"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 25.0
+offset_right = 153.0
+offset_bottom = 48.0
+text = "ammount
+"
+
+[node name="EnemyLosses" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Enemy Losses:"
 
-[node name="CoinSpent" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer/EnemyLosses"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 30.0
+offset_right = 138.0
+offset_bottom = 53.0
+text = "ammount
+"
+
+[node name="CoinSpent" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Total Coin Spent:"
 
-[node name="Time" type="Label" parent="CanvasLayer/WinLoseScreen/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer/CoinSpent"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 30.0
+offset_right = 104.0
+offset_bottom = 53.0
+text = "ammount
+"
+
+[node name="Time" type="Label" parent="CanvasLayer/WinLoseScreen/PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Time to conquest:   "
+
+[node name="Stats" type="Label" parent="CanvasLayer/WinLoseScreen"]
+visible = false
+layout_mode = 2
+offset_left = 638.0
+offset_top = 78.0
+offset_right = 681.0
+offset_bottom = 101.0
+size_flags_horizontal = 4
+text = "Stats:"
 
 [node name="Continue" type="Label" parent="CanvasLayer/WinLoseScreen"]
 visible = false

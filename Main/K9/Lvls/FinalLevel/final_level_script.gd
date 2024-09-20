@@ -6,4 +6,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalHiveMind.enemies_gold_coins = hiveminds_base_gold
-	$World/WorldNav.bake_navigation_polygon()
+	#$World/WorldNav.bake_navigation_polygon()
+	
+	$TheHiveMind/TowerHearts/PlayersHeart.set_final_level()
+	$TheHiveMind/TowerHearts/EnemyHeart2.set_final_level()
