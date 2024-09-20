@@ -1,4 +1,25 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://crgf21qgb2vr"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://crgf21qgb2vr"]
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_ui1ld"]
+resource_name = "Chorus"
+voice_count = 4
+dry = 0.8
+wet = 0.96
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_pvwki"]
+resource_name = "Reverb"
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_pcuwi"]
 resource_name = "Reverb"
@@ -16,8 +37,12 @@ bus/1/name = &"World"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = -3.76831
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectChorus_ui1ld")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_pvwki")
+bus/1/effect/1/enabled = true
 bus/2/name = &"Player"
 bus/2/solo = false
 bus/2/mute = false

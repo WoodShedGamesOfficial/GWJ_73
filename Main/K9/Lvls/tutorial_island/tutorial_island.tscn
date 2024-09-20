@@ -220,10 +220,19 @@ offset_bottom = 482.0
 text = "Gather your troops or lead the charge yourself to destroy the enemies heart!
 "
 
+[node name="Welcome10" type="RichTextLabel" parent="Labels"]
+offset_left = 8242.0
+offset_top = 99.0
+offset_right = 8470.0
+offset_bottom = 528.0
+text = "Use the mouse wheel to zoom in and out of the battlefield to get a better view of things:
+
+fun fact: 
+"
+
 [node name="Player_0" parent="." instance=ExtResource("5_c1wgj")]
 position = Vector2(-283, 329)
 rotation = -0.900308
-scale = Vector2(1, 1)
 
 [node name="gates" type="Node" parent="."]
 
@@ -250,7 +259,6 @@ scale = Vector2(0.637819, 0.637819)
 [node name="HostileGate" parent="gates" instance=ExtResource("5_4obm7")]
 position = Vector2(11981, 325)
 rotation = 1.56602
-scale = Vector2(1, 1)
 gate_health = 50
 
 [node name="TheHiveMind" type="Node" parent="."]

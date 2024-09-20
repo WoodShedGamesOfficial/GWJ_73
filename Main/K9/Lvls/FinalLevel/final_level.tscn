@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bi7r0outi0sx7"]
+[gd_scene load_steps=10 format=4 uid="uid://bi7r0outi0sx7"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/FinalLevel/final_level_script.gd" id="1_k3pnr"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_uqu6n"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="4_fxocl"]
 [ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="5_mrkm8"]
 [ext_resource type="Texture2D" uid="uid://cnmh5ydxt0x45" path="res://Main/K9/Assets/2D/Sprites/TroopSpawner.png" id="6_a68qm"]
-[ext_resource type="Script" path="res://Main/K9/Assets/TowerHeart/tower_heart_script.gd" id="8_46kck"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="8_rsk4w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_px5f3"]
@@ -533,14 +532,6 @@ wait_time = 75.0
 [node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
 position = Vector2(1299, 1043)
 scale = Vector2(6.40936, 6.40936)
-TOWERSTATS = {
-"health": 2000
-}
-
-[node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
-position = Vector2(11852, 286)
-scale = Vector2(5.87331, 5.87331)
-script = ExtResource("8_46kck")
 TOWERSTATS = {
 "health": 2000
 }

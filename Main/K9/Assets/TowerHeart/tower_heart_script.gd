@@ -20,6 +20,8 @@ const MAIN_MENU = preload("res://Main/K9/Lvls/main_menu.tscn")
 const FINAL_LEVEL = preload("res://Main/K9/Lvls/FinalLevel/final_level.tscn")
 const LOADSCREEN = preload('res://Main/SAGD/Assets/loading_screen.tscn')
 
+signal towers_death
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CanvasLayer/WinLoseScreen.visible = false
@@ -127,7 +129,3 @@ func death_of_the_tower():
 	$CanvasLayer/WinLoseScreen.update_stats_panel()
 	pass
 	
-
-func set_final_level():
-	final_level = true
-	pass

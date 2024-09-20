@@ -8,3 +8,9 @@ func _ready():
 	GlobalHiveMind.enemies_gold_coins = hiveminds_base_gold
 	pass # Replace with function body.
  
+
+
+func _on_bk_music_finished():
+	$BKMusic.pitch_scale = randf_range(0.8, 1.1)
+	$BKMusic.play()
+	pass # Replace with function body.

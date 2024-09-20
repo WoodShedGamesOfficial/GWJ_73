@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bvgo1sg5f3ja1"]
+[gd_scene load_steps=28 format=4 uid="uid://bvgo1sg5f3ja1"]
 
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_2keua"]
 [ext_resource type="Script" path="res://Main/K9/Lvls/Lvl_0/level_0_script.gd" id="1_qa2pk"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="10_oixl2"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="11_5qnov"]
 [ext_resource type="PackedScene" uid="uid://78d8d4y6ftyu" path="res://Main/K9/Assets/coin_pickup.tscn" id="11_jq1sy"]
+[ext_resource type="AudioStream" uid="uid://da3udprndtdpy" path="res://Main/K9/Assets/Audio/OST/GWJ_73_partDeux.ogg" id="17_p32db"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_txw3b"]
 vertices = PackedVector2Array(-2448, -400, -2448, -390.852, -3199.8, -318.039, -3204.28, -801.852, -2512, -688, 3151.47, -839.43, 3166.44, -31.7422, 2604.31, -50.3516, 2610.4, -412.5, 2576, -835.344, 2576, -688, -2512, -835.648, -2353.6, -400, -2288, -688, -1903.55, -443.578, -784, 824.57, -1888.55, 827.75, -1861.89, 194.07, -1603.3, 240.367, -1348.6, -1439.68, 624, -1457.07, 624, -528, -496, -1040, -2288, -845.883, -1599.29, -840.609, -1218.69, 238.594, -784, -1040, -1264, -217.008, -1264, -1104, 688, 820.328, -560, 823.922, -560, -240, -368, -240, 688, 688, 1577.12, 190.328, 2119, 816.219, 912, 819.688, 912, 688, 1220.18, 150.469, 1587.22, -834, 2288, -834, 2288, -560, 2119, -397.609, 2512, -560, 2512, -688, 688, 464, -368, -304, -304, -304, -144, -240, -304, -528, -560, -528, -560, -752, -496, -752, -80, -528, -80, -464, -144, -464, 688, -240, 912, -528, 848, -528, 848, -1459.05, 1216.19, -1462.3, 1231.99, -889.219, 912, 464, -1352.22, -1104, -1354.92, -1131.19)
@@ -427,8 +428,17 @@ scale = Vector2(0.581221, 0.581221)
 position = Vector2(1067, -1310)
 scale = Vector2(0.581221, 0.581221)
 
+[node name="BKMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_p32db")
+volume_db = -6.679
+pitch_scale = 1.1
+autoplay = true
+mix_target = 1
+bus = &"World"
+
 [connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
+[connection signal="finished" from="BKMusic" to="." method="_on_bk_music_finished"]
 
 [editable path="World/MudSplat"]
 [editable path="World/MudSplat2"]
