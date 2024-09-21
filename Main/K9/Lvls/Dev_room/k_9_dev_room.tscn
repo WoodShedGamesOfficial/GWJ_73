@@ -195,10 +195,6 @@ position = Vector2(-2959, 115)
 [node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
 position = Vector2(-3997, 227)
 
-[node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
-position = Vector2(482, -238)
-heart_faction = "hostile"
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.310424, 0.326156, 0.358265, 1)
 
@@ -258,12 +254,10 @@ gate_health = 5
 [node name="Portal_000" parent="Duffs/PortalManager/Portals" index="0" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_cs77b")]
 position = Vector2(-3233, 651)
 linked_portal = NodePath("../Portal_001")
-faction = "friendly"
 
 [node name="Portal_001" parent="Duffs/PortalManager/Portals" index="1" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_cs77b")]
 position = Vector2(-350, 795)
 linked_portal = NodePath("../Portal_000")
-faction = "hostile"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ue5al")

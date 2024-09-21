@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=33 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://sv7l5kycqjet" path="res://Main/K9/Assets/Player/pause_menu.tscn" id="6_gqqi6"]
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/gui_script.gd" id="6_iwycx"]
 [ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="8_efr0t"]
-[ext_resource type="PackedScene" uid="uid://cg1tgik1raup3" path="res://Main/K9/Assets/win_lose_screen.tscn" id="8_io5ii"]
 [ext_resource type="Texture2D" uid="uid://efjtifdax32w" path="res://Main/K9/Assets/2D/UI/CastleUI.png" id="9_pv8eh"]
 [ext_resource type="Texture2D" uid="uid://cl31527500yi8" path="res://Main/K9/Assets/2D/UI/CastleUI_Panel.png" id="10_kvxd5"]
 [ext_resource type="Texture2D" uid="uid://dw0wwtwbbjjx6" path="res://Main/K9/Assets/2D/Arrow.png" id="12_hdiom"]
@@ -132,6 +131,19 @@ func _input(event):
 	pass
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_xitft"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6bdxt"]
+font_size = 24
+font_color = Color(1, 0.239216, 0.262745, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lbucs"]
+font_size = 64
+font_color = Color(0, 0.921919, 0.213041, 1)
+
 [sub_resource type="GDScript" id="GDScript_e533t"]
 resource_name = "CompassScript"
 script/source = "extends Marker2D
@@ -147,6 +159,58 @@ func _process(delta):
 	
 	pass
 "
+
+[sub_resource type="Curve" id="Curve_16q5m"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.506849, -11.8682), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ml1ii"]
+curve = SubResource("Curve_16q5m")
+
+[sub_resource type="Gradient" id="Gradient_kyoo6"]
+colors = PackedColorArray(0, 0.439216, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i85fm"]
+gradient = SubResource("Gradient_kyoo6")
+
+[sub_resource type="Curve" id="Curve_bn0qf"]
+_data = [Vector2(0, 0.197802), 0.0, 0.0, 0, 0, Vector2(0.630137, 0.131868), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6c7lx"]
+curve = SubResource("Curve_bn0qf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o7buc"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 200.0
+emission_ring_inner_radius = 100.0
+angle_min = -45.0
+angle_max = 45.0
+angle_curve = SubResource("CurveTexture_ml1ii")
+inherit_velocity_ratio = 0.5
+direction = Vector3(0, 0, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_6c7lx")
+color_ramp = SubResource("GradientTexture1D_i85fm")
+
+[sub_resource type="Gradient" id="Gradient_d1ufx"]
+offsets = PackedFloat32Array(0.473333, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pmchg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ytvf6"]
+color_ramp = SubResource("Gradient_d1ufx")
+noise = SubResource("FastNoiseLite_pmchg")
 
 [node name="Player_0" type="CharacterBody2D"]
 collision_mask = 14
@@ -221,7 +285,49 @@ anchor_right = 0.5
 anchor_bottom = 0.0
 grow_vertical = 1
 
-[node name="WinLoseScreen" parent="GUI" instance=ExtResource("8_io5ii")]
+[node name="DeathLabel" type="Label" parent="GUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You are reconstituting yourself near the towers heart:
+Time Left:"
+label_settings = SubResource("LabelSettings_xitft")
+
+[node name="DeathLabel2" type="Label" parent="GUI/DeathLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -2.0
+offset_right = -73.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.458824, 0.313726, 1)
+text = "TIME"
+label_settings = SubResource("LabelSettings_6bdxt")
+
+[node name="Respawn_Timer" type="Timer" parent="GUI/DeathLabel"]
+wait_time = 10.0
+one_shot = true
+
+[node name="Panel" type="Panel" parent="GUI/DeathLabel"]
+modulate = Color(0.0823529, 0, 0.0156863, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_right = 427.0
+offset_bottom = 70.0
 
 [node name="HUD" type="Control" parent="GUI"]
 layout_mode = 3
@@ -263,6 +369,15 @@ texture_progress = ExtResource("8_efr0t")
 tint_under = Color(0.0495185, 3.5346e-08, 0.0185641, 1)
 tint_progress = Color(0.831373, 0, 0, 1)
 
+[node name="Label" type="Label" parent="GUI/HUD/HP_Bar"]
+layout_mode = 0
+offset_left = 142.199
+offset_top = 215.557
+offset_right = 389.199
+offset_bottom = 303.557
+text = "number"
+label_settings = SubResource("LabelSettings_lbucs")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD"]
 layout_mode = 0
 offset_left = 74.0
@@ -298,5 +413,15 @@ position = Vector2(90, -2.38419e-07)
 rotation = 1.57019
 scale = Vector2(0.323386, 0.323386)
 texture = ExtResource("12_hdiom")
+
+[node name="DeathGoopVFX" type="GPUParticles2D" parent="."]
+position = Vector2(3, -3)
+emitting = false
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_o7buc")
+texture = SubResource("NoiseTexture2D_ytvf6")
+lifetime = 1.25
+one_shot = true
+explosiveness = 0.75
 
 [editable path="PlayerWeapon"]

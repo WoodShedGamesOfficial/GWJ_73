@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://buj7i6rrea0yn" path="res://Main/K9/Assets/2D/Sprites/Human/Head.png" id="1_nc3vu"]
 [ext_resource type="Script" path="res://Main/K9/Assets/TROOPS/basic_troop_Script.gd" id="1_sd5ys"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_ljdod"]
-[ext_resource type="AudioStream" uid="uid://bi5qnteu6128r" path="res://Main/K9/Assets/Audio/SFX/Death_A.ogg" id="4_02xtc"]
-[ext_resource type="AudioStream" uid="uid://ydy8pxwt3yt6" path="res://Main/K9/Assets/Audio/SFX/Death_B.ogg" id="4_t7tfk"]
-[ext_resource type="AudioStream" uid="uid://ctri741ilja0" path="res://Main/K9/Assets/Audio/SFX/SwordClang_A.ogg" id="5_4aha7"]
+[ext_resource type="AudioStream" uid="uid://u2aluri45m0y" path="res://Main/K9/Assets/Audio/SFX/02-Audio 2.ogg" id="4_1ut0u"]
+[ext_resource type="AudioStream" uid="uid://c5na7asumiiok" path="res://Main/K9/Assets/Audio/SFX/01-Audio 1.ogg" id="5_n2orq"]
+[ext_resource type="AudioStream" uid="uid://cuukthinntkpv" path="res://Main/K9/Assets/Audio/SFX/05-KniveVwoodspoon.ogg" id="6_707kp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdqng"]
 radius = 23.7697
@@ -219,17 +219,17 @@ debug_color = Color(0.647445, 0.521158, 0, 0.42)
 [node name="Audio" type="Node" parent="."]
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("4_02xtc")
-volume_db = -2.0
+stream = ExtResource("4_1ut0u")
+volume_db = -12.0
 bus = &"NPCs"
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("4_t7tfk")
+stream = ExtResource("5_n2orq")
 bus = &"NPCs"
 
 [node name="SwordClash" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_4aha7")
-volume_db = -5.0
+stream = ExtResource("6_707kp")
+volume_db = -12.0
 bus = &"NPCs"
 
 [node name="AttackTimer" type="Timer" parent="."]

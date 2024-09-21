@@ -39,3 +39,10 @@ var firendly_name_array = [
  "Liam", "Maya", "Nathan", "Olivia", "Parker", "Quinn", "Rachel", "Sarah", "Thomas", "Ursula", "Vincent",
  "William", "Xander", "Yvette", "Zachary", "SAGD", "DevinGD", "TQ", "Dutt"
 ]
+
+
+#high scores
+
+var enemy_losses : int
+var friendly_losses : int
+var total_gold_spent : int

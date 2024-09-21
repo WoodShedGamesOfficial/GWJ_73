@@ -47,7 +47,7 @@ func assign_faction():
 		"friendly" : 
 			add_to_group('Player')
 			add_to_group('friendly') # Grouping for behavioral reasons
-			add_to_group('teleportable') # Grouping for behavioral reasons
+			#add_to_group('teleportable') # Grouping for behavioral reasons
 			
 			$Sprites/Head.modulate = GlobalLibrary.player_color #Color Coding
 			$Sprites/Feet.modulate = GlobalLibrary.player_color  #Color Coding
@@ -72,7 +72,7 @@ func assign_faction():
 			
 		'hostile' : 
 			add_to_group("enemy") # Grouping for behavioral reasons
-			add_to_group('teleportable') # Grouping for behavioral reasons
+			#add_to_group('teleportable') # Grouping for behavioral reasons
 			
 			$Sprites/Head.modulate = Color.DARK_RED #Color Coding
 			$Sprites/Feet.modulate = Color.DARK_RED #Color Coding
@@ -193,6 +193,7 @@ func hurt(damage, damage_type) -> int:
 	elif is_in_group('enemy'):
 		GlobalHiveMind.enemies_gold_coins += 5
 	print(str(TROOP_STATS.health))
+	
 	return TROOP_STATS.health
 	
 
@@ -215,15 +216,17 @@ func death():
 		$Audio/DeathSFX.play(0.0)
 		#await $Audio/DeathSFX.finished
 		GlobalHiveMind.enemies_gold_coins += 25
-		print(name + "  died")
+		GlobalLibrary.friendly_losses += 1
+		#print(name + "  died")
 		queue_free()
 	elif is_in_group('enemy'): 
 		GlobalHiveMind.enemy_troop_count.erase(name)
-		$Audio/DeathSFX.pitch_scale = randf_range(0.80, 1.6)
+		$Audio/DeathSFX.pitch_scale = randf_range(0.50, 1.0)
 		$Audio/DeathSFX.play(0.0)
 		GlobalHiveMind.players_gold_coins += 50
+		GlobalLibrary.enemy_losses += 1
 		#await $Audio/DeathSFX.finished
-		print(name + "  died")
+		#print(name + "  died")
 		queue_free()
 	
 	#queue_free()

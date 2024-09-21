@@ -44,7 +44,7 @@ var canAttack : bool
 func _ready():
 	name = names.pick_random()
 	$Control/Label.text = name
-	GlobalHiveMind.friendly_troops_names.append(name)
+	GlobalHiveMind.friendly_troop_count.append(name)
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
 	navigation_agent.path_desired_distance = 4.0

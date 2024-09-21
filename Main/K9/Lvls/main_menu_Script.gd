@@ -5,7 +5,10 @@ class_name K9_Main_menu_controller
 const LOADINGSCREEN = preload('res://Main/SAGD/Assets/loading_screen.tscn')
 
 @export var dev_room_path : PackedScene
-@export var level_0_path : PackedScene
+#@export var level_0_path : PackedScene
+
+const LEVEL_0 = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+const TUTORIAL_ISLAND = preload("res://Main/K9/Lvls/tutorial_island/tutorial_island.tscn")
 
 #var fun_facts_array = [ #LEGACY
 	#"The tallest tower in the world is the Burj Khalifa, standing at 2,717 feet tall!",
@@ -91,7 +94,7 @@ func toggle_tut():
 	
 
 func goto_tutorial_island():
-	GlobalLibrary.level_path = preload('res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn')
+	GlobalLibrary.level_path = preload("res://Main/K9/Lvls/tutorial_island/tutorial_island.tscn")
 	#const island_path = preload("res://Main/SAGD/Lvls_Menus/tutorial_island (2).tscn")
 	get_tree().change_scene_to_packed(LOADINGSCREEN)
 	pass
@@ -99,7 +102,7 @@ func goto_tutorial_island():
 
 func goto_level_0():
 	#const lvl0_p = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
-	GlobalLibrary.level_path = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
+	GlobalLibrary.level_path = preload('res://Main/K9/Lvls/Lvl_0/level_0.tscn')
 	
 	get_tree().change_scene_to_packed(LOADINGSCREEN)
 	pass
@@ -142,17 +145,6 @@ func toggle_credits_panel():
 	var lots_of_CP = $CreditsPanel
 	
 	lots_of_CP.visible =! lots_of_CP.visible
-	
-	pass
-	
-
-func start_level_0():
-	GlobalLibrary.level_path = preload("res://Main/K9/Lvls/Lvl_0/level_0.tscn")
-	
-	if level_0_path != null:
-		get_tree().change_scene_to_packed(LOADINGSCREEN)
-	else:
-		print("no level 0 assigned")
 	
 	pass
 	

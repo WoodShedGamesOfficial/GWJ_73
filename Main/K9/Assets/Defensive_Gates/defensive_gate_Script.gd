@@ -49,11 +49,13 @@ func destroy_gate():
 		#get_tree().current_scene.get_node_or_null("NavigationRegion2D").bake_navigation_polygon()
 	if not gate_Destroyed:
 		$Sprites/ToothyGate.queue_free()
+		$health.queue_free()
 		set_collision_layer_value(2, false)
 		set_collision_layer_value(5, false)
 		set_collision_layer_value(1, false)
 		DisableMode.DISABLE_MODE_MAKE_STATIC
 		gate_Destroyed = true
+		
 	else:
 		return
 	pass

@@ -1,15 +1,21 @@
-[gd_scene load_steps=21 format=4 uid="uid://bi7r0outi0sx7"]
+[gd_scene load_steps=27 format=4 uid="uid://bi7r0outi0sx7"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/FinalLevel/final_level_script.gd" id="1_k3pnr"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_uqu6n"]
 [ext_resource type="TileSet" uid="uid://sagmyrtdcn8c" path="res://Main/K9/Assets/Tilemaps/WallTilemap.tres" id="2_5sxh4"]
 [ext_resource type="PackedScene" uid="uid://c6l5wlds2suxo" path="res://Main/K9/Assets/2D/textures/vfx/MudSplat.tscn" id="3_5d1t7"]
 [ext_resource type="PackedScene" uid="uid://dvjqmovptc8a" path="res://Main/K9/Assets/Player/player_0.tscn" id="4_fxocl"]
-[ext_resource type="PackedScene" uid="uid://cfgc78ags3cbo" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind.tscn" id="5_mrkm8"]
+[ext_resource type="Script" path="res://Main/K9/Assets/TheHiveMind/the_hive_mind_controller.gd" id="6_2ni7n"]
 [ext_resource type="Texture2D" uid="uid://cnmh5ydxt0x45" path="res://Main/K9/Assets/2D/Sprites/TroopSpawner.png" id="6_a68qm"]
-[ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="8_fnnrs"]
+[ext_resource type="PackedScene" uid="uid://krjhmw7cd1a4" path="res://Main/K9/Assets/TowerHeart/tower_heart.tscn" id="8_jtkek"]
 [ext_resource type="PackedScene" uid="uid://7p387hc5oya" path="res://Main/K9/Assets/Defensive_Gates/defensive_gate.tscn" id="8_rsk4w"]
-[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="9_sdfbf"]
+[ext_resource type="PackedScene" uid="uid://l73moxbtkx2e" path="res://Main/K9/Assets/TowerHeart/enemy_heart.tscn" id="9_tfq83"]
+[ext_resource type="Texture2D" uid="uid://cutqxyiul2nei" path="res://Main/K9/Assets/2D/Sprites/FX_CloudAlpha02.png" id="10_w8lcp"]
+[ext_resource type="Texture2D" uid="uid://b61plgnupf5m7" path="res://Main/K9/Assets/2D/Sprites/PlainCircle.png" id="11_bntht"]
+[ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="13_m0vjn"]
+[ext_resource type="PackedScene" uid="uid://cklwjef0rhhbt" path="res://Main/K9/Lvls/FinalLevel/end_game_Screen.tscn" id="14_nq3eq"]
+[ext_resource type="PackedScene" uid="uid://78d8d4y6ftyu" path="res://Main/K9/Assets/coin_pickup.tscn" id="15_sfoxv"]
+[ext_resource type="AudioStream" uid="uid://d3e1l40brkwq" path="res://Main/K9/Assets/Audio/OST/FINAL_LEVEL_OST.wav" id="16_hnyqo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_px5f3"]
 vertices = PackedVector2Array(7408, 1008, 4624, 1008, 4624, -112, 7408, -112, 11760, 1712, 11760, 2856.16, 11646.9, 2678.1, 11635.6, 1613.46, 7668.99, 2576, 6222.86, 2863.99, 6320, 2576, 1936.55, -527.648, 2288, -607.602, 2288, -48, 7632, 1232, 7632, -336, 10288, 944, 10288, 1594.14, 8400, 1520, 5584, -624, 5584, -669.313, 5717.91, -665.383, 6149.95, -2059.49, 6149.09, -652.742, 5676.8, -1766.03, 2224, 1520, 2224, 1521.23, 1302.13, 1504.46, 1332.01, -568.867, 11661, -624, 12012, -622.359, 12012, 1618.84, 11856.6, 1616.61, 10512, -48, 10512, -624, 1904, -688, 1937.27, -688, 1621.01, -611.883, 4400, 1232, 6192, 1520, 6192, 1556.82, 6150.55, 1556.64, 5712, 1520, 2512, 944, 5769.03, 1556.67, 5712, 1556.89, 2512, -48, 2512, -624, 4400, -336, 6320, -624, 10288, -624, 10288, -48, 11824, 1648, 11824, 1712, 2512, 1520, 2288, 944, 2288, 1520, 6276.64, -649.008, 6320, -648.797, 5648, -1766.35, 5648, -1808, 8400, 1567.1, 10512, 1597.35, 10512, 944, 5736.93, 2840.81, 6143.8, 2536.86, 6320, 2541.38, 2014.09, -2084.98, 1904, -1808, 1641.91, -2063.43, 11855.1, 1648)
@@ -36,8 +42,9 @@ var players_wallet = GlobalHiveMind.players_gold_coins
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for points in $\"../../FriendlySpawnPoints\".get_children():
-		spawn_points_array.append(points.transform.origin)
+	if get_node_or_null(\"../../FriendlySpawnPoints\") != null:
+		for points in $\"../../FriendlySpawnPoints\".get_children():
+			spawn_points_array.append(points.transform.origin)
 	
 	
 	#GlobalHiveMind.players_gold_coins = 500
@@ -46,6 +53,7 @@ func _ready():
 func _input(event):
 	if Input.is_action_just_released(\"ui_accept\") and canInteract and GlobalHiveMind.players_gold_coins >= price_of_troop:
 		spawn_friendly_troop()
+		GlobalLibrary.total_gold_spent += price_of_troop
 	pass
 	
 
@@ -136,7 +144,7 @@ tile_map_data = PackedByteArray("AAD+//7/AgAAAAAAAAD+////AgAAAAEAAAD+/wAAAgAAAAE
 tile_set = ExtResource("1_uqu6n")
 
 [node name="Walls" type="TileMapLayer" parent="World/WorldNav/TileMap"]
-tile_map_data = PackedByteArray("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AgBeAP7/AQAGAAEAAgBeAP3/AQAGAAEAAgBeAPz/AQAGAAEAAgBeAPv/AQAGAAEAAgBeAPr/AQAGAAAAAgBdAPr/AQAFAAAAAgBcAPr/AQAFAAAAAgBbAPr/AQAFAAAAAgBaAPr/AQAFAAAAAgBZAPr/AQAFAAAAAgBYAPr/AQAFAAAAAgBXAPr/AQAFAAAAAgBWAPr/AQAFAAAAAgBVAPr/AQAFAAAAAgBUAPr/AQAFAAAAAgBTAPr/AQAFAAAAAgBSAPr/AQAFAAAAAgBRAPr/AQAEAAAAAgBRAPv/AQAGAAEAAjBRAPz/AQAGAAEAAjBRAP3/AQAGAAEAAjBRAP7/AQAGAAEAAjBRAAgAAQAGAAEAAjBRAAkAAQAGAAEAAjBRAAoAAQAGAAEAAjBRAAsAAQAGAAEAAjBRAAwAAQAGAAEAAjBdAA0AAQAFAAIAAABcABYAAQAGAAEABABcABUAAQAGAAEABABcABQAAQAGAAEABABcABMAAQAGAAEABABcABIAAQAGAAEABABcABEAAQAGAAEABABcABAAAQAGAAEABABcAA8AAQAGAAEABABcAA4AAQAGAAEABABZAA4AAQAGAAEABDBZAA8AAQAGAAEABDBZABAAAQAGAAEABDBZABEAAQAGAAEABDBZABIAAQAGAAEABDBYABMAAQAFAAAABABXABMAAQAFAAAABABWABMAAQAFAAAABABVABMAAQAFAAAABABUABMAAQAFAAAABABTABMAAQAFAAAABABSABMAAQAFAAAABABRABMAAQAFAAAABABQABMAAQAFAAAABABPABMAAQAFAAAABABOABMAAQAFAAAABABNABMAAQAFAAAABABMABMAAQAFAAAABABLABMAAQAFAAAABABKABMAAQAFAAAABABJABMAAQAFAAAABABIABMAAQAFAAAABABHABMAAQAFAAAABABGABMAAQAFAAAABABFABMAAQAFAAAABABEABMAAQAFAAAABABDABMAAQAFAAAABABCABMAAQAFAAAABABBABMAAQAFAAAABABAABMAAQAFAAAABAA/ABMAAQAFAAAABAA+ABMAAQAFAAAABAA9ABMAAQAFAAAABAA8ABMAAQAFAAAABAA7ABMAAQAFAAAABAA6ABMAAQAFAAAABAA5ABMAAQAFAAAABAA4ABMAAQAFAAAABAA3ABMAAQAFAAAABAA2ABMAAQAFAAAABAA1ABMAAQAFAAAABAA0ABMAAQAFAAAABAAzABMAAQAFAAAABAAyABMAAQAFAAAABAAxABIAAQAFAAAABFAxABEAAQAFAAAABFAxABAAAQAFAAAABFAxAA8AAQAFAAAABFAxAA4AAQAFAAAABFAxAA0AAQAFAAAABFArAA0AAQAFAAAABGArAA4AAQAFAAAABGArAA8AAQAFAAAABGArABAAAQAFAAAABGArABEAAQAFAAAABGArABIAAQAFAAAABGArABMAAQAFAAAABGArABQAAQAFAAAABGArABUAAQAFAAAABGArABYAAQAFAAAABGArABcAAQAEAAIAAAAsABcAAQAFAAIAAAAtABcAAQAFAAIAAAAuABcAAQAFAAIAAAAvABcAAQAFAAIAAAAwABcAAQAFAAIAAAAxABcAAQAFAAIAAAAyABcAAQAFAAIAAAAzABcAAQAFAAIAAAA0ABcAAQAFAAIAAAA1ABcAAQAFAAIAAAA2ABcAAQAFAAIAAAA3ABcAAQAFAAIAAAA4ABcAAQAFAAIAAAA5ABcAAQAFAAIAAAA6ABcAAQAFAAIAAAA7ABcAAQAFAAIAAAA8ABcAAQAFAAIAAAA9ABcAAQAFAAIAAAA+ABcAAQAFAAIAAAA/ABcAAQAFAAIAAABAABcAAQAFAAIAAABBABcAAQAFAAIAAABCABcAAQAFAAIAAABDABcAAQAFAAIAAABEABcAAQAFAAIAAABFABcAAQAFAAIAAABGABcAAQAFAAIAAABHABcAAQAFAAIAAABIABcAAQAFAAIAAABJABcAAQAFAAIAAABKABcAAQAFAAIAAABLABcAAQAFAAIAAABMABcAAQAFAAIAAABNABcAAQAFAAIAAABOABcAAQAFAAIAAABPABcAAQAFAAIAAABQABcAAQAFAAIAAABRABcAAQAFAAIAAABSABcAAQAFAAIAAABTABcAAQAFAAIAAABUABcAAQAFAAIAAABVABcAAQAFAAIAAABWABcAAQAFAAIAAABXABcAAQAFAAIAAABYABcAAQAFAAIAAABZABcAAQAFAAIAAABaABcAAQAFAAIAAABbABcAAQAFAAIAAABcABcAAQAGAAIAAAAjAP7/AQAEAAAAAQAkAP7/AQAFAAAAAQAlAP7/AQAFAAAAAQAmAP7/AQAFAAAAAQAnAP7/AQAFAAAAAQAoAP7/AQAFAAAAAQApAP7/AQAFAAAAAQAqAP7/AQAFAAAAAQArAP7/AQAFAAAAAQAsAP7/AQAFAAAAAQAtAP7/AQAFAAAAAQAuAP7/AQAFAAAAAQAvAP7/AQAFAAAAAQAwAP7/AQAFAAAAAQAxAP7/AQAFAAAAAQAyAP7/AQAFAAAAAQAzAP7/AQAFAAAAAQA0AP7/AQAFAAAAAQA1AP7/AQAFAAAAAQA2AP7/AQAFAAAAAQA3AP7/AQAFAAAAAQA4AP7/AQAFAAAAAQA5AP7/AQAFAAAAAQA6AP7/AQAGAAAAAQAjAAgAAQAEAAIAAAAkAAgAAQAFAAIAAAAlAAgAAQAFAAIAAAAmAAgAAQAFAAIAAAAnAAgAAQAFAAIAAAAoAAgAAQAFAAIAAAApAAgAAQAFAAIAAAAqAAgAAQAFAAIAAAArAAgAAQAFAAIAAAAsAAgAAQAFAAIAAAAtAAgAAQAFAAIAAAAuAAgAAQAFAAIAAAAvAAgAAQAFAAIAAAAwAAgAAQAFAAIAAAAxAAgAAQAFAAIAAAAyAAgAAQAFAAIAAAAzAAgAAQAFAAIAAAA0AAgAAQAFAAIAAAA1AAgAAQAFAAIAAAA2AAgAAQAFAAIAAAA3AAgAAQAFAAIAAAA4AAgAAQAFAAIAAAA5AAgAAQAFAAIAAAA6AAgAAQAGAAIAAAAjAAcAAQAEAAEAAAAjAAYAAQAEAAEAAAAjAAUAAQAEAAEAAAAjAAQAAQAEAAEAAAAjAAMAAQAEAAEAAAAjAAIAAQAEAAEAAAAjAAEAAQAEAAEAAAAjAAAAAQAEAAEAAAAjAP//AQAEAAEAAAA6AAcAAQAGAAEAAAA6AAYAAQAGAAEAAAA6AAUAAQAGAAEAAAA6AAAAAQAGAAEAAAA6AP//AQAGAAEAAAA6AAEAAQAGAAEAAAA6AAIAAQAGAAEAAAA6AAMAAQAGAAEAAAA6AAQAAQAGAAEAAAA=")
+tile_map_data = PackedByteArray("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AgBeAP7/AQAGAAEAAgBeAP3/AQAGAAEAAgBeAPz/AQAGAAEAAgBeAPv/AQAGAAEAAgBeAPr/AQAGAAAAAgBdAPr/AQAFAAAAAgBcAPr/AQAFAAAAAgBbAPr/AQAFAAAAAgBaAPr/AQAFAAAAAgBZAPr/AQAFAAAAAgBYAPr/AQAFAAAAAgBXAPr/AQAFAAAAAgBWAPr/AQAFAAAAAgBVAPr/AQAFAAAAAgBUAPr/AQAFAAAAAgBTAPr/AQAFAAAAAgBSAPr/AQAFAAAAAgBRAPr/AQAEAAAAAgBRAPv/AQAGAAEAAjBRAPz/AQAGAAEAAjBRAP3/AQAGAAEAAjBRAP7/AQAGAAEAAjBRAAgAAQAGAAEAAjBRAAkAAQAGAAEAAjBRAAoAAQAGAAEAAjBRAAsAAQAGAAEAAjBRAAwAAQAGAAEAAjBdAA0AAQAFAAIAAABcABYAAQAGAAEABABcABUAAQAGAAEABABcABQAAQAGAAEABABcABMAAQAGAAEABABcABIAAQAGAAEABABcABEAAQAGAAEABABcABAAAQAGAAEABABcAA8AAQAGAAEABABcAA4AAQAGAAEABABZAA4AAQAGAAEABDBZAA8AAQAGAAEABDBZABAAAQAGAAEABDBZABEAAQAGAAEABDBZABIAAQAGAAEABDBYABMAAQAFAAAABABXABMAAQAFAAAABABWABMAAQAFAAAABABVABMAAQAFAAAABABUABMAAQAFAAAABABTABMAAQAFAAAABABSABMAAQAFAAAABABRABMAAQAFAAAABABQABMAAQAFAAAABABPABMAAQAFAAAABABOABMAAQAFAAAABABNABMAAQAFAAAABABMABMAAQAFAAAABABLABMAAQAFAAAABABKABMAAQAFAAAABABJABMAAQAFAAAABABIABMAAQAFAAAABABHABMAAQAFAAAABABGABMAAQAFAAAABABFABMAAQAFAAAABABEABMAAQAFAAAABABDABMAAQAFAAAABABCABMAAQAFAAAABABBABMAAQAFAAAABABAABMAAQAFAAAABAA/ABMAAQAFAAAABAA+ABMAAQAFAAAABAA9ABMAAQAFAAAABAA8ABMAAQAFAAAABAA7ABMAAQAFAAAABAA6ABMAAQAFAAAABAA5ABMAAQAFAAAABAA4ABMAAQAFAAAABAA3ABMAAQAFAAAABAA2ABMAAQAFAAAABAA1ABMAAQAFAAAABAA0ABMAAQAFAAAABAAzABMAAQAFAAAABAAyABMAAQAFAAAABAAxABIAAQAFAAAABFAxABEAAQAFAAAABFAxABAAAQAFAAAABFAxAA8AAQAFAAAABFAxAA4AAQAFAAAABFAxAA0AAQAFAAAABFArAA0AAQAFAAAABGArAA4AAQAFAAAABGArAA8AAQAFAAAABGArABAAAQAFAAAABGArABEAAQAFAAAABGArABIAAQAFAAAABGArABMAAQAFAAAABGArABQAAQAFAAAABGArABUAAQAFAAAABGArABYAAQAFAAAABGArABcAAQAEAAIAAAAsABcAAQAFAAIAAAAtABcAAQAFAAIAAAAuABcAAQAFAAIAAAAvABcAAQAFAAIAAAAwABcAAQAFAAIAAAAxABcAAQAFAAIAAAAyABcAAQAFAAIAAAAzABcAAQAFAAIAAAA0ABcAAQAFAAIAAAA1ABcAAQAFAAIAAAA2ABcAAQAFAAIAAAA3ABcAAQAFAAIAAAA4ABcAAQAFAAIAAAA5ABcAAQAFAAIAAAA6ABcAAQAFAAIAAAA7ABcAAQAFAAIAAAA8ABcAAQAFAAIAAAA9ABcAAQAFAAIAAAA+ABcAAQAFAAIAAAA/ABcAAQAFAAIAAABAABcAAQAFAAIAAABBABcAAQAFAAIAAABCABcAAQAFAAIAAABDABcAAQAFAAIAAABEABcAAQAFAAIAAABFABcAAQAFAAIAAABGABcAAQAFAAIAAABHABcAAQAFAAIAAABIABcAAQAFAAIAAABJABcAAQAFAAIAAABKABcAAQAFAAIAAABLABcAAQAFAAIAAABMABcAAQAFAAIAAABNABcAAQAFAAIAAABOABcAAQAFAAIAAABPABcAAQAFAAIAAABQABcAAQAFAAIAAABRABcAAQAFAAIAAABSABcAAQAFAAIAAABTABcAAQAFAAIAAABUABcAAQAFAAIAAABVABcAAQAFAAIAAABWABcAAQAFAAIAAABXABcAAQAFAAIAAABYABcAAQAFAAIAAABZABcAAQAFAAIAAABaABcAAQAFAAIAAABbABcAAQAFAAIAAABcABcAAQAGAAIAAAAjAP7/AQAEAAAAAQAkAP7/AQAFAAAAAQAlAP7/AQAFAAAAAQAmAP7/AQAFAAAAAQAnAP7/AQAFAAAAAQAoAP7/AQAFAAAAAQApAP7/AQAFAAAAAQAqAP7/AQAFAAAAAQArAP7/AQAFAAAAAQAsAP7/AQAFAAAAAQAtAP7/AQAFAAAAAQAuAP7/AQAFAAAAAQAvAP7/AQAFAAAAAQAwAP7/AQAFAAAAAQAxAP7/AQAFAAAAAQAyAP7/AQAFAAAAAQAzAP7/AQAFAAAAAQA0AP7/AQAFAAAAAQA1AP7/AQAFAAAAAQA2AP7/AQAFAAAAAQA3AP7/AQAFAAAAAQA4AP7/AQAFAAAAAQA5AP7/AQAFAAAAAQA6AP7/AQAGAAAAAQAjAAgAAQAEAAIAAAAkAAgAAQAFAAIAAAAlAAgAAQAFAAIAAAAmAAgAAQAFAAIAAAAnAAgAAQAFAAIAAAAoAAgAAQAFAAIAAAApAAgAAQAFAAIAAAAqAAgAAQAFAAIAAAArAAgAAQAFAAIAAAAsAAgAAQAFAAIAAAAtAAgAAQAFAAIAAAAuAAgAAQAFAAIAAAAvAAgAAQAFAAIAAAAwAAgAAQAFAAIAAAAxAAgAAQAFAAIAAAAyAAgAAQAFAAIAAAAzAAgAAQAFAAIAAAA0AAgAAQAFAAIAAAA1AAgAAQAFAAIAAAA2AAgAAQAFAAIAAAA3AAgAAQAFAAIAAAA4AAgAAQAFAAIAAAA5AAgAAQAFAAIAAAA6AAgAAQAGAAIAAAAjAAcAAQAEAAEAAAAjAAYAAQAEAAEAAAAjAAUAAQAEAAEAAAAjAAQAAQAEAAEAAAAjAAMAAQAEAAEAAAAjAAIAAQAEAAEAAAAjAAEAAQAEAAEAAAAjAAAAAQAEAAEAAAAjAP//AQAEAAEAAAA6AAcAAQAGAAEAAAA6AAYAAQAGAAEAAAA6AAUAAQAGAAEAAAA6AAAAAQAGAAEAAAA6AP//AQAGAAEAAAA6AAEAAQAGAAEAAAA6AAIAAQAGAAEAAAA6AAMAAQAGAAEAAAA6AAQAAQAGAAEAAAASAAcAAQADAAQAAAARAP//AQADAAQAAGA=")
 tile_set = ExtResource("2_5sxh4")
 
 [node name="obstacles" type="Node" parent="World/WorldNav"]
@@ -463,17 +471,23 @@ rotation = -3.11729
 scale = Vector2(2.78529, 2.70438)
 
 [node name="Player_0" parent="." instance=ExtResource("4_fxocl")]
+position = Vector2(870, 379)
 base_gold = 2000
 
-[node name="TheHiveMind" parent="." instance=ExtResource("5_mrkm8")]
+[node name="TheHiveMind" type="Node" parent="."]
+script = ExtResource("6_2ni7n")
 
-[node name="EnemySpawnPoint" parent="TheHiveMind/EnemySpawnPoints" index="0"]
+[node name="EnemySpawnPoints" type="Node" parent="TheHiveMind"]
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11845, -497)
 
-[node name="TroopSpawner" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint" index="0"]
+[node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint"]
+position = Vector2(-2, -4)
+texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint2" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="1"]
+[node name="EnemySpawnPoint2" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11581, -245)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint2"]
@@ -481,7 +495,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint3" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="2"]
+[node name="EnemySpawnPoint3" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11353, 28)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint3"]
@@ -489,7 +503,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint4" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="3"]
+[node name="EnemySpawnPoint4" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11308, 355)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint4"]
@@ -497,7 +511,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint5" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="4"]
+[node name="EnemySpawnPoint5" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11374, 631)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint5"]
@@ -505,7 +519,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint6" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="5"]
+[node name="EnemySpawnPoint6" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11578, 847)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint6"]
@@ -513,7 +527,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint7" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="6"]
+[node name="EnemySpawnPoint7" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11869, 1087)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint7"]
@@ -521,7 +535,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint8" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="7"]
+[node name="EnemySpawnPoint8" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11647, 1453)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint8"]
@@ -529,7 +543,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint9" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="8"]
+[node name="EnemySpawnPoint9" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11233, 1555)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint9"]
@@ -537,7 +551,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint10" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="9"]
+[node name="EnemySpawnPoint10" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(10798, 1585)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint10"]
@@ -545,7 +559,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint11" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="10"]
+[node name="EnemySpawnPoint11" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11538, -587)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint11"]
@@ -553,7 +567,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint12" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="11"]
+[node name="EnemySpawnPoint12" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(11205, -617)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint12"]
@@ -561,7 +575,7 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="EnemySpawnPoint13" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints" index="12"]
+[node name="EnemySpawnPoint13" type="Marker2D" parent="TheHiveMind/EnemySpawnPoints"]
 position = Vector2(10806, -620)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/EnemySpawnPoints/EnemySpawnPoint13"]
@@ -569,120 +583,144 @@ position = Vector2(-2, -4)
 texture = ExtResource("6_a68qm")
 flip_h = true
 
-[node name="FriendlySpawnPoints" parent="TheHiveMind/FriendlySpawnPoints" index="0"]
-position = Vector2(1418, -502)
+[node name="FriendlySpawnPoints" type="Node" parent="TheHiveMind"]
 
-[node name="FriendlySpawnPoints2" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="1"]
+[node name="FriendlySpawnPoints" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
+position = Vector2(2171, 1206)
+
+[node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints"]
+position = Vector2(16, -4)
+texture = ExtResource("6_a68qm")
+
+[node name="FriendlySpawnPoints2" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(1431, -222)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints2"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints3" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="2"]
-position = Vector2(1832, -600)
+[node name="FriendlySpawnPoints3" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
+position = Vector2(1701, 909)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints3"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints4" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="3"]
+[node name="FriendlySpawnPoints4" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(2155, -149)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints4"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints5" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="4"]
+[node name="FriendlySpawnPoints5" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(1454, 234)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints5"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints6" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="5"]
+[node name="FriendlySpawnPoints6" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(1671, 612)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints6"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints7" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="6"]
+[node name="FriendlySpawnPoints7" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(1943, 914)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints7"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints8" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="7"]
+[node name="FriendlySpawnPoints8" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(2024, 1317)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints8"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="FriendlySpawnPoints9" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints" index="8"]
+[node name="FriendlySpawnPoints9" type="Marker2D" parent="TheHiveMind/FriendlySpawnPoints"]
 position = Vector2(2226, 826)
 
 [node name="TroopSpawner" type="Sprite2D" parent="TheHiveMind/FriendlySpawnPoints/FriendlySpawnPoints9"]
 position = Vector2(16, -4)
 texture = ExtResource("6_a68qm")
 
-[node name="ResourceTimer" parent="TheHiveMind/Timers" index="3"]
-wait_time = 75.0
+[node name="Timers" type="Node" parent="TheHiveMind"]
 
-[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" index="0"]
+[node name="SpawnTimer" type="Timer" parent="TheHiveMind/Timers"]
+wait_time = 6.0
+
+[node name="WaveTransitionTimer" type="Timer" parent="TheHiveMind/Timers"]
+wait_time = 35.0
+one_shot = true
+
+[node name="WaveStart" type="Timer" parent="TheHiveMind/Timers"]
+wait_time = 15.0
+one_shot = true
+
+[node name="ResourceTimer" type="Timer" parent="TheHiveMind/Timers"]
+wait_time = 75.0
+autostart = true
+
+[node name="EnemyNPCs" type="Node" parent="TheHiveMind"]
+
+[node name="FriendlyNPCs" type="Node" parent="TheHiveMind"]
+
+[node name="CapturePoints" type="Node" parent="TheHiveMind"]
+
+[node name="TowerHearts" type="Node" parent="TheHiveMind"]
+
+[node name="PlayersHeart" parent="TheHiveMind/TowerHearts" instance=ExtResource("8_jtkek")]
 position = Vector2(1299, 1043)
 scale = Vector2(6.40936, 6.40936)
+heart_color = Color(0, 1, 0.596078, 1)
 TOWERSTATS = {
 "health": 2000
 }
 
-[node name="EnemyHeart2" parent="TheHiveMind/TowerHearts" index="1"]
-position = Vector2(11852, 286)
-scale = Vector2(5.87331, 5.87331)
-heart_faction = "hostile"
-TOWERSTATS = {
-"health": 2000
-}
+[node name="EnemyHeart" parent="TheHiveMind/TowerHearts" instance=ExtResource("9_tfq83")]
+position = Vector2(11814, 312)
+scale = Vector2(4.64994, 4.64994)
 
-[node name="FriendlyTroopSpawnButton" parent="TheHiveMind/SpawnButtons" index="0"]
+[node name="SpawnButtons" type="Node" parent="TheHiveMind"]
+
+[node name="FriendlyTroopSpawnButton" type="Node2D" parent="TheHiveMind/SpawnButtons"]
+position = Vector2(384, 376)
 rotation = -0.0186007
-
-[node name="FriendlyTroopSpawnButton2" type="Node2D" parent="TheHiveMind/SpawnButtons" index="1"]
-position = Vector2(1293, -602)
-rotation = -0.0111818
 script = SubResource("GDScript_p4mte")
 
-[node name="Label" type="Label" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
+[node name="Label" type="Label" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton"]
 offset_left = -71.0
 offset_top = -83.0
 offset_right = 78.0
 offset_bottom = -60.0
 text = "Spawn infantry : 50"
 
-[node name="InteractionRadius" type="Area2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
+[node name="InteractionRadius" type="Area2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius"]
 shape = SubResource("CircleShape2D_2s8js")
 
-[node name="Marker2D" type="Marker2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
+[node name="Marker2D" type="Marker2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton"]
 position = Vector2(15, 402)
 
-[node name="SpawnFX" type="GPUParticles2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
+[node name="SpawnFX" type="GPUParticles2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton"]
 position = Vector2(-1.81326, 3.70297)
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_kthl0")
-texture = ExtResource("8_fnnrs")
+texture = ExtResource("10_w8lcp")
 lifetime = 0.65
 one_shot = true
 explosiveness = 0.8
 
-[node name="PlainCircle" type="Sprite2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2"]
+[node name="PlainCircle" type="Sprite2D" parent="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton"]
 modulate = Color(0.384314, 0.658824, 0.396078, 1)
 scale = Vector2(0.154175, 0.154175)
-texture = ExtResource("9_sdfbf")
+texture = ExtResource("11_bntht")
 
 [node name="DefensiveGate" parent="." instance=ExtResource("8_rsk4w")]
 position = Vector2(2345, 270)
@@ -768,16 +806,272 @@ faction = "hostile"
 [node name="Eyeball" parent="HsotileGate6/Sprites" index="2"]
 modulate = Color(0.925129, 0, 0.353862, 1)
 
-[connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2" method="_on_interaction_radius_body_entered"]
-[connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton2" method="_on_interaction_radius_body_exited"]
+[node name="Portals" type="Node" parent="."]
+
+[node name="Portal_000" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(-95, 604)
+linked_portal = NodePath("../Portal_001")
+
+[node name="Portal_001" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(4400, 352)
+linked_portal = NodePath("../Portal_000")
+
+[node name="Portal_002" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(7648, 418)
+linked_portal = NodePath("../Portal_000")
+
+[node name="Portal_003" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(11706, 2828)
+linked_portal = NodePath("../Portal_000")
+
+[node name="Portal_004" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(5737, 2816)
+linked_portal = NodePath("../Portal_003")
+
+[node name="Portal_005" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(1618, -2088)
+linked_portal = NodePath("../Portal_006")
+
+[node name="Portal_006" parent="Portals" node_paths=PackedStringArray("linked_portal") instance=ExtResource("13_m0vjn")]
+position = Vector2(6208, -1304)
+linked_portal = NodePath("../Portal_005")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndGame" parent="CanvasLayer" instance=ExtResource("14_nq3eq")]
+visible = false
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="CoinPickup" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(2883, 1418)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup2" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(3451, 1411)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup3" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(4046, 1408)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup4" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(4631, 1435)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup5" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5038, 1445)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup6" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5559, 1411)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup7" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5983, 1401)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup8" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6531, 1404)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup9" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6901, 1407)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup10" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(7261, 1414)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup11" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(7253, -400)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup12" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6855, -421)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup13" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6469, -429)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup14" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6024, -429)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup15" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5566, -412)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup16" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5134, -412)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup17" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(4706, -459)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup18" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(4181, -463)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup19" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(3681, -522)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup20" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(3092, -505)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup21" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(2664, -530)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup22" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5646, -1941)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup23" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5203, -1952)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup24" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(4771, -1968)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup25" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(3420, -1968)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup26" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5967, 2021)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup27" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(5972, 2555)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup28" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6335, 2731)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup29" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(6938, 2720)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup30" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(7461, 2752)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup31" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(7936, 2747)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup32" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(8593, 2806)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup33" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9474, 2763)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup34" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10019, 2758)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup35" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10414, 2779)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup36" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10798, 2790)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup37" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(11257, 2763)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup38" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(11689, 2597)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup39" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(11684, 2143)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup40" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10205, 2741)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup41" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9858, 2730)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup42" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9639, 2746)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup43" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10600, 1443)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup44" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(11027, 1507)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup45" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10819, 1416)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup46" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10995, 1667)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup47" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10509, 1651)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup48" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(10498, 1277)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup49" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9019, 509)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup50" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9190, 433)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup51" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9298, 573)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup52" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(9209, 783)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="CoinPickup53" parent="Coins" instance=ExtResource("15_sfoxv")]
+position = Vector2(8968, 726)
+scale = Vector2(0.717918, 0.717918)
+
+[node name="BKMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_hnyqo")
+pitch_scale = 0.8
+
+[connection signal="towers_death" from="TheHiveMind/TowerHearts/PlayersHeart" to="TheHiveMind" method="_on_players_heart_towers_death"]
+[connection signal="towers_death" from="TheHiveMind/TowerHearts/EnemyHeart" to="." method="_on_enemy_heart_towers_death"]
+[connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
+[connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
+[connection signal="finished" from="BKMusic" to="." method="_on_bk_music_finished"]
 
 [editable path="World/MudSplat"]
 [editable path="World/MudSplat2"]
 [editable path="World/MudSplat3"]
-[editable path="TheHiveMind"]
 [editable path="HsotileGate"]
 [editable path="HsotileGate2"]
 [editable path="HsotileGate3"]
 [editable path="HsotileGate4"]
 [editable path="HsotileGate5"]
 [editable path="HsotileGate6"]
+[editable path="CanvasLayer/EndGame"]
