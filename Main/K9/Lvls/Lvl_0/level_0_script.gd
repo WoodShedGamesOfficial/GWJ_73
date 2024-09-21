@@ -10,6 +10,10 @@ func _ready():
 	#GlobalHiveMind.enemy_heart_pos_array.clear()
 	
 	GlobalHiveMind.enemies_gold_coins = hiveminds_base_gold
+	
+	GlobalHiveMind.friendly_troop_count.clear()
+	GlobalHiveMind.enemy_troop_count.clear()
+	
 	pass # Replace with function body.
  
 

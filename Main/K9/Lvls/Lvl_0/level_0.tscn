@@ -275,6 +275,9 @@ autostart = true
 [node name="EnemyHeart" parent="TheHiveMind/TowerHearts" instance=ExtResource("8_v4sx0")]
 position = Vector2(3028, -167)
 scale = Vector2(2.67108, 2.67108)
+TOWERSTATS = {
+"health": 2000
+}
 LEVEL_PATH_ON_WIN = ExtResource("9_7ka0o")
 
 [node name="PlayersHeart" parent="TheHiveMind/TowerHearts" instance=ExtResource("9_tkjvb")]
@@ -334,13 +337,13 @@ rotation = -0.0010922
 [node name="DefensiveGate3" parent="." instance=ExtResource("3_djy7d")]
 position = Vector2(832, 580)
 rotation = 1.58582
-gate_health = 2
+gate_health = 1500
 faction = "hostile"
 
 [node name="DefensiveGate4" parent="." instance=ExtResource("3_djy7d")]
 position = Vector2(2508, -552)
 rotation = 1.58582
-gate_health = 2
+gate_health = 2000
 faction = "hostile"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

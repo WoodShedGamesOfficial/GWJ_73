@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dvjqmovptc8a"]
+[gd_scene load_steps=33 format=3 uid="uid://dvjqmovptc8a"]
 
 [ext_resource type="Script" path="res://Main/K9/Assets/Player/player_script.gd" id="1_ww0cy"]
 [ext_resource type="Texture2D" uid="uid://dijsynvoqbp6m" path="res://Main/K9/Assets/2D/Sprites/Human/Feet.png" id="2_n3oth"]
@@ -130,6 +130,8 @@ func _input(event):
 		$Pause_Menu.visible =! $Pause_Menu.visible
 	pass
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_xitft"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6bdxt"]
 font_size = 24
@@ -284,7 +286,6 @@ anchor_bottom = 0.0
 grow_vertical = 1
 
 [node name="DeathLabel" type="Label" parent="GUI"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -298,6 +299,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "You are reconstituting yourself near the towers heart:
 Time Left:"
+label_settings = SubResource("LabelSettings_xitft")
 
 [node name="DeathLabel2" type="Label" parent="GUI/DeathLabel"]
 layout_mode = 1
@@ -319,6 +321,13 @@ label_settings = SubResource("LabelSettings_6bdxt")
 [node name="Respawn_Timer" type="Timer" parent="GUI/DeathLabel"]
 wait_time = 10.0
 one_shot = true
+
+[node name="Panel" type="Panel" parent="GUI/DeathLabel"]
+modulate = Color(0.0823529, 0, 0.0156863, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_right = 427.0
+offset_bottom = 70.0
 
 [node name="HUD" type="Control" parent="GUI"]
 layout_mode = 3

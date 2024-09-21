@@ -9,6 +9,9 @@ func _ready():
 	GlobalHiveMind.enemies_gold_coins = hiveminds_base_gold
 	
 	$CanvasLayer/EndGame.visible = false
+	
+	GlobalHiveMind.friendly_troop_count.clear()
+	GlobalHiveMind.enemy_troop_count.clear()
 	#$World/WorldNav.bake_navigation_polygon()
 	
 	#$TheHiveMind/TowerHearts/PlayersHeart.set_final_level()

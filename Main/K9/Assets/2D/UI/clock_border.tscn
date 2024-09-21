@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://c307e8qqb7yd7"]
+
+[ext_resource type="Texture2D" uid="uid://bqnsy36ghd8ql" path="res://Main/K9/Assets/2D/UI/ClockBorderLower.png" id="1_kqgbk"]
+[ext_resource type="Texture2D" uid="uid://bcqh3b4a0r00c" path="res://Main/K9/Assets/2D/UI/StoneBorderUpper.png" id="2_y6trd"]
+
+[sub_resource type="Gradient" id="Gradient_a7ci7"]
+colors = PackedColorArray(0, 0, 0, 1, 0.572549, 0.239216, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w6nnv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_paswk"]
+color_ramp = SubResource("Gradient_a7ci7")
+noise = SubResource("FastNoiseLite_w6nnv")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fb41r"]
+texture = SubResource("NoiseTexture2D_paswk")
+
+[sub_resource type="VisualShader" id="VisualShader_fsn50"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-271.094, 10.1488)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_fb41r")
+nodes/fragment/2/position = Vector2(-180, 100)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwmjy"]
+shader = SubResource("VisualShader_fsn50")
+
+[node name="ClockBorder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hwmjy")
+layout_mode = 0
+offset_right = 377.0
+offset_bottom = 380.0
+texture = ExtResource("1_kqgbk")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 380.0
+texture = ExtResource("2_y6trd")
+expand_mode = 2

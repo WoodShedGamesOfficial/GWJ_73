@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://bi7r0outi0sx7"]
+[gd_scene load_steps=27 format=4 uid="uid://bi7r0outi0sx7"]
 
 [ext_resource type="Script" path="res://Main/K9/Lvls/FinalLevel/final_level_script.gd" id="1_k3pnr"]
 [ext_resource type="TileSet" uid="uid://c6sg2wbsi15u8" path="res://Main/K9/Assets/Tilemaps/floor_tilemap_128x128.tres" id="1_uqu6n"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b0eafs0fgc2xr" path="res://Main/Dutt/Assets/PortalManager/portal_000.tscn" id="13_m0vjn"]
 [ext_resource type="PackedScene" uid="uid://cklwjef0rhhbt" path="res://Main/K9/Lvls/FinalLevel/end_game_Screen.tscn" id="14_nq3eq"]
 [ext_resource type="PackedScene" uid="uid://78d8d4y6ftyu" path="res://Main/K9/Assets/coin_pickup.tscn" id="15_sfoxv"]
+[ext_resource type="AudioStream" uid="uid://d3e1l40brkwq" path="res://Main/K9/Assets/Audio/OST/FINAL_LEVEL_OST.wav" id="16_hnyqo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_px5f3"]
 vertices = PackedVector2Array(7408, 1008, 4624, 1008, 4624, -112, 7408, -112, 11760, 1712, 11760, 2856.16, 11646.9, 2678.1, 11635.6, 1613.46, 7668.99, 2576, 6222.86, 2863.99, 6320, 2576, 1936.55, -527.648, 2288, -607.602, 2288, -48, 7632, 1232, 7632, -336, 10288, 944, 10288, 1594.14, 8400, 1520, 5584, -624, 5584, -669.313, 5717.91, -665.383, 6149.95, -2059.49, 6149.09, -652.742, 5676.8, -1766.03, 2224, 1520, 2224, 1521.23, 1302.13, 1504.46, 1332.01, -568.867, 11661, -624, 12012, -622.359, 12012, 1618.84, 11856.6, 1616.61, 10512, -48, 10512, -624, 1904, -688, 1937.27, -688, 1621.01, -611.883, 4400, 1232, 6192, 1520, 6192, 1556.82, 6150.55, 1556.64, 5712, 1520, 2512, 944, 5769.03, 1556.67, 5712, 1556.89, 2512, -48, 2512, -624, 4400, -336, 6320, -624, 10288, -624, 10288, -48, 11824, 1648, 11824, 1712, 2512, 1520, 2288, 944, 2288, 1520, 6276.64, -649.008, 6320, -648.797, 5648, -1766.35, 5648, -1808, 8400, 1567.1, 10512, 1597.35, 10512, 944, 5736.93, 2840.81, 6143.8, 2536.86, 6320, 2541.38, 2014.09, -2084.98, 1904, -1808, 1641.91, -2063.43, 11855.1, 1648)
@@ -1054,10 +1055,15 @@ scale = Vector2(0.717918, 0.717918)
 position = Vector2(8968, 726)
 scale = Vector2(0.717918, 0.717918)
 
+[node name="BKMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_hnyqo")
+pitch_scale = 0.8
+
 [connection signal="towers_death" from="TheHiveMind/TowerHearts/PlayersHeart" to="TheHiveMind" method="_on_players_heart_towers_death"]
 [connection signal="towers_death" from="TheHiveMind/TowerHearts/EnemyHeart" to="." method="_on_enemy_heart_towers_death"]
 [connection signal="body_entered" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_entered"]
 [connection signal="body_exited" from="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton/InteractionRadius" to="TheHiveMind/SpawnButtons/FriendlyTroopSpawnButton" method="_on_interaction_radius_body_exited"]
+[connection signal="finished" from="BKMusic" to="." method="_on_bk_music_finished"]
 
 [editable path="World/MudSplat"]
 [editable path="World/MudSplat2"]
